@@ -1,0 +1,80 @@
+/* Global reset and styling */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  background-color: #F4F5F7;
+  color: #172B4D;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Theme Design Tokens as CSS Variables */
+:root {
+  --primary: #0052CC;
+  --primary-light: #3884FF;
+  --primary-dark: #003E99;
+  --bg-default: #F4F5F7;
+  --bg-paper: #FFFFFF;
+  --text-primary: #091E42;
+  --text-secondary: #5E6C84;
+  --divider: #DFE1E6;
+  --sidebar-bg: #091E42;
+  --sidebar-text: #8993A4;
+  --sidebar-hover: rgba(255, 255, 255, 0.08);
+  --success: #006644;
+  --success-bg: #E3FCEF;
+  --warning: #FF8B00;
+  --warning-bg: #FFEAD5;
+  --info: #0747A6;
+  --info-bg: #DEEBFF;
+  --error: #DE350B;
+  --error-bg: #FFEBE6;
+}
+
+/* Beautiful custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F4F5F7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C1C7D0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A5ADBA;
+}
+
+/* Interactive animations and pulses matching MUI ripple look */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 82, 204, 0.4);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(0, 82, 204, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 82, 204, 0);
+  }
+}
+
+.pulse-indicator {
+  animation: pulse 2s infinite;
+  border-radius: 50%;
+}
+
+

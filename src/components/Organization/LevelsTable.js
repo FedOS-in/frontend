@@ -65,8 +65,65 @@ const LEVELS_DATA = [
 
 export default function LevelsTable() {
   const [searchQuery, setSearchQuery] = React.useState("")
+  const [federationNodes, setFederationNodes] = React.useState([])
+  const [isLoadingNodes, setIsLoadingNodes] = React.useState(true)
 
-  const filteredData = LEVELS_DATA.filter((row) =>
+  React.useEffect(() => {
+    const controller = new AbortController()
+
+    async function loadFederationNodes() {
+      try {
+        const response = await fetch(
+          "http://localhost:3001/api/federation-nodes",
+          {
+            signal: controller.signal,
+          },
+        )
+
+        if (!response.ok) {
+          throw new Error("Failed to load federation nodes")
+        }
+
+        const nodes = await response.json()
+
+        setFederationNodes(
+          nodes.map((node, index) => ({
+            order: index + 1,
+            name: node.name,
+            desc: node.parent?.name
+              ? `Child of ${node.parent.name}`
+              : "Loaded from federation nodes API",
+            tag: node.parentId ? "Child Node" : "Root Node",
+            chapters: String(node.children?.length ?? 0),
+            status: node.isActive ? "Active" : "Inactive",
+          })),
+        )
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setFederationNodes([])
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoadingNodes(false)
+        }
+      }
+    }
+
+    loadFederationNodes()
+
+    return () => {
+      controller.abort()
+    }
+  }, [])
+
+  const combinedData = [...federationNodes, ...LEVELS_DATA].map(
+    (row, index) => ({
+      ...row,
+      displayOrder: index + 1,
+    }),
+  )
+
+  const filteredData = combinedData.filter((row) =>
     row.name.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
@@ -119,7 +176,7 @@ export default function LevelsTable() {
             <Typography
               variant="h6"
               sx={{ fontWeight: 700, color: "#091E42", mt: -0.5 }}>
-              5
+              {isLoadingNodes ? "..." : filteredData.length}
             </Typography>
           </Box>
 
@@ -165,9 +222,9 @@ export default function LevelsTable() {
           </TableHead>
           <TableBody>
             {filteredData.map((row) => (
-              <TableRow key={row.order} hover>
+              <TableRow key={`${row.name}-${row.displayOrder}`} hover>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
-                  {row.order}
+                  {row.displayOrder}
                 </TableCell>
                 <TableCell>
                   <Stack direction="row" spacing={1} alignItems="center">
@@ -280,7 +337,7 @@ export default function LevelsTable() {
         <Typography
           variant="body2"
           sx={{ color: "text.secondary", fontWeight: 500, fontSize: "0.8rem" }}>
-          Showing 1 to {filteredData.length} of {LEVELS_DATA.length} levels
+          Showing 1 to {filteredData.length} of {combinedData.length} levels
         </Typography>
       </Stack>
     </>

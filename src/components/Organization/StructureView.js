@@ -1,18 +1,19 @@
 "use client"
+
 import React from "react"
 import {
-  Grid,
+  Alert,
+  Avatar,
+  Box,
+  Button,
   Card,
   CardContent,
-  OutlinedInput,
-  Stack,
-  Box,
-  Typography,
   Chip,
-  IconButton,
-  Avatar,
+  CircularProgress,
   Divider,
-  Button,
+  IconButton,
+  OutlinedInput,
+  Typography,
 } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import OrgIcon from "@mui/icons-material/CorporateFare"
@@ -22,18 +23,150 @@ import SwapIcon from "@mui/icons-material/SwapVert"
 import CloseIcon from "@mui/icons-material/Close"
 import DeleteIcon from "@mui/icons-material/Delete"
 import MoreIcon from "@mui/icons-material/MoreVert"
+import AddChapterDrawer from "@/components/Organization/AddChapterDrawer"
+
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
+
+function buildHierarchyRows(nodes) {
+  const nodeMap = new Map(nodes.map((node) => [node.id, node]))
+  const childrenByParent = new Map()
+
+  nodes.forEach((node) => {
+    if (!node.parentId || !nodeMap.has(node.parentId)) return
+    const siblings = childrenByParent.get(node.parentId) || []
+    siblings.push(node)
+    childrenByParent.set(node.parentId, siblings)
+  })
+
+  const roots = nodes
+    .filter((node) => !node.parentId || !nodeMap.has(node.parentId))
+    .sort((a, b) => a.name.localeCompare(b.name))
+
+  const rows = []
+  const visited = new Set()
+
+  const visit = (node, depth) => {
+    if (visited.has(node.id)) return
+    visited.add(node.id)
+    rows.push({ node, depth })
+
+    const children = (childrenByParent.get(node.id) || []).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    )
+
+    children.forEach((child) => visit(child, depth + 1))
+  }
+
+  roots.forEach((root) => visit(root, 0))
+
+  nodes.forEach((node) => {
+    if (!visited.has(node.id)) {
+      visit(node, 0)
+    }
+  })
+
+  return rows
+}
+
+function staticMembers(depth, index) {
+  const base = 1248
+  const value = Math.max(120, base - depth * 180 - index * 27)
+  return `${value.toLocaleString()} members`
+}
 
 export default function StructureView() {
+  const [searchQuery, setSearchQuery] = React.useState("")
+  const [nodes, setNodes] = React.useState([])
+  const [loadingNodes, setLoadingNodes] = React.useState(true)
+  const [errorMessage, setErrorMessage] = React.useState("")
+  const [selectedNodeId, setSelectedNodeId] = React.useState(null)
+  const [editDrawerOpen, setEditDrawerOpen] = React.useState(false)
+  const [refreshCounter, setRefreshCounter] = React.useState(0)
+
+  React.useEffect(() => {
+    const controller = new AbortController()
+
+    async function loadNodes() {
+      setLoadingNodes(true)
+      setErrorMessage("")
+
+      try {
+        const response = await fetch(`${backendUrl}/api/federation-nodes`, {
+          signal: controller.signal,
+        })
+
+        if (!response.ok) {
+          throw new Error("Unable to load federation nodes")
+        }
+
+        const data = await response.json()
+        setNodes(Array.isArray(data) ? data : [])
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setErrorMessage(error.message || "Unable to load federation nodes")
+          setNodes([])
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoadingNodes(false)
+        }
+      }
+    }
+
+    loadNodes()
+
+    return () => controller.abort()
+  }, [refreshCounter])
+
+  const hierarchyRows = React.useMemo(() => buildHierarchyRows(nodes), [nodes])
+
+  const filteredRows = React.useMemo(() => {
+    const query = searchQuery.trim().toLowerCase()
+    if (!query) return hierarchyRows
+    return hierarchyRows.filter(({ node }) =>
+      node.name.toLowerCase().includes(query),
+    )
+  }, [hierarchyRows, searchQuery])
+
+  const effectiveSelectedNodeId = React.useMemo(() => {
+    if (!filteredRows.length) {
+      return null
+    }
+
+    const exists = filteredRows.some(({ node }) => node.id === selectedNodeId)
+    return exists ? selectedNodeId : filteredRows[0].node.id
+  }, [filteredRows, selectedNodeId])
+
+  const selectedRow = React.useMemo(
+    () =>
+      hierarchyRows.find(({ node }) => node.id === effectiveSelectedNodeId) ||
+      null,
+    [hierarchyRows, effectiveSelectedNodeId],
+  )
+
+  const selectedNode = selectedRow?.node || null
+  const selectedDepth = selectedRow?.depth ?? 0
+  const selectedMembers = staticMembers(selectedDepth, 0)
+  const selectedChildrenCount = selectedNode?.children?.length ?? 0
+  const selectedParentName = selectedNode?.parent?.name || "-"
+
   return (
-    <Grid container spacing={3}>
-      {/* Left Side: Tree View List */}
-      <Grid item xs={12} md={5}>
+    <Box
+      sx={{
+        display: "grid",
+        gap: 3,
+        gridTemplateColumns: { xs: "1fr", md: "5fr 7fr" },
+      }}>
+      <Box>
         <Card sx={{ height: "100%", bgcolor: "#FFFFFF" }}>
           <CardContent sx={{ p: 2 }}>
             <OutlinedInput
               placeholder="Search chapter or level..."
               fullWidth
               size="small"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
               startAdornment={
                 <SearchIcon
                   sx={{ color: "text.secondary", mr: 0.5, fontSize: "1.1rem" }}
@@ -42,116 +175,73 @@ export default function StructureView() {
               sx={{ mb: 3 }}
             />
 
-            {/* Fake hierarchy tree */}
-            <Stack spacing={1}>
-              {/* Level 1: National */}
-              <Box sx={{ pl: 1, borderLeft: "2px solid #DFE1E6", py: 0.5 }}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <OrgIcon sx={{ color: "#5E6C84", fontSize: "1.1rem" }} />
-                  <Typography sx={{ fontWeight: 700, fontSize: "0.9rem" }}>
-                    National Federation
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{ color: "text.secondary", ml: "auto" }}>
-                    1,248 members
-                  </Typography>
-                </Stack>
-              </Box>
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 
-              {/* Level 2: State (Active Selected) */}
-              <Box
-                sx={{
-                  pl: 4,
-                  borderLeft: "2px solid #0052CC",
-                  py: 0.5,
-                  bgcolor: "#DEEBFF",
-                  borderRadius: "0 4px 4px 0",
-                }}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <OrgIcon sx={{ color: "#0052CC", fontSize: "1.1rem" }} />
-                  <Typography
+            {loadingNodes ? (
+              <Box sx={{ py: 4, display: "flex", justifyContent: "center" }}>
+                <CircularProgress size={28} />
+              </Box>
+            ) : null}
+
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              {!loadingNodes && filteredRows.length === 0 ? (
+                <Typography
+                  variant="body2"
+                  sx={{ color: "text.secondary", py: 1 }}>
+                  No federation nodes found.
+                </Typography>
+              ) : null}
+
+              {filteredRows.map(({ node, depth }, idx) => {
+                const isActive = node.id === effectiveSelectedNodeId
+                return (
+                  <Box
+                    key={node.id}
+                    onClick={() => setSelectedNodeId(node.id)}
                     sx={{
-                      fontWeight: 700,
-                      fontSize: "0.9rem",
-                      color: "#0052CC",
+                      pl: 1 + depth * 3,
+                      borderLeft: isActive
+                        ? "2px solid #0052CC"
+                        : "2px solid #DFE1E6",
+                      py: 0.8,
+                      borderRadius: "0 4px 4px 0",
+                      bgcolor: isActive ? "#DEEBFF" : "transparent",
+                      cursor: "pointer",
                     }}>
-                    Tamil Nadu Association
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{ color: "#0052CC", ml: "auto", fontWeight: 600 }}>
-                    1,045 members
-                  </Typography>
-                </Stack>
-              </Box>
-
-              {/* Level 3: Districts under State */}
-              {[
-                "Chennai Chapter",
-                "Coimbatore Chapter",
-                "Madurai Chapter",
-                "Trichy Chapter",
-                "Salem Chapter",
-                "Tirunelveli Chapter",
-              ].map((dist, idx) => (
-                <Box
-                  key={idx}
-                  sx={{ pl: 7, borderLeft: "1px dashed #DFE1E6", py: 0.5 }}>
-                  <Stack direction="row" spacing={1} alignItems="center">
-                    <Box
-                      sx={{
-                        width: 6,
-                        height: 6,
-                        bgcolor: "#C1C7D0",
-                        borderRadius: "50%",
-                      }}
-                    />
-                    <Typography
-                      sx={{ fontSize: "0.85rem", color: "text.primary" }}>
-                      {dist}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{ color: "text.secondary", ml: "auto" }}>
-                      {320 - idx * 50} members
-                    </Typography>
-                  </Stack>
-                </Box>
-              ))}
-
-              {/* Other States */}
-              {[
-                "Karnataka Association",
-                "Kerala Association",
-                "Maharashtra Association",
-                "Gujarat Association",
-              ].map((state, idx) => (
-                <Box
-                  key={idx}
-                  sx={{ pl: 4, borderLeft: "2px solid #DFE1E6", py: 0.8 }}>
-                  <Stack direction="row" spacing={1} alignItems="center">
-                    <OrgIcon sx={{ color: "#5E6C84", fontSize: "1.1rem" }} />
-                    <Typography sx={{ fontWeight: 600, fontSize: "0.875rem" }}>
-                      {state}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{ color: "text.secondary", ml: "auto" }}>
-                      {890 - idx * 120} members
-                    </Typography>
-                  </Stack>
-                </Box>
-              ))}
-            </Stack>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      <OrgIcon
+                        sx={{
+                          color: isActive ? "#0052CC" : "#5E6C84",
+                          fontSize: "1.1rem",
+                        }}
+                      />
+                      <Typography
+                        sx={{
+                          fontWeight: isActive ? 700 : 600,
+                          fontSize: "0.875rem",
+                          color: isActive ? "#0052CC" : "text.primary",
+                        }}>
+                        {node.name}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: isActive ? "#0052CC" : "text.secondary",
+                          ml: "auto",
+                        }}>
+                        {staticMembers(depth, idx)}
+                      </Typography>
+                    </Box>
+                  </Box>
+                )
+              })}
+            </Box>
           </CardContent>
         </Card>
-      </Grid>
+      </Box>
 
-      {/* Right Side: Chapter Details Panel */}
-      <Grid item xs={12} md={7}>
+      <Box>
         <Card sx={{ bgcolor: "#FFFFFF", p: 3 }}>
-          {/* Header profile row */}
           <Box
             sx={{
               display: "flex",
@@ -159,7 +249,7 @@ export default function StructureView() {
               alignItems: "flex-start",
               mb: 3,
             }}>
-            <Stack direction="row" spacing={2} alignItems="center">
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box
                 sx={{
                   p: 1.5,
@@ -171,96 +261,101 @@ export default function StructureView() {
                 <OrgIcon sx={{ color: "#0052CC", fontSize: "2rem" }} />
               </Box>
               <Box>
-                <Stack direction="row" spacing={1.5} alignItems="center">
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    Tamil Nadu Association
+                    {selectedNode?.name || "No node selected"}
                   </Typography>
                   <Chip
-                    label="Active"
+                    label={
+                      selectedNode?.isActive === false ? "Inactive" : "Active"
+                    }
                     size="small"
-                    color="success"
+                    color={
+                      selectedNode?.isActive === false ? "default" : "success"
+                    }
                     sx={{ fontSize: "0.7rem", height: 18 }}
                   />
-                </Stack>
+                </Box>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Level: State Association &bull; Parent: National Federation
+                  Level: {selectedDepth + 1} &bull; Parent: {selectedParentName}
                 </Typography>
               </Box>
-            </Stack>
+            </Box>
             <IconButton size="small">
               <MoreIcon />
             </IconButton>
           </Box>
 
-          {/* Stats Widget blocks */}
-          <Grid container spacing={2} sx={{ mb: 4 }}>
+          <Box
+            sx={{
+              display: "grid",
+              gap: 2,
+              mb: 4,
+              gridTemplateColumns: {
+                xs: "repeat(2, minmax(0, 1fr))",
+                sm: "repeat(4, minmax(0, 1fr))",
+              },
+            }}>
             {[
               {
                 title: "Members",
-                val: "1,045",
+                val: selectedMembers,
                 link: "View members →",
                 color: "#0052CC",
-                bg: "#DEEBFF",
               },
               {
                 title: "Office Bearers",
                 val: "32",
                 link: "View all →",
                 color: "#0052CC",
-                bg: "#DEEBFF",
               },
               {
                 title: "Sub-organizations",
-                val: "26",
+                val: `${selectedChildrenCount}`,
                 link: "View all →",
                 color: "#006644",
-                bg: "#E3FCEF",
               },
               {
                 title: "Collected This FY",
                 val: "₹12,45,600",
                 link: "View payments →",
                 color: "#FF8B00",
-                bg: "#FFEAD5",
               },
-            ].map((item, idx) => (
-              <Grid item xs={6} sm={3} key={idx}>
-                <Box
+            ].map((item) => (
+              <Box
+                key={item.title}
+                sx={{
+                  p: 2,
+                  border: "1px solid #DFE1E6",
+                  borderRadius: "8px",
+                  height: "100%",
+                }}>
+                <Typography
+                  variant="caption"
                   sx={{
-                    p: 2,
-                    border: "1px solid #DFE1E6",
-                    borderRadius: "8px",
-                    height: "100%",
+                    color: "text.secondary",
+                    fontWeight: 600,
+                    display: "block",
+                    mb: 0.5,
                   }}>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: "text.secondary",
-                      fontWeight: 600,
-                      display: "block",
-                      mb: 0.5,
-                    }}>
-                    {item.title}
-                  </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
-                    {item.val}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: item.color,
-                      cursor: "pointer",
-                      fontWeight: 600,
-                      "&:hover": { textDecoration: "underline" },
-                    }}>
-                    {item.link}
-                  </Typography>
-                </Box>
-              </Grid>
+                  {item.title}
+                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                  {item.val}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: item.color,
+                    cursor: "pointer",
+                    fontWeight: 600,
+                  }}>
+                  {item.link}
+                </Typography>
+              </Box>
             ))}
-          </Grid>
+          </Box>
 
-          {/* Leadership Office Bearers Block */}
           <Box sx={{ mb: 4 }}>
             <Box
               sx={{
@@ -277,14 +372,14 @@ export default function StructureView() {
               </Button>
             </Box>
 
-            <Stack spacing={1.5}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {[
                 { pos: "President", name: "Kavin Arul", tag: "Active" },
                 { pos: "Secretary", name: "Yazhini Devi", tag: "Active" },
                 { pos: "Treasurer", name: "Pranav Mani", tag: "Active" },
-              ].map((leader, idx) => (
+              ].map((leader) => (
                 <Box
-                  key={idx}
+                  key={leader.pos}
                   sx={{
                     p: 1.5,
                     border: "1px solid #DFE1E6",
@@ -293,7 +388,7 @@ export default function StructureView() {
                     alignItems: "center",
                     justifyContent: "space-between",
                   }}>
-                  <Stack direction="row" spacing={2} alignItems="center">
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                     <Avatar
                       sx={{
                         width: 32,
@@ -321,7 +416,7 @@ export default function StructureView() {
                         {leader.name}
                       </Typography>
                     </Box>
-                  </Stack>
+                  </Box>
                   <Chip
                     label={leader.tag}
                     size="small"
@@ -331,15 +426,22 @@ export default function StructureView() {
                   />
                 </Box>
               ))}
-            </Stack>
+            </Box>
           </Box>
 
-          {/* Actions toolbar */}
           <Divider sx={{ my: 3 }} />
-          <Stack direction="row" spacing={2} justifyContent="flex-end">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 2,
+              flexWrap: "wrap",
+            }}>
             <Button
               variant="outlined"
               startIcon={<EditIcon />}
+              onClick={() => setEditDrawerOpen(true)}
+              disabled={!selectedNode}
               sx={{ borderColor: "#DFE1E6", color: "#091E42" }}>
               Edit
             </Button>
@@ -364,9 +466,17 @@ export default function StructureView() {
             <Button variant="outlined" startIcon={<DeleteIcon />} color="error">
               Delete
             </Button>
-          </Stack>
+          </Box>
         </Card>
-      </Grid>
-    </Grid>
+      </Box>
+
+      <AddChapterDrawer
+        open={editDrawerOpen}
+        onClose={() => setEditDrawerOpen(false)}
+        mode="edit"
+        chapterToEdit={selectedNode}
+        onSaved={() => setRefreshCounter((prev) => prev + 1)}
+      />
+    </Box>
   )
 }

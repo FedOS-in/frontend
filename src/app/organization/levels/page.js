@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add"
 
 export default function LevelsPage() {
   return (
-    <OrganizationLayout activeMenu="levels" onNavigate={() => {}}>
+    <OrganizationLayout>
       <PageHeader
         title="Organization Levels"
         subtitle="Define and manage the hierarchy levels used in your organization structure."

@@ -17,7 +17,13 @@ export default function Sidebar({
   return (
     <Box
       className={`sidebar ${sidebarCollapsed ? "sidebar--collapsed" : ""}`}
-      sx={{ width: sidebarCollapsed ? 70 : 240 }}>
+      sx={{
+        width: sidebarCollapsed ? 70 : 240,
+        position: "sticky",
+        top: 0,
+        alignSelf: "flex-start",
+        flexShrink: 0,
+      }}>
       <SidebarHeader sidebarCollapsed={sidebarCollapsed} />
       <SidebarMenu
         activeMenu={activeMenu}

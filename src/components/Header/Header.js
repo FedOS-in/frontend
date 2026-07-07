@@ -5,12 +5,10 @@ import {
   Typography,
   Select,
   MenuItem,
-  Stack,
   IconButton,
   Badge,
   Divider,
   Avatar,
-  Link,
 } from "@mui/material"
 import OrgIcon from "@mui/icons-material/CorporateFare"
 import HelpIcon from "@mui/icons-material/HelpOutlineOutlined"
@@ -29,7 +27,12 @@ export default function Header() {
         px: 3,
         flexShrink: 0,
       }}>
-      <Stack direction="row" spacing={1.5} alignItems="center">
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1.5,
+        }}>
         <IconButton sx={{ p: 0.5, bgcolor: "#F4F5F7", borderRadius: "6px" }}>
           <OrgIcon sx={{ color: "#5E6C84", fontSize: "1.3rem" }} />
         </IconButton>
@@ -46,9 +49,14 @@ export default function Header() {
           <MenuItem value="ima">Indian Medical Association</MenuItem>
           <MenuItem value="state">State Medical Council</MenuItem>
         </Select>
-      </Stack>
+      </Box>
 
-      <Stack direction="row" spacing={2.5} alignItems="center">
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2.5,
+        }}>
         <IconButton size="small" sx={{ color: "#5E6C84" }}>
           <HelpIcon fontSize="small" />
         </IconButton>
@@ -72,11 +80,13 @@ export default function Header() {
           flexItem
           sx={{ height: 20, my: "auto" }}
         />
-        <Stack
-          direction="row"
-          spacing={1.5}
-          alignItems="center"
-          sx={{ cursor: "pointer" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            cursor: "pointer",
+          }}>
           <Avatar
             sx={{
               width: 32,
@@ -99,8 +109,8 @@ export default function Header() {
               Secretary
             </Typography>
           </Box>
-        </Stack>
-      </Stack>
+        </Box>
+      </Box>
     </Box>
   )
 }

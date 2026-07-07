@@ -4,7 +4,6 @@ import { Collapse } from "@mui/material"
 import OrgIcon from "@mui/icons-material/CorporateFare"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
-import SidebarMenuItem from "./SidebarMenuItem"
 
 export default function SidebarOrganizationMenu({
   activeMenu,

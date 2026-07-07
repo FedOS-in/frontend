@@ -8,7 +8,7 @@ import PeopleIcon from "@mui/icons-material/People"
 
 export default function OfficeBearersPage() {
   return (
-    <OrganizationLayout activeMenu="bearers" onNavigate={() => {}}>
+    <OrganizationLayout>
       <PageHeader
         title="Office Bearers"
         subtitle="Manage leadership positions and assignments across the organization."

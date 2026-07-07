@@ -1,10 +1,12 @@
 /* Sidebar block styling using BEM methodology */
 .sidebar {
-  background-color: #091E42;
-  color: #8993A4;
+  background-color: #091e42;
+  color: #8993a4;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   transition: width 0.2s ease-in-out;
   z-index: 10;
@@ -27,25 +29,28 @@
   width: 32px;
   height: 32px;
   border-radius: 6px;
-  background-color: #0052CC;
+  background-color: #0052cc;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 1.2rem;
 }
 
 .sidebar__logo-text {
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 800;
   letter-spacing: 0.05em;
 }
 
 .sidebar__menu {
   flex: 1;
+  min-height: 0;
   padding: 16px 0;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -76,11 +81,11 @@
 
 .sidebar__menu-icon {
   font-size: 1.25rem;
-  color: #8993A4;
+  color: #8993a4;
 }
 
 .sidebar__menu-text {
-  color: #8993A4;
+  color: #8993a4;
   font-weight: 500;
   font-size: 0.85rem;
 }
@@ -98,10 +103,12 @@
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  color: #8993A4;
+  color: #8993a4;
   font-weight: 500;
   font-size: 0.85rem;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .sidebar__submenu-item:hover {
@@ -109,18 +116,19 @@
 }
 
 .sidebar__submenu-item--active {
-  color: #FFFFFF;
-  background-color: #0052CC;
+  color: #ffffff;
+  background-color: #0052cc;
   font-weight: 600;
 }
 
 .sidebar__submenu-item--active:hover {
-  background-color: #0052CC;
+  background-color: #0052cc;
 }
 
 .sidebar__footer {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 12px;
+  flex-shrink: 0;
 }
 
 .sidebar__user-card {
@@ -139,13 +147,13 @@
 }
 
 .sidebar__user-name {
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 600;
   font-size: 0.8rem;
 }
 
 .sidebar__user-role {
-  color: #8993A4;
+  color: #8993a4;
   font-size: 0.7rem;
 }
 
@@ -156,12 +164,14 @@
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 6px;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .sidebar__collapse-btn:hover {
   background-color: rgba(255, 255, 255, 0.04);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .sidebar__collapse-btn--centered {

@@ -3,11 +3,14 @@ import React from "react"
 import OrganizationLayout from "@/components/Organization/OrganizationLayout"
 import PageHeader from "@/components/Organization/PageHeader"
 import StructureView from "@/components/Organization/StructureView"
+import AddChapterDrawer from "@/components/Organization/AddChapterDrawer"
 import AddIcon from "@mui/icons-material/Add"
 
 export default function StructurePage() {
+  const [addChapterOpen, setAddChapterOpen] = React.useState(false)
+
   return (
-    <OrganizationLayout activeMenu="structure" onNavigate={() => {}}>
+    <OrganizationLayout>
       <PageHeader
         title="Organization Structure"
         subtitle="Manage hierarchy levels and chapters"
@@ -17,11 +20,20 @@ export default function StructurePage() {
         ]}
         actions={[
           { label: "Add Level", icon: <AddIcon />, variant: "outlined" },
-          { label: "Add Chapter", icon: <AddIcon />, variant: "contained" },
+          {
+            label: "Add Chapter",
+            icon: <AddIcon />,
+            variant: "contained",
+            onClick: () => setAddChapterOpen(true),
+          },
         ]}
       />
 
       <StructureView />
+      <AddChapterDrawer
+        open={addChapterOpen}
+        onClose={() => setAddChapterOpen(false)}
+      />
     </OrganizationLayout>
   )
 }

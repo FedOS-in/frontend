@@ -10,6 +10,7 @@ const ROUTES_BY_MENU = {
   structure: "/organization/structure",
   levels: "/organization/levels",
   bearers: "/organization/officebearers",
+  userForms: "/organization/userForm",
 }
 
 function getActiveMenu(pathname) {
@@ -18,6 +19,7 @@ function getActiveMenu(pathname) {
   if (pathname.startsWith("/organization/structure")) return "structure"
   if (pathname.startsWith("/organization/levels")) return "levels"
   if (pathname.startsWith("/organization/officebearers")) return "bearers"
+  if (pathname.startsWith("/organization/userForm")) return "userForms"
   return "dashboard"
 }
 

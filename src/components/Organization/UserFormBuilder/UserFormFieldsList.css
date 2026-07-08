@@ -1,0 +1,73 @@
+.user-form-fields-list {
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.user-form-fields-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.user-form-fields-list__title,
+.user-form-fields-list__empty-title,
+.user-form-fields-list__label {
+  font-weight: 700;
+}
+
+.user-form-fields-list__empty {
+  border: 1px dashed var(--mui-palette-divider);
+  border-radius: 16px;
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.user-form-fields-list__items {
+  display: grid;
+  gap: 10px;
+}
+
+.user-form-fields-list__item {
+  border: 1px solid var(--mui-palette-divider);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+  cursor: grab;
+  transition: border-color 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.user-form-fields-list__item:active {
+  cursor: grabbing;
+}
+
+.user-form-fields-list__item--dragging {
+  opacity: 0.55;
+}
+
+.user-form-fields-list__item--drop-target {
+  border-color: var(--mui-palette-primary-main);
+  background: color-mix(in srgb, var(--mui-palette-primary-main) 8%, transparent);
+}
+
+.user-form-fields-list__item-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.user-form-fields-list__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user-form-fields-list__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

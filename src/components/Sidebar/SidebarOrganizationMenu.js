@@ -13,13 +13,14 @@ export default function SidebarOrganizationMenu({
   setOrgOpen,
 }) {
   const isOrgActive =
-    ["levels", "structure", "bearers"].includes(activeMenu) ||
+    ["levels", "structure", "bearers", "userForms"].includes(activeMenu) ||
     activeMenu === "create-position"
 
   const submenuItems = [
     { id: "structure", label: "Structure" },
     { id: "bearers", label: "Office Bearers" },
     { id: "levels", label: "Levels" },
+    { id: "userForms", label: "User Forms" },
   ]
 
   return (

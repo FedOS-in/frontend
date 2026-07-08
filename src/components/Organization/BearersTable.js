@@ -115,7 +115,7 @@ export default function BearersTable() {
     <>
       {/* Filter Row */}
       <Card sx={{ mb: 3, p: 2, bgcolor: "#FFFFFF" }}>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2} sx={{ alignItems: "center" }}>
           <Grid item xs={12} sm={6} md={2.4}>
             <Typography
               variant="caption"
@@ -286,7 +286,7 @@ export default function BearersTable() {
                 </TableCell>
                 <TableCell>
                   {row.status === "Vacant" ? (
-                    <Stack direction="row" spacing={1.5} alignItems="center">
+                    <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
                       <Avatar
                         sx={{
                           width: 32,
@@ -317,7 +317,7 @@ export default function BearersTable() {
                       </Box>
                     </Stack>
                   ) : (
-                    <Stack direction="row" spacing={1.5} alignItems="center">
+                    <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
                       <Avatar
                         sx={{
                           width: 32,
@@ -341,7 +341,7 @@ export default function BearersTable() {
                           }}>
                           {row.name}
                         </Typography>
-                        <Stack direction="row" spacing={1} alignItems="center">
+                        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                           <Typography
                             variant="caption"
                             sx={{
@@ -384,14 +384,14 @@ export default function BearersTable() {
                 </TableCell>
                 <TableCell
                   sx={{ fontSize: "0.85rem", color: "text.secondary" }}>
-                  <Stack direction="row" spacing={0.5} alignItems="center">
+                  <Stack direction="row" spacing={0.5} sx={{ alignItems: "center" }}>
                     <CalendarIcon sx={{ fontSize: "0.9rem" }} />
                     <span>{row.term}</span>
                   </Stack>
                 </TableCell>
                 <TableCell
                   sx={{ fontSize: "0.85rem", color: "text.secondary" }}>
-                  <Stack direction="row" spacing={0.5} alignItems="center">
+                  <Stack direction="row" spacing={0.5} sx={{ alignItems: "center" }}>
                     <CalendarIcon sx={{ fontSize: "0.9rem" }} />
                     <span>{row.end}</span>
                   </Stack>
@@ -434,7 +434,7 @@ export default function BearersTable() {
                     <Stack
                       direction="row"
                       spacing={0.5}
-                      justifyContent="center">
+                      sx={{ justifyContent: "center" }}>
                       <IconButton
                         size="small"
                         sx={{

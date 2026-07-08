@@ -133,9 +133,7 @@ export default function LevelsTable() {
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={2}
-        sx={{ mb: 3 }}
-        justifyContent="space-between"
-        alignItems="center">
+        sx={{ mb: 3, justifyContent: "space-between", alignItems: "center" }}>
         <OutlinedInput
           placeholder="Search level name..."
           size="small"
@@ -227,7 +225,7 @@ export default function LevelsTable() {
                   {row.displayOrder}
                 </TableCell>
                 <TableCell>
-                  <Stack direction="row" spacing={1} alignItems="center">
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                     <Typography sx={{ fontWeight: 600, fontSize: "0.9rem" }}>
                       {row.name}
                     </Typography>
@@ -275,7 +273,7 @@ export default function LevelsTable() {
                   </Box>
                 </TableCell>
                 <TableCell>
-                  <Stack direction="row" spacing={1} alignItems="center">
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                     <Box
                       sx={{
                         width: 8,
@@ -290,7 +288,7 @@ export default function LevelsTable() {
                   </Stack>
                 </TableCell>
                 <TableCell align="center">
-                  <Stack direction="row" spacing={1} justifyContent="center">
+                  <Stack direction="row" spacing={1} sx={{ justifyContent: "center" }}>
                     <IconButton
                       size="small"
                       sx={{
@@ -320,10 +318,8 @@ export default function LevelsTable() {
       {/* Footer Info */}
       <Stack
         direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mt: 3, px: 1 }}>
-        <Stack direction="row" spacing={1} alignItems="center">
+        sx={{ mt: 3, px: 1, justifyContent: "space-between", alignItems: "center" }}>
+        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
           <InfoIconCustom
             sx={{ color: "text.secondary", fontSize: "1.1rem" }}
           />

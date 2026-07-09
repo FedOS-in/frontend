@@ -2,18 +2,63 @@
 
 import * as React from "react"
 import Alert from "@mui/material/Alert"
+import Button from "@mui/material/Button"
+import AddIcon from "@mui/icons-material/Add"
 import { EMPTY_DRAFT, FIELD_TYPE_OPTIONS, createFieldKey, normalizeFieldKey, parseOptions } from "./userFormBuilderConfig"
 import UserFormBuilderForm from "./UserFormBuilderForm"
 import UserFormFieldsList from "./UserFormFieldsList"
 import "./UserFormBuilderWorkspace.css"
 
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
+
 export default function UserFormBuilderWorkspace({ onCancel }) {
   const [formName, setFormName] = React.useState("")
+  const [chapterOptions, setChapterOptions] = React.useState([])
+  const [selectedChapter, setSelectedChapter] = React.useState(null)
+  const [loadingChapters, setLoadingChapters] = React.useState(false)
   const [fieldDraft, setFieldDraft] = React.useState(EMPTY_DRAFT)
   const [fields, setFields] = React.useState([])
   const [editingFieldId, setEditingFieldId] = React.useState(null)
   const [fieldKeyDirty, setFieldKeyDirty] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState("")
+  const [successMessage, setSuccessMessage] = React.useState("")
+  const [isSubmittingForm, setIsSubmittingForm] = React.useState(false)
+
+  React.useEffect(() => {
+    const controller = new AbortController()
+
+    async function loadChapters() {
+      setLoadingChapters(true)
+
+      try {
+        const response = await fetch(`${backendUrl}/api/federation-nodes`, {
+          signal: controller.signal,
+        })
+
+        if (!response.ok) {
+          throw new Error("Unable to load chapters")
+        }
+
+        const nodes = await response.json()
+        setChapterOptions(Array.isArray(nodes) ? nodes : [])
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setErrorMessage(error.message || "Unable to load chapters")
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoadingChapters(false)
+        }
+      }
+    }
+
+    loadChapters()
+
+    return () => {
+      controller.abort()
+    }
+  }, [])
 
   const resetFieldDraft = React.useCallback(() => {
     setFieldDraft(EMPTY_DRAFT)
@@ -155,21 +200,91 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
     })
   }, [])
 
+  const handleCreateForm = async () => {
+    const normalizedFormName = formName.trim()
+
+    if (!normalizedFormName) {
+      setSuccessMessage("")
+      setErrorMessage("Form name is required")
+      return
+    }
+
+    if (!selectedChapter?.id) {
+      setSuccessMessage("")
+      setErrorMessage("Chapter is required")
+      return
+    }
+
+    if (fields.length === 0) {
+      setSuccessMessage("")
+      setErrorMessage("Add at least one field before creating the form")
+      return
+    }
+
+    setIsSubmittingForm(true)
+    setErrorMessage("")
+    setSuccessMessage("")
+
+    try {
+      const payload = {
+        federationNodeId: selectedChapter.id,
+        name: normalizedFormName,
+        version: 1,
+        isActive: true,
+        fields: fields.map((field, index) => ({
+          fieldKey: field.fieldKey,
+          label: field.label,
+          fieldType: field.fieldType,
+          isRequired: field.isRequired,
+          sortOrder: index + 1,
+          ...(field.options?.length
+            ? { options: field.options.join(",") }
+            : {}),
+        })),
+      }
+
+      const response = await fetch(`${backendUrl}/api/forms`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        const payloadError = await response.json().catch(() => null)
+        throw new Error(payloadError?.message || "Failed to create form")
+      }
+
+      setSuccessMessage("Form created successfully")
+      onCancel()
+    } catch (error) {
+      setErrorMessage(error.message || "Failed to create form")
+    } finally {
+      setIsSubmittingForm(false)
+    }
+  }
+
   return (
     <div className="user-form-builder-workspace">
       <div className="user-form-builder-workspace__main">
         <UserFormBuilderForm
+          chapterOptions={chapterOptions}
           fieldDraft={fieldDraft}
           formName={formName}
           isEditing={Boolean(editingFieldId)}
+          loadingChapters={loadingChapters}
           onCancelEdit={handleCancelEdit}
           onCancel={onCancel}
+          onChapterChange={setSelectedChapter}
           onDraftChange={handleDraftChange}
           onFieldKeyChange={handleFieldKeyChange}
           onFormNameChange={setFormName}
           onSubmitField={handleSubmitField}
+          selectedChapter={selectedChapter}
         />
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+        {successMessage && <Alert severity="success">{successMessage}</Alert>}
       </div>
 
       <div className="user-form-builder-workspace__sidebar">
@@ -179,6 +294,16 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
           onReorderFields={handleReorderFields}
           onRemoveField={handleRemoveField}
         />
+      </div>
+
+      <div className="user-form-builder-workspace__footer-actions">
+        <Button
+          variant="contained"
+          endIcon={<AddIcon />}
+          onClick={handleCreateForm}
+          disabled={isSubmittingForm}>
+          {isSubmittingForm ? "Creating..." : "Create Form"}
+        </Button>
       </div>
     </div>
   )

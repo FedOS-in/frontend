@@ -16,15 +16,19 @@ import { FIELD_TYPE_OPTIONS } from "./userFormBuilderConfig"
 import "./UserFormBuilderForm.css"
 
 export default function UserFormBuilderForm({
+  chapterOptions,
   fieldDraft,
   formName,
   isEditing,
+  loadingChapters,
   onCancel,
   onCancelEdit,
+  onChapterChange,
   onDraftChange,
   onFieldKeyChange,
   onFormNameChange,
   onSubmitField,
+  selectedChapter,
 }) {
   return (
     <Paper variant="outlined" className="user-form-builder-form">
@@ -39,6 +43,47 @@ export default function UserFormBuilderForm({
           placeholder="Member registration form"
           fullWidth
           required
+        />
+        <Autocomplete
+          options={chapterOptions ?? []}
+          value={selectedChapter}
+          onChange={(_, value) => onChapterChange(value ?? null)}
+          loading={loadingChapters}
+          getOptionLabel={(option) => option?.name || ""}
+          isOptionEqualToValue={(option, value) => option.id === value?.id}
+          renderOption={(props, option) => (
+            <Box component="li" {...props} key={option.id}>
+              <Box>
+                <Typography sx={{ fontWeight: 600 }}>{option.name}</Typography>
+                <Typography variant="caption" sx={{ color: "text.secondary" }}>
+                  {option.parent?.name
+                    ? `Parent: ${option.parent.name}`
+                    : "Top-level node"}
+                </Typography>
+              </Box>
+            </Box>
+          )}
+          filterOptions={(options, state) =>
+            options.filter((option) =>
+              option.name.toLowerCase().includes(state.inputValue.toLowerCase()),
+            )
+          }
+          noOptionsText={
+            loadingChapters
+              ? "Loading chapters..."
+              : chapterOptions.length === 0
+                ? "No chapters available"
+                : "No matching chapter found"
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Chapter"
+              placeholder="Search chapter by name"
+              helperText="Select the chapter to which this form belongs"
+              required
+            />
+          )}
         />
       </div>
 

@@ -9,3 +9,9 @@
   display: grid;
   gap: 12px;
 }
+
+.user-form-builder-workspace__footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 2px;
+}

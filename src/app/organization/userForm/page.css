@@ -1,0 +1,245 @@
+.user-form-page__alert {
+  margin-bottom: 16px;
+}
+
+.user-form-page__empty {
+  margin-bottom: 20px;
+  padding: 28px;
+  border-style: dashed;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+}
+
+.user-form-page__empty-title {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.user-form-page__empty-text {
+  margin-bottom: 16px;
+}
+
+.user-form-page__grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.user-form-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--mui-palette-divider, #dfe1e6);
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.user-form-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0052cc 0%, #3884ff 100%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.user-form-card:hover {
+  transform: translateY(-2px);
+  border-color: #b9cdf9;
+  box-shadow: 0 12px 24px rgba(9, 30, 66, 0.1);
+}
+
+.user-form-card:hover::before {
+  opacity: 1;
+}
+
+.user-form-card__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 12px;
+  background: linear-gradient(180deg, rgba(56, 132, 255, 0.08) 0%, rgba(56, 132, 255, 0.02) 100%);
+  border-bottom: 1px solid var(--mui-palette-divider, #dfe1e6);
+}
+
+.user-form-card__title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--mui-palette-text-primary, #091e42);
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-form-card__menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.user-form-card__menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(9, 30, 66, 0.15);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--mui-palette-text-secondary, #5e6c84);
+  width: 30px;
+  height: 30px;
+}
+
+.user-form-card__menu-trigger .MuiSvgIcon-root {
+  font-size: 1rem;
+}
+
+.user-form-card__menu-trigger:hover {
+  background: rgba(0, 82, 204, 0.08);
+  color: #0052cc;
+}
+
+.user-form-card__menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 3;
+  display: grid;
+  min-width: 140px;
+  padding: 6px;
+  border: 1px solid rgba(9, 30, 66, 0.12);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(9, 30, 66, 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.user-form-card__menu:hover .user-form-card__menu-dropdown,
+.user-form-card__menu:focus-within .user-form-card__menu-dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.user-form-card__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.user-form-card__menu-item .MuiSvgIcon-root {
+  font-size: 1rem;
+}
+
+.user-form-card__menu-item--view {
+  color: #0052cc;
+}
+
+.user-form-card__menu-item--view:hover {
+  background: rgba(0, 82, 204, 0.16);
+}
+
+.user-form-card__menu-item--edit {
+  color: #7a4d00;
+}
+
+.user-form-card__menu-item--edit:hover {
+  background: rgba(255, 139, 0, 0.22);
+}
+
+.user-form-card__menu-item--share {
+  color: #006644;
+}
+
+.user-form-card__menu-item--share:hover {
+  background: rgba(0, 102, 68, 0.22);
+}
+
+.user-form-card__menu-item--delete {
+  color: #bf2600;
+}
+
+.user-form-card__menu-item--delete:hover {
+  background: rgba(222, 53, 11, 0.22);
+}
+
+.user-form-card__fields {
+  margin: 0;
+  padding: 12px 18px 18px;
+  width: 100%;
+}
+
+.user-form-card__field-item {
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(9, 30, 66, 0.12);
+}
+
+.user-form-card__field-item:last-child {
+  border-bottom: 0;
+}
+
+.user-form-card__field-text {
+  color: var(--mui-palette-text-secondary, #5e6c84);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.user-form-modal__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.user-form-modal__edit-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  color: #7a4d00;
+  background: rgba(255, 139, 0, 0.14);
+}
+
+.user-form-modal__edit-button:hover {
+  background: rgba(255, 139, 0, 0.22);
+}
+
+@media (min-width: 640px) {
+  .user-form-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .user-form-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .user-form-page__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

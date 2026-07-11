@@ -25,8 +25,8 @@ export default function AddChapterDrawer({
   chapterToEdit = null,
   onSaved,
 }) {
-  const [chapterName, setChapterName] = React.useState("")
-  const [parentNode, setParentNode] = React.useState(null)
+  const [chapterNameOverride, setChapterNameOverride] = React.useState(undefined)
+  const [parentNodeOverride, setParentNodeOverride] = React.useState(undefined)
   const [parentOptions, setParentOptions] = React.useState([])
   const [loadingParents, setLoadingParents] = React.useState(false)
   const [submitting, setSubmitting] = React.useState(false)
@@ -34,12 +34,23 @@ export default function AddChapterDrawer({
   const [successMessage, setSuccessMessage] = React.useState("")
 
   const resetForm = () => {
-    setChapterName("")
-    setParentNode(null)
+    setChapterNameOverride(undefined)
+    setParentNodeOverride(undefined)
     setErrorMessage("")
   }
 
   const isEditMode = mode === "edit" && Boolean(chapterToEdit?.id)
+  const initialChapterName = isEditMode ? chapterToEdit?.name || "" : ""
+  const chapterName =
+    chapterNameOverride !== undefined ? chapterNameOverride : initialChapterName
+  const initialParentNode = React.useMemo(() => {
+    if (!isEditMode) return null
+    return (
+      parentOptions.find((node) => node.id === chapterToEdit?.parentId) || null
+    )
+  }, [isEditMode, parentOptions, chapterToEdit?.parentId])
+  const parentNode =
+    parentNodeOverride !== undefined ? parentNodeOverride : initialParentNode
 
   React.useEffect(() => {
     if (!open) {
@@ -82,25 +93,6 @@ export default function AddChapterDrawer({
       controller.abort()
     }
   }, [open])
-
-  React.useEffect(() => {
-    if (!open) {
-      return
-    }
-
-    if (isEditMode) {
-      setChapterName(chapterToEdit?.name || "")
-
-      const matchedParent = parentOptions.find(
-        (node) => node.id === chapterToEdit?.parentId,
-      )
-      setParentNode(matchedParent || null)
-      return
-    }
-
-    setChapterName("")
-    setParentNode(null)
-  }, [open, isEditMode, chapterToEdit, parentOptions])
 
   const handleClose = () => {
     if (submitting) return
@@ -176,7 +168,7 @@ export default function AddChapterDrawer({
             <TextField
               label="Chapter Name"
               value={chapterName}
-              onChange={(event) => setChapterName(event.target.value)}
+              onChange={(event) => setChapterNameOverride(event.target.value)}
               placeholder="Enter chapter name"
               fullWidth
               required
@@ -185,7 +177,7 @@ export default function AddChapterDrawer({
             <Autocomplete
               options={parentOptions ?? []}
               value={parentNode}
-              onChange={(_, value) => setParentNode(value ?? null)}
+              onChange={(_, value) => setParentNodeOverride(value ?? null)}
               loading={loadingParents}
               getOptionLabel={(option) => option?.name || ""}
               isOptionEqualToValue={(option, value) => option.id === value?.id}

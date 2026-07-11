@@ -10,6 +10,7 @@ const ROUTES_BY_MENU = {
   structure: "/organization/structure",
   levels: "/organization/levels",
   bearers: "/organization/officebearers",
+  users: "/organization/users",
   userForms: "/organization/userForm",
 }
 
@@ -19,6 +20,7 @@ function getActiveMenu(pathname) {
   if (pathname.startsWith("/organization/structure")) return "structure"
   if (pathname.startsWith("/organization/levels")) return "levels"
   if (pathname.startsWith("/organization/officebearers")) return "bearers"
+  if (pathname.startsWith("/organization/users")) return "users"
   if (pathname.startsWith("/organization/userForm")) return "userForms"
   return "dashboard"
 }
@@ -28,6 +30,11 @@ export default function AppShell({ children }) {
   const pathname = usePathname()
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false)
   const [orgOpen, setOrgOpen] = React.useState(true)
+
+  const shouldHideSidebar = React.useMemo(
+    () => pathname?.startsWith("/user/create/") ?? false,
+    [pathname],
+  )
 
   const activeMenu = React.useMemo(() => getActiveMenu(pathname), [pathname])
 
@@ -46,14 +53,16 @@ export default function AppShell({ children }) {
         overflow: "hidden",
         bgcolor: "background.default",
       }}>
-      <Sidebar
-        activeMenu={activeMenu}
-        onNavigate={handleNavigate}
-        sidebarCollapsed={sidebarCollapsed}
-        setSidebarCollapsed={setSidebarCollapsed}
-        orgOpen={orgOpen}
-        setOrgOpen={setOrgOpen}
-      />
+      {shouldHideSidebar ? null : (
+        <Sidebar
+          activeMenu={activeMenu}
+          onNavigate={handleNavigate}
+          sidebarCollapsed={sidebarCollapsed}
+          setSidebarCollapsed={setSidebarCollapsed}
+          orgOpen={orgOpen}
+          setOrgOpen={setOrgOpen}
+        />
+      )}
 
       <Box
         sx={{

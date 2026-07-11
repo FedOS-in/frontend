@@ -1,0 +1,28 @@
+.org-users {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.org-users__toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) minmax(220px, 280px);
+  gap: 16px;
+  align-items: center;
+}
+
+.org-users__summary {
+  color: #5e6c84;
+  font-size: 0.875rem;
+}
+
+.org-users__error {
+  color: #bf2600;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+  .org-users__toolbar {
+    grid-template-columns: 1fr;
+  }
+}

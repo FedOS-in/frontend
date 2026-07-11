@@ -6,14 +6,28 @@ import AddIcon from "@mui/icons-material/Add"
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
-import ShareIcon from "@mui/icons-material/Share"
+import ContentCopyIcon from "@mui/icons-material/ContentCopy"
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, List, ListItem, Paper, Typography } from "@mui/material"
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  List,
+  ListItem,
+  Paper,
+  Snackbar,
+  Typography,
+} from "@mui/material"
 import OrganizationLayout from "@/components/Organization/OrganizationLayout"
 import PageHeader from "@/components/Organization/PageHeader"
 import "./page.css"
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
 
 function getDisplayedFields(fields = []) {
   if (!Array.isArray(fields)) return []
@@ -30,28 +44,37 @@ export default function UserFormPage() {
   const [forms, setForms] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [errorMessage, setErrorMessage] = React.useState("")
+  const [successMessage, setSuccessMessage] = React.useState("")
   const [selectedForm, setSelectedForm] = React.useState(null)
 
-  const loadForms = React.useCallback(async () => {
-    setIsLoading(true)
-    setErrorMessage("")
-    try {
-      const response = await fetch(`${backendUrl}/api/forms`)
-      if (!response.ok) {
-        throw new Error("Unable to load forms")
-      }
-      const payload = await response.json()
-      setForms(Array.isArray(payload) ? payload : [])
-    } catch (error) {
-      setErrorMessage(error.message || "Unable to load forms")
-    } finally {
-      setIsLoading(false)
-    }
-  }, [])
-
   React.useEffect(() => {
-    loadForms()
-  }, [loadForms])
+    const controller = new AbortController()
+
+    ;(async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/forms`, {
+          signal: controller.signal,
+        })
+
+        if (!response.ok) {
+          throw new Error("Unable to load forms")
+        }
+
+        const payload = await response.json()
+        setForms(Array.isArray(payload) ? payload : [])
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setErrorMessage(error.message || "Unable to load forms")
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false)
+        }
+      }
+    })()
+
+    return () => controller.abort()
+  }, [])
 
   const handleDelete = async (formId) => {
     const isConfirmed = window.confirm("Delete this form?")
@@ -75,7 +98,9 @@ export default function UserFormPage() {
 
   const handleShare = async (formId) => {
     try {
-      await navigator.clipboard.writeText(`/user/create/${formId}`)
+      const shareUrl = new URL(`/user/create/${formId}`, window.location.origin)
+      await navigator.clipboard.writeText(shareUrl.toString())
+      setSuccessMessage("Invite link copied")
     } catch {
       setErrorMessage("Unable to copy share link")
     }
@@ -101,7 +126,9 @@ export default function UserFormPage() {
       />
 
       {errorMessage ? (
-        <Alert severity="error" className="user-form-page__alert">{errorMessage}</Alert>
+        <Alert severity="error" className="user-form-page__alert">
+          {errorMessage}
+        </Alert>
       ) : null}
 
       {!isLoading && forms.length === 0 ? (
@@ -129,20 +156,38 @@ export default function UserFormPage() {
                 {form.name}
               </Typography>
               <div className="user-form-card__menu" aria-label="Form actions">
-                <IconButton className="user-form-card__menu-trigger" aria-label="Open form actions">
+                <IconButton
+                  className="user-form-card__menu-trigger"
+                  aria-label="Open form actions">
                   <MoreVertIcon />
                 </IconButton>
                 <div className="user-form-card__menu-dropdown">
-                  <button type="button" className="user-form-card__menu-item user-form-card__menu-item--view" onClick={() => setSelectedForm(form)}>
+                  <button
+                    type="button"
+                    className="user-form-card__menu-item user-form-card__menu-item--view"
+                    onClick={() => setSelectedForm(form)}>
                     <VisibilityOutlinedIcon /> View
                   </button>
-                  <button type="button" className="user-form-card__menu-item user-form-card__menu-item--edit" onClick={() => router.push(`/organization/userForm/edit?formId=${form.id}`)}>
+                  <button
+                    type="button"
+                    className="user-form-card__menu-item user-form-card__menu-item--edit"
+                    onClick={() =>
+                      router.push(
+                        `/organization/userForm/edit?formId=${form.id}`,
+                      )
+                    }>
                     <EditOutlinedIcon /> Edit
                   </button>
-                  <button type="button" className="user-form-card__menu-item user-form-card__menu-item--share" onClick={() => handleShare(form.id)}>
-                    <ShareIcon /> Share
+                  <button
+                    type="button"
+                    className="user-form-card__menu-item user-form-card__menu-item--share"
+                    onClick={() => handleShare(form.id)}>
+                    <ContentCopyIcon /> Invite Users
                   </button>
-                  <button type="button" className="user-form-card__menu-item user-form-card__menu-item--delete" onClick={() => handleDelete(form.id)}>
+                  <button
+                    type="button"
+                    className="user-form-card__menu-item user-form-card__menu-item--delete"
+                    onClick={() => handleDelete(form.id)}>
                     <DeleteIcon /> Delete
                   </button>
                 </div>
@@ -151,8 +196,14 @@ export default function UserFormPage() {
 
             <List className="user-form-card__fields">
               {getDisplayedFields(form.fields).map((field, index) => (
-                <ListItem key={field.id || `${form.id}-${index}`} className="user-form-card__field-item">
-                  <Typography variant="body2" className="user-form-card__field-text">{field.label}</Typography>
+                <ListItem
+                  key={field.id || `${form.id}-${index}`}
+                  className="user-form-card__field-item">
+                  <Typography
+                    variant="body2"
+                    className="user-form-card__field-text">
+                    {field.label}
+                  </Typography>
                 </ListItem>
               ))}
             </List>
@@ -195,6 +246,19 @@ export default function UserFormPage() {
           <Button onClick={() => setSelectedForm(null)}>Close</Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar
+        open={Boolean(successMessage)}
+        autoHideDuration={2500}
+        onClose={() => setSuccessMessage("")}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}>
+        <Alert
+          severity="success"
+          variant="filled"
+          onClose={() => setSuccessMessage("")}>
+          {successMessage}
+        </Alert>
+      </Snackbar>
     </OrganizationLayout>
   )
 }

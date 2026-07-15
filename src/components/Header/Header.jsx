@@ -13,8 +13,21 @@ import {
 import OrgIcon from "@mui/icons-material/CorporateFare"
 import HelpIcon from "@mui/icons-material/HelpOutlineOutlined"
 import BellIcon from "@mui/icons-material/Notifications"
+import { useOrganizationLocale, useOrganizationText } from "@/i18n/organizationLanguageStore"
+
+const LANGUAGE_OPTIONS = [
+  { value: "en", label: "English" },
+  { value: "hi", label: "Hindi" },
+  { value: "kn", label: "Kannada" },
+  { value: "ml", label: "Malayalam" },
+  { value: "ta", label: "Tamil" },
+  { value: "te", label: "Telugu" },
+]
 
 export default function Header() {
+  const { locale, setLocale, availableLocales } = useOrganizationLocale()
+  const text = useOrganizationText()
+
   return (
     <Box
       sx={{
@@ -55,8 +68,37 @@ export default function Header() {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 2.5,
+          gap: 2,
         }}>
+        <Typography
+          variant="caption"
+          sx={{
+            color: "#5E6C84",
+            fontWeight: 600,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+          }}>
+          Language
+        </Typography>
+        <Select
+          value={locale}
+          onChange={(event) => setLocale(event.target.value)}
+          variant="standard"
+          disableUnderline
+          sx={{
+            minWidth: 120,
+            fontWeight: 600,
+            color: "#091E42",
+            fontSize: "0.85rem",
+            mr: 0.5,
+            "& .MuiSelect-select": { py: 0.5, pr: 3 },
+          }}>
+          {LANGUAGE_OPTIONS.filter((option) => availableLocales.includes(option.value)).map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
         <IconButton size="small" sx={{ color: "#5E6C84" }}>
           <HelpIcon fontSize="small" />
         </IconButton>
@@ -106,7 +148,7 @@ export default function Header() {
             <Typography
               variant="caption"
               sx={{ color: "#5E6C84", display: "block", fontSize: "0.7rem" }}>
-              Secretary
+              {text.sidebar.userRole}
             </Typography>
           </Box>
         </Box>

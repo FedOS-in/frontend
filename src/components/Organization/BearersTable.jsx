@@ -116,7 +116,7 @@ export default function BearersTable() {
       {/* Filter Row */}
       <Card sx={{ mb: 3, p: 2, bgcolor: "#FFFFFF" }}>
         <Grid container spacing={2} sx={{ alignItems: "center" }}>
-          <Grid item={!!item} xs={12} sm={6} md={2.4}>
+          <Grid item xs={12} sm={6} md={2.4}>
             <Typography
               variant="caption"
               sx={{

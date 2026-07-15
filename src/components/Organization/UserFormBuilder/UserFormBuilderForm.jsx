@@ -12,7 +12,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material"
-import { FIELD_TYPE_OPTIONS } from "./userFormBuilderConfig"
+import { getFieldTypeOptions } from "./userFormBuilderConfig"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./UserFormBuilderForm.css"
 
 export default function UserFormBuilderForm({
@@ -30,17 +31,18 @@ export default function UserFormBuilderForm({
   onSubmitField,
   selectedChapter,
 }) {
+  const text = useOrganizationText()
   return (
     <Paper variant="outlined" className="user-form-builder-form">
       <div className="user-form-builder-form__section">
         <Typography variant="h6" className="user-form-builder-form__title">
-          Form Setup
+          {text.userFormBuilder.formSetup}
         </Typography>
         <TextField
-          label="Form Name"
+          label={text.userFormBuilder.formName}
           value={formName}
           onChange={(event) => onFormNameChange(event.target.value)}
-          placeholder="Member registration form"
+          placeholder={text.userFormBuilder.formNamePlaceholder}
           fullWidth
           required
         />
@@ -57,8 +59,8 @@ export default function UserFormBuilderForm({
                 <Typography sx={{ fontWeight: 600 }}>{option.name}</Typography>
                 <Typography variant="caption" sx={{ color: "text.secondary" }}>
                   {option.parent?.name
-                    ? `Parent: ${option.parent.name}`
-                    : "Top-level node"}
+                    ? `${text.userFormBuilder.parentPrefix} ${option.parent.name}`
+                    : text.userFormBuilder.topLevelNode}
                 </Typography>
               </Box>
             </Box>
@@ -70,17 +72,17 @@ export default function UserFormBuilderForm({
           }
           noOptionsText={
             loadingChapters
-              ? "Loading chapters..."
+              ? text.userFormBuilder.loadingChapters
               : chapterOptions.length === 0
-                ? "No chapters available"
-                : "No matching chapter found"
+                ? text.userFormBuilder.noChaptersAvailable
+                : text.userFormBuilder.noMatchingChapter
           }
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Chapter"
-              placeholder="Search chapter by name"
-              helperText="Select the chapter to which this form belongs"
+              label={text.userFormBuilder.chapter}
+              placeholder={text.userFormBuilder.chapterSearchPlaceholder}
+              helperText={text.userFormBuilder.chapterHelper}
               required
             />
           )}
@@ -93,45 +95,45 @@ export default function UserFormBuilderForm({
         <Typography
           variant="subtitle1"
           className="user-form-builder-form__title">
-          Add Field
+          {text.userFormBuilder.addField}
         </Typography>
 
         <Box className="user-form-builder-form__grid">
           <div className="user-form-builder-form__cell">
             <TextField
-              label="Label"
+              label={text.userFormBuilder.label}
               value={fieldDraft.label}
               onChange={(event) => onDraftChange("label", event.target.value)}
-              placeholder="Phone Number"
+              placeholder={text.userFormBuilder.labelPlaceholder}
               fullWidth
             />
           </div>
 
           <div className="user-form-builder-form__cell">
             <TextField
-              label="fieldKey"
+              label={text.userFormBuilder.fieldKey}
               value={fieldDraft.fieldKey}
               onChange={(event) => onFieldKeyChange(event.target.value)}
-              placeholder="phone_number"
+              placeholder={text.userFormBuilder.fieldKeyPlaceholder}
               fullWidth
             />
           </div>
 
           <div className="user-form-builder-form__cell">
             <Autocomplete
-              options={FIELD_TYPE_OPTIONS}
+              options={getFieldTypeOptions()}
               value={fieldDraft.fieldType}
               onChange={(_, value) => onDraftChange("fieldType", value)}
               getOptionLabel={(option) => option?.label || ""}
               isOptionEqualToValue={(option, value) =>
                 option.value === value?.value
               }
-              noOptionsText="No field types found"
+              noOptionsText={text.userFormBuilder.noFieldTypesFound}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Field Type"
-                  placeholder="Search a field type"
+                  label={text.userFormBuilder.fieldType}
+                  placeholder={text.userFormBuilder.fieldTypePlaceholder}
                 />
               )}
             />
@@ -147,17 +149,17 @@ export default function UserFormBuilderForm({
                   }
                 />
               }
-              label="Is required"
+              label={text.userFormBuilder.isRequired}
             />
           </div>
 
           <div className="user-form-builder-form__cell user-form-builder-form__cell--full">
             <TextField
-              label="Options"
+              label={text.userFormBuilder.options}
               value={fieldDraft.options}
               onChange={(event) => onDraftChange("options", event.target.value)}
-              placeholder="Use commas or new lines for select-style options"
-              helperText="Needed for Select, Multi Select, Checkbox, and Radio"
+              placeholder={text.userFormBuilder.optionsPlaceholder}
+              helperText={text.userFormBuilder.optionsHelper}
               multiline
               rows={1}
               fullWidth
@@ -169,13 +171,13 @@ export default function UserFormBuilderForm({
           <Button
             variant="outlined"
             onClick={isEditing ? onCancelEdit : onCancel}>
-            {isEditing ? "Cancel Edit" : "Cancel"}
+            {isEditing ? text.userFormBuilder.cancelEdit : text.userFormBuilder.cancel}
           </Button>
           <Button
             variant="contained"
             endIcon={isEditing ? <EditOutlinedIcon /> : <AddIcon />}
             onClick={onSubmitField}>
-            {isEditing ? "Update Field" : "Add Field"}
+            {isEditing ? text.userFormBuilder.updateField : text.userFormBuilder.addFieldAction}
           </Button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutlineOutlined"
 import { Chip, IconButton, Paper, Typography } from "@mui/material"
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./UserFormFieldsList.css"
 
 export default function UserFormFieldsList({
@@ -13,6 +14,7 @@ export default function UserFormFieldsList({
   onReorderFields,
   onRemoveField,
 }) {
+  const text = useOrganizationText()
   const [draggedFieldId, setDraggedFieldId] = React.useState(null)
   const [dropTargetFieldId, setDropTargetFieldId] = React.useState(null)
 
@@ -55,18 +57,18 @@ export default function UserFormFieldsList({
     <Paper variant="outlined" className="user-form-fields-list">
       <div className="user-form-fields-list__header">
         <Typography variant="h6" className="user-form-fields-list__title">
-          Added Fields
+          {text.userFormFieldsList.title}
         </Typography>
-        <Chip label={`${fields.length} items`} size="small" color="primary" />
+        <Chip label={`${fields.length} ${text.userFormFieldsList.countSuffix}`} size="small" color="primary" />
       </div>
 
       {fields.length === 0 ? (
         <div className="user-form-fields-list__empty">
           <Typography className="user-form-fields-list__empty-title">
-            No fields added yet
+            {text.userFormFieldsList.emptyTitle}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Added fields stay visible here while you continue building the form.
+            {text.userFormFieldsList.emptyText}
           </Typography>
         </div>
       ) : (
@@ -96,16 +98,16 @@ export default function UserFormFieldsList({
 
                   <div className="user-form-fields-list__actions">
                     <IconButton
-                      aria-label={`Edit ${field.label}`}
+                      aria-label={`${text.userFormFieldsList.editAriaPrefix} ${field.label}`}
                       onClick={() => onEditField(field.id)}>
                       <EditOutlinedIcon />
                     </IconButton>
                     <IconButton
-                      aria-label={`Remove ${field.label}`}
+                      aria-label={`${text.userFormFieldsList.removeAriaPrefix} ${field.label}`}
                       onClick={() => onRemoveField(field.id)}>
                       <DeleteOutlineIcon />
                     </IconButton>
-                    <IconButton aria-label={`drag${field.label}`}>
+                    <IconButton aria-label={`${text.userFormFieldsList.dragAriaPrefix} ${field.label}`}>
                       <DragIndicatorIcon />
                     </IconButton>
                   </div>
@@ -114,7 +116,7 @@ export default function UserFormFieldsList({
                 <div className="user-form-fields-list__chips">
                   <Chip label={field.fieldTypeLabel} size="small" />
                   {field.isRequired && (
-                    <Chip label="Required" size="small" color="primary" />
+                    <Chip label={text.userFormFieldsList.required} size="small" color="primary" />
                   )}
                   {field.options.map((option) => (
                     <Chip

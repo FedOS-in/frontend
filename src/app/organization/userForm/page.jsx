@@ -24,11 +24,11 @@ import {
 } from "@mui/material"
 import OrganizationLayout from "@/components/Organization/OrganizationLayout"
 import PageHeader from "@/components/Organization/PageHeader"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./page.css"
 
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
-
 function getDisplayedFields(fields = []) {
   if (!Array.isArray(fields)) return []
   const maxFields = 5
@@ -41,6 +41,7 @@ function getDisplayedFields(fields = []) {
 
 export default function UserFormPage() {
   const router = useRouter()
+  const text = useOrganizationText()
   const [forms, setForms] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [errorMessage, setErrorMessage] = React.useState("")
@@ -57,14 +58,14 @@ export default function UserFormPage() {
         })
 
         if (!response.ok) {
-          throw new Error("Unable to load forms")
+          throw new Error(text.userFormPage.messages.loadError)
         }
 
         const payload = await response.json()
         setForms(Array.isArray(payload) ? payload : [])
       } catch (error) {
         if (error.name !== "AbortError") {
-          setErrorMessage(error.message || "Unable to load forms")
+          setErrorMessage(error.message || text.userFormPage.messages.loadError)
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -77,7 +78,7 @@ export default function UserFormPage() {
   }, [])
 
   const handleDelete = async (formId) => {
-    const isConfirmed = window.confirm("Delete this form?")
+    const isConfirmed = window.confirm(text.userFormPage.messages.deleteConfirm)
     if (!isConfirmed) return
     setErrorMessage("")
     try {
@@ -86,13 +87,13 @@ export default function UserFormPage() {
       })
       if (!response.ok) {
         const payloadError = await response.json().catch(() => null)
-        throw new Error(payloadError?.message || "Failed to delete form")
+        throw new Error(payloadError?.message || text.userFormPage.messages.deleteFailed)
       }
       setForms((currentForms) =>
         currentForms.filter((form) => form.id !== formId),
       )
     } catch (error) {
-      setErrorMessage(error.message || "Failed to delete form")
+      setErrorMessage(error.message || text.userFormPage.messages.deleteFailed)
     }
   }
 
@@ -100,24 +101,24 @@ export default function UserFormPage() {
     try {
       const shareUrl = new URL(`/user/create/${formId}`, window.location.origin)
       await navigator.clipboard.writeText(shareUrl.toString())
-      setSuccessMessage("Invite link copied")
+      setSuccessMessage(text.userFormPage.messages.copied)
     } catch {
-      setErrorMessage("Unable to copy share link")
+      setErrorMessage(text.userFormPage.messages.copyFailed)
     }
   }
 
   return (
     <OrganizationLayout>
       <PageHeader
-        title="User Forms"
-        subtitle="Generate dynamic user forms by defining the fields, validation requirements, and reusable metadata in one place."
+        title={text.userFormPage.title}
+        subtitle={text.userFormPage.subtitle}
         breadcrumbs={[
-          { label: "Organization", href: true, id: "structure" },
-          { label: "User Forms", href: false },
+          { label: text.common.organization, href: true, id: "structure" },
+          { label: text.userFormPage.breadcrumbs.userForms, href: false },
         ]}
         actions={[
           {
-            label: "Create form",
+            label: text.userFormPage.actions.createForm,
             icon: <AddIcon />,
             variant: "contained",
             onClick: () => router.push("/organization/userForm/create"),
@@ -134,31 +135,31 @@ export default function UserFormPage() {
       {!isLoading && forms.length === 0 ? (
         <Paper variant="outlined" className="user-form-page__empty">
           <Typography variant="h6" className="user-form-page__empty-title">
-            No forms found
+            {text.userFormPage.emptyState.title}
           </Typography>
           <Typography variant="body2" className="user-form-page__empty-text">
-            Create a form to see it listed here.
+            {text.userFormPage.emptyState.text}
           </Typography>
           <Button
             variant="contained"
             startIcon={<AddIcon />}
             onClick={() => router.push("/organization/userForm/create")}>
-            Create form
+            {text.userFormPage.emptyState.action}
           </Button>
         </Paper>
       ) : null}
 
-      <section className="user-form-page__grid" aria-label="Created forms">
+      <section className="user-form-page__grid" aria-label={text.userFormPage.cards.ariaLabel}>
         {forms.map((form) => (
           <Paper key={form.id} variant="outlined" className="user-form-card">
             <div className="user-form-card__head">
               <Typography variant="h6" className="user-form-card__title">
                 {form.name}
               </Typography>
-              <div className="user-form-card__menu" aria-label="Form actions">
+              <div className="user-form-card__menu" aria-label={text.userFormPage.cards.actionsLabel}>
                 <IconButton
                   className="user-form-card__menu-trigger"
-                  aria-label="Open form actions">
+                  aria-label={text.userFormPage.cards.openActions}>
                   <MoreVertIcon />
                 </IconButton>
                 <div className="user-form-card__menu-dropdown">
@@ -166,7 +167,7 @@ export default function UserFormPage() {
                     type="button"
                     className="user-form-card__menu-item user-form-card__menu-item--view"
                     onClick={() => setSelectedForm(form)}>
-                    <VisibilityOutlinedIcon /> View
+                    <VisibilityOutlinedIcon /> {text.userFormPage.cards.view}
                   </button>
                   <button
                     type="button"
@@ -176,19 +177,19 @@ export default function UserFormPage() {
                         `/organization/userForm/edit?formId=${form.id}`,
                       )
                     }>
-                    <EditOutlinedIcon /> Edit
+                    <EditOutlinedIcon /> {text.userFormPage.cards.edit}
                   </button>
                   <button
                     type="button"
                     className="user-form-card__menu-item user-form-card__menu-item--share"
                     onClick={() => handleShare(form.id)}>
-                    <ContentCopyIcon /> Invite Users
+                    <ContentCopyIcon /> {text.userFormPage.cards.inviteUsers}
                   </button>
                   <button
                     type="button"
                     className="user-form-card__menu-item user-form-card__menu-item--delete"
                     onClick={() => handleDelete(form.id)}>
-                    <DeleteIcon /> Delete
+                    <DeleteIcon /> {text.userFormPage.cards.delete}
                   </button>
                 </div>
               </div>
@@ -217,11 +218,11 @@ export default function UserFormPage() {
         fullWidth
         maxWidth="sm">
         <DialogTitle className="user-form-modal__title">
-          <span>{selectedForm?.name || "Form details"}</span>
+          <span>{selectedForm?.name || text.userFormPage.cards.detailsTitle}</span>
           {selectedForm?.id ? (
             <IconButton
               className="user-form-modal__edit-button"
-              aria-label="Edit form"
+              aria-label={text.userFormPage.cards.editForm}
               onClick={() => {
                 const formId = selectedForm.id
                 setSelectedForm(null)
@@ -243,7 +244,7 @@ export default function UserFormPage() {
           </List>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setSelectedForm(null)}>Close</Button>
+          <Button onClick={() => setSelectedForm(null)}>{text.common.close}</Button>
         </DialogActions>
       </Dialog>
 

@@ -6,25 +6,27 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import OrganizationLayout from "@/components/Organization/OrganizationLayout"
 import PageHeader from "@/components/Organization/PageHeader"
 import UserFormBuilderEditWorkspace from "@/components/Organization/UserFormBuilder/UserFormBuilderEditWorkspace"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./page.css"
 
 export default function EditUserFormPageClient({ errorMessage, initialForm }) {
   const router = useRouter()
+  const text = useOrganizationText()
 
   return (
     <OrganizationLayout>
       <div className="edit-user-form-page">
         <PageHeader
-          title="Edit User Form"
-          subtitle="Update form details and fields with the same workspace used for creation."
+          title={text.userFormPage.editTitle}
+          subtitle={text.userFormPage.editSubtitle}
           breadcrumbs={[
-            { label: "Organization", href: true, id: "structure" },
-            { label: "User Forms", href: true, id: "userForm" },
-            { label: "Edit Form", href: false },
+            { label: text.common.organization, href: true, id: "structure" },
+            { label: text.userFormPage.breadcrumbs.userForms, href: true, id: "userForm" },
+            { label: text.userFormPage.breadcrumbs.editForm, href: false },
           ]}
           actions={[
             {
-              label: "Back to forms",
+              label: text.common.backToForms,
               icon: <ArrowBackIcon />,
               variant: "outlined",
               onClick: () => router.push("/organization/userForm"),

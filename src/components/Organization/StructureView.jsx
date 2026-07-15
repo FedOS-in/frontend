@@ -24,10 +24,10 @@ import CloseIcon from "@mui/icons-material/Close"
 import DeleteIcon from "@mui/icons-material/Delete"
 import MoreIcon from "@mui/icons-material/MoreVert"
 import AddChapterDrawer from "@/components/Organization/AddChapterDrawer"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
-
 function buildHierarchyRows(nodes) {
   const nodeMap = new Map(nodes.map((node) => [node.id, node]))
   const childrenByParent = new Map()
@@ -69,13 +69,14 @@ function buildHierarchyRows(nodes) {
   return rows
 }
 
-function staticMembers(depth, index) {
+function staticMembers(depth, index, membersLabel) {
   const base = 1248
   const value = Math.max(120, base - depth * 180 - index * 27)
-  return `${value.toLocaleString()} members`
+  return `${value.toLocaleString()} ${membersLabel}`
 }
 
 export default function StructureView() {
+  const text = useOrganizationText()
   const [searchQuery, setSearchQuery] = React.useState("")
   const [nodes, setNodes] = React.useState([])
   const [loadingNodes, setLoadingNodes] = React.useState(true)
@@ -97,14 +98,14 @@ export default function StructureView() {
         })
 
         if (!response.ok) {
-          throw new Error("Unable to load federation nodes")
+          throw new Error(text.structureView.loadingError)
         }
 
         const data = await response.json()
         setNodes(Array.isArray(data) ? data : [])
       } catch (error) {
         if (error.name !== "AbortError") {
-          setErrorMessage(error.message || "Unable to load federation nodes")
+          setErrorMessage(error.message || text.structureView.loadingError)
           setNodes([])
         }
       } finally {
@@ -147,7 +148,7 @@ export default function StructureView() {
 
   const selectedNode = selectedRow?.node || null
   const selectedDepth = selectedRow?.depth ?? 0
-  const selectedMembers = staticMembers(selectedDepth, 0)
+  const selectedMembers = staticMembers(selectedDepth, 0, text.structureView.membersLabel)
   const selectedChildrenCount = selectedNode?.children?.length ?? 0
   const selectedParentName = selectedNode?.parent?.name || "-"
 
@@ -162,7 +163,7 @@ export default function StructureView() {
         <Card sx={{ height: "100%", bgcolor: "#FFFFFF" }}>
           <CardContent sx={{ p: 2 }}>
             <OutlinedInput
-              placeholder="Search chapter or level..."
+              placeholder={text.structureView.searchPlaceholder}
               fullWidth
               size="small"
               value={searchQuery}
@@ -188,7 +189,7 @@ export default function StructureView() {
                 <Typography
                   variant="body2"
                   sx={{ color: "text.secondary", py: 1 }}>
-                  No federation nodes found.
+                  {text.structureView.emptyState}
                 </Typography>
               ) : null}
 
@@ -229,7 +230,7 @@ export default function StructureView() {
                           color: isActive ? "#0052CC" : "text.secondary",
                           ml: "auto",
                         }}>
-                        {staticMembers(depth, idx)}
+                        {staticMembers(depth, idx, text.structureView.membersLabel)}
                       </Typography>
                     </Box>
                   </Box>
@@ -263,11 +264,13 @@ export default function StructureView() {
               <Box>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                   <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    {selectedNode?.name || "No node selected"}
+                    {selectedNode?.name || text.structureView.noNodeSelected}
                   </Typography>
                   <Chip
                     label={
-                      selectedNode?.isActive === false ? "Inactive" : "Active"
+                      selectedNode?.isActive === false
+                        ? text.structureView.status.inactive
+                        : text.structureView.status.active
                     }
                     size="small"
                     color={
@@ -277,7 +280,7 @@ export default function StructureView() {
                   />
                 </Box>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Level: {selectedDepth + 1} &bull; Parent: {selectedParentName}
+                  {text.structureView.details.level}: {selectedDepth + 1} &bull; {text.structureView.details.parent}: {selectedParentName}
                 </Typography>
               </Box>
             </Box>
@@ -298,27 +301,27 @@ export default function StructureView() {
             }}>
             {[
               {
-                title: "Members",
+                title: text.structureView.stats.members,
                 val: selectedMembers,
-                link: "View members →",
+                link: text.structureView.statLinks.members,
                 color: "#0052CC",
               },
               {
-                title: "Office Bearers",
+                title: text.structureView.stats.officeBearers,
                 val: "32",
-                link: "View all →",
+                link: text.structureView.statLinks.officeBearers,
                 color: "#0052CC",
               },
               {
-                title: "Sub-organizations",
+                title: text.structureView.stats.subOrganizations,
                 val: `${selectedChildrenCount}`,
-                link: "View all →",
+                link: text.structureView.statLinks.subOrganizations,
                 color: "#006644",
               },
               {
-                title: "Collected This FY",
+                title: text.structureView.stats.collectedThisFY,
                 val: "₹12,45,600",
-                link: "View payments →",
+                link: text.structureView.statLinks.collectedThisFY,
                 color: "#FF8B00",
               },
             ].map((item) => (
@@ -365,18 +368,30 @@ export default function StructureView() {
                 mb: 2,
               }}>
               <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                Leadership (Office Bearers)
+                {text.structureView.leadership}
               </Typography>
               <Button variant="text" size="small" sx={{ color: "#0052CC" }}>
-                View all →
+                {text.common.viewAll}
               </Button>
             </Box>
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
               {[
-                { pos: "President", name: "Kavin Arul", tag: "Active" },
-                { pos: "Secretary", name: "Yazhini Devi", tag: "Active" },
-                { pos: "Treasurer", name: "Pranav Mani", tag: "Active" },
+                {
+                  pos: text.structureView.leaderPositions.president,
+                  name: "Kavin Arul",
+                  tag: text.structureView.status.active,
+                },
+                {
+                  pos: text.structureView.leaderPositions.secretary,
+                  name: "Yazhini Devi",
+                  tag: text.structureView.status.active,
+                },
+                {
+                  pos: text.structureView.leaderPositions.treasurer,
+                  name: "Pranav Mani",
+                  tag: text.structureView.status.active,
+                },
               ].map((leader) => (
                 <Box
                   key={leader.pos}
@@ -443,28 +458,28 @@ export default function StructureView() {
               onClick={() => setEditDrawerOpen(true)}
               disabled={!selectedNode}
               sx={{ borderColor: "#DFE1E6", color: "#091E42" }}>
-              Edit
+              {text.structureView.actions.edit}
             </Button>
             <Button
               variant="outlined"
               startIcon={<PeopleIcon />}
               sx={{ borderColor: "#DFE1E6", color: "#091E42" }}>
-              Manage Office Bearers
+              {text.structureView.actions.manageOfficeBearers}
             </Button>
             <Button
               variant="outlined"
               startIcon={<SwapIcon />}
               sx={{ borderColor: "#DFE1E6", color: "#091E42" }}>
-              Move
+              {text.structureView.actions.move}
             </Button>
             <Button
               variant="outlined"
               startIcon={<CloseIcon />}
               color="warning">
-              Deactivate
+              {text.structureView.actions.deactivate}
             </Button>
             <Button variant="outlined" startIcon={<DeleteIcon />} color="error">
-              Delete
+              {text.structureView.actions.delete}
             </Button>
           </Box>
         </Card>

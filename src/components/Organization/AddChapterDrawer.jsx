@@ -13,11 +13,11 @@ import {
   Typography,
   Snackbar,
 } from "@mui/material"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 const DRAWER_WIDTH = 460
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
-
 export default function AddChapterDrawer({
   open,
   onClose,
@@ -25,6 +25,7 @@ export default function AddChapterDrawer({
   chapterToEdit = null,
   onSaved,
 }) {
+  const text = useOrganizationText()
   const [chapterNameOverride, setChapterNameOverride] = React.useState(undefined)
   const [parentNodeOverride, setParentNodeOverride] = React.useState(undefined)
   const [parentOptions, setParentOptions] = React.useState([])
@@ -69,7 +70,7 @@ export default function AddChapterDrawer({
         })
 
         if (!response.ok) {
-          throw new Error("Unable to load parent federation nodes")
+          throw new Error(text.addChapterDrawer.validation.loadParentsFailed)
         }
 
         const nodes = await response.json()
@@ -77,7 +78,7 @@ export default function AddChapterDrawer({
       } catch (error) {
         if (error.name !== "AbortError") {
           setErrorMessage(
-            error.message || "Unable to load parent federation nodes",
+            error.message || text.addChapterDrawer.validation.loadParentsFailed,
           )
         }
       } finally {
@@ -104,7 +105,7 @@ export default function AddChapterDrawer({
     event.preventDefault()
 
     if (!chapterName.trim()) {
-      setErrorMessage("Chapter name is required")
+      setErrorMessage(text.addChapterDrawer.validation.chapterNameRequired)
       return
     }
 
@@ -131,19 +132,21 @@ export default function AddChapterDrawer({
 
       if (!response.ok) {
         const payload = await response.json().catch(() => null)
-        throw new Error(payload?.message || "Failed to create chapter")
+        throw new Error(payload?.message || text.addChapterDrawer.validation.createFailed)
       }
 
       const savedNode = await response.json().catch(() => null)
 
       resetForm()
       setSuccessMessage(
-        isEditMode ? "Chapter updated successfully" : "Chapter created successfully",
+        isEditMode
+          ? text.addChapterDrawer.messages.updated
+          : text.addChapterDrawer.messages.created,
       )
       onSaved?.(savedNode)
       onClose()
     } catch (error) {
-      setErrorMessage(error.message || "Failed to create chapter")
+      setErrorMessage(error.message || text.addChapterDrawer.validation.createFailed)
     } finally {
       setSubmitting(false)
     }
@@ -156,20 +159,20 @@ export default function AddChapterDrawer({
           <Stack spacing={3} component="form" onSubmit={handleSubmit}>
             <Box>
               <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5 }}>
-                {isEditMode ? "Edit Chapter" : "Add Chapter"}
+                {isEditMode ? text.addChapterDrawer.title.edit : text.addChapterDrawer.title.create}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 {isEditMode
-                  ? "Update chapter details and parent hierarchy."
-                  : "Create a chapter under an existing federation node."}
+                  ? text.addChapterDrawer.subtitle.edit
+                  : text.addChapterDrawer.subtitle.create}
               </Typography>
             </Box>
 
             <TextField
-              label="Chapter Name"
+              label={text.addChapterDrawer.chapterName}
               value={chapterName}
               onChange={(event) => setChapterNameOverride(event.target.value)}
-              placeholder="Enter chapter name"
+              placeholder={text.addChapterDrawer.chapterNamePlaceholder}
               fullWidth
               required
             />
@@ -191,8 +194,8 @@ export default function AddChapterDrawer({
                       variant="caption"
                       sx={{ color: "text.secondary" }}>
                       {option.parent?.name
-                        ? `Parent: ${option.parent.name}`
-                        : "Top-level node"}
+                        ? `${text.addChapterDrawer.parentPrefix} ${option.parent.name}`
+                        : text.addChapterDrawer.topLevelNode}
                     </Typography>
                   </Box>
                 </Box>
@@ -206,17 +209,17 @@ export default function AddChapterDrawer({
               }
               noOptionsText={
                 loadingParents
-                  ? "Loading nodes..."
+                  ? text.addChapterDrawer.loadingParents
                   : parentOptions.length === 0
-                    ? "No federation nodes available"
-                    : "No matching federation node found"
+                    ? text.addChapterDrawer.noNodesAvailable
+                    : text.addChapterDrawer.noMatchingNode
               }
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Parent Federation Node"
-                  placeholder="Search federation node by name"
-                  helperText="Select the parent federation node for this chapter"
+                  label={text.addChapterDrawer.parentFederationNode}
+                  placeholder={text.addChapterDrawer.parentSearchPlaceholder}
+                  helperText={text.addChapterDrawer.parentHelper}
                 />
               )}
             />
@@ -228,16 +231,16 @@ export default function AddChapterDrawer({
                 variant="outlined"
                 onClick={handleClose}
                 disabled={submitting}>
-                Cancel
+                {text.addChapterDrawer.cancel}
               </Button>
               <Button type="submit" variant="contained" disabled={submitting}>
                 {submitting
                   ? isEditMode
-                    ? "Updating..."
-                    : "Creating..."
+                    ? text.addChapterDrawer.updating
+                    : text.addChapterDrawer.creating
                   : isEditMode
-                    ? "Update Chapter"
-                    : "Create Chapter"}
+                    ? text.addChapterDrawer.update
+                    : text.addChapterDrawer.create}
               </Button>
             </Box>
           </Stack>

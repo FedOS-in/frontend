@@ -9,16 +9,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt"
 import SettingsIcon from "@mui/icons-material/Settings"
 import SidebarMenuItem from "./SidebarMenuItem"
 import SidebarOrganizationMenu from "./SidebarOrganizationMenu"
-
-const MENU_ITEMS = [
-  { id: "dashboard", icon: DashboardIcon, label: "Dashboard" },
-  { id: "applications", icon: AppsIcon, label: "Applications" },
-  { id: "members", icon: PeopleIcon, label: "Members" },
-  { id: "renewals", icon: RenewIcon, label: "Renewals" },
-  { id: "payments", icon: PayIcon, label: "Payments" },
-  { id: "receipts", icon: ReceiptIcon, label: "Receipts" },
-  { id: "settings", icon: SettingsIcon, label: "Settings" },
-]
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 export default function SidebarMenu({
   activeMenu,
@@ -27,9 +18,21 @@ export default function SidebarMenu({
   orgOpen,
   setOrgOpen,
 }) {
+  const text = useOrganizationText()
+
+  const menuItems = [
+    { id: "dashboard", icon: DashboardIcon, label: text.sidebar.menu.dashboard },
+    { id: "applications", icon: AppsIcon, label: text.sidebar.menu.applications },
+    { id: "members", icon: PeopleIcon, label: text.sidebar.menu.members },
+    { id: "renewals", icon: RenewIcon, label: text.sidebar.menu.renewals },
+    { id: "payments", icon: PayIcon, label: text.sidebar.menu.payments },
+    { id: "receipts", icon: ReceiptIcon, label: text.sidebar.menu.receipts },
+    { id: "settings", icon: SettingsIcon, label: text.sidebar.menu.settings },
+  ]
+
   return (
     <div className="sidebar__menu">
-      {MENU_ITEMS.map((item) => (
+      {menuItems.map((item) => (
         <SidebarMenuItem
           key={item.id}
           icon={item.icon}

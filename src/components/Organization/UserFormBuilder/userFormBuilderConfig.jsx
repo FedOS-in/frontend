@@ -1,69 +1,9 @@
-export const FIELD_TYPE_OPTIONS = [
-  {
-    value: "TEXT",
-    label: "Text",
-    helperText: "Short single-line text input",
-  },
-  {
-    value: "NUMBER",
-    label: "Number",
-    helperText: "Numeric input",
-  },
-  {
-    value: "DATE",
-    label: "Date",
-    helperText: "Date picker input",
-  },
-  {
-    value: "SELECT",
-    label: "Select",
-    helperText: "Single-choice dropdown",
-    supportsOptions: true,
-  },
-  {
-    value: "MULTI_SELECT",
-    label: "Multi Select",
-    helperText: "Multiple-choice dropdown",
-    supportsOptions: true,
-  },
-  {
-    value: "CHECKBOX",
-    label: "Checkbox",
-    helperText: "Checkbox group",
-    supportsOptions: true,
-  },
-  {
-    value: "RADIO",
-    label: "Radio",
-    helperText: "Single-choice radio group",
-    supportsOptions: true,
-  },
-  {
-    value: "BOOLEAN",
-    label: "Boolean",
-    helperText: "Yes or no switch",
-  },
-  {
-    value: "FILE",
-    label: "File",
-    helperText: "File upload input",
-  },
-  {
-    value: "EMAIL",
-    label: "Email",
-    helperText: "Email address input",
-  },
-  {
-    value: "PHONE",
-    label: "Phone",
-    helperText: "Phone number input",
-  },
-  {
-    value: "TEXTAREA",
-    label: "Textarea",
-    helperText: "Long-form text input",
-  },
-]
+import { getOrganizationLocale } from "@/i18n/organizationLanguageStore"
+import { getOrganizationText } from "@/i18n/organizationText"
+
+export function getFieldTypeOptions() {
+  return getOrganizationText(getOrganizationLocale()).userFormBuilder.fieldTypes
+}
 
 export const EMPTY_DRAFT = {
   label: "",

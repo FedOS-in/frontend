@@ -16,15 +16,8 @@ import {
   Typography,
 } from "@mui/material"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./OrganizationUsersTable.css"
-
-const COLUMNS = [
-  { id: "name", label: "Name" },
-  { id: "email", label: "Email" },
-  { id: "phoneNumber", label: "Phone" },
-  { id: "approvalStatus", label: "Approval Status" },
-  { id: "createdAt", label: "Created" },
-]
 
 export default function OrganizationUsersTable({
   rows,
@@ -35,6 +28,14 @@ export default function OrganizationUsersTable({
   getRowActions,
   onAction,
 }) {
+  const text = useOrganizationText()
+  const columns = [
+    { id: "name", label: text.usersTable.columns.name },
+    { id: "email", label: text.usersTable.columns.email },
+    { id: "phoneNumber", label: text.usersTable.columns.phoneNumber },
+    { id: "approvalStatus", label: text.usersTable.columns.approvalStatus },
+    { id: "createdAt", label: text.usersTable.columns.createdAt },
+  ]
   const [menuAnchor, setMenuAnchor] = React.useState(null)
   const [selectedUserId, setSelectedUserId] = React.useState("")
 
@@ -56,7 +57,7 @@ export default function OrganizationUsersTable({
       <Table>
         <TableHead>
           <TableRow>
-            {COLUMNS.map((column) => (
+            {columns.map((column) => (
               <TableCell key={column.id}>
                 <TableSortLabel
                   active={orderBy === column.id}
@@ -66,7 +67,7 @@ export default function OrganizationUsersTable({
                 </TableSortLabel>
               </TableCell>
             ))}
-            <TableCell align="center">Action</TableCell>
+            <TableCell align="center">{text.usersTable.action}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -76,14 +77,14 @@ export default function OrganizationUsersTable({
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.phoneNumber}</TableCell>
               <TableCell>
-                {statusLabelMap.get(row.approvalStatus) || "Unknown"}
+                {statusLabelMap.get(row.approvalStatus) || text.usersTable.unknown}
               </TableCell>
               <TableCell>
                 {new Date(row.createdAt).toLocaleDateString()}
               </TableCell>
               <TableCell align="center">
                 <IconButton
-                  aria-label="row actions"
+                  aria-label={text.usersTable.rowActions}
                   onClick={(event) => handleMenuOpen(event, row.id)}
                   size="small">
                   <MoreVertIcon fontSize="small" />
@@ -96,7 +97,7 @@ export default function OrganizationUsersTable({
             <TableRow>
               <TableCell colSpan={6} align="center">
                 <Typography className="org-users-table__empty">
-                  No users found.
+                  {text.usersTable.emptyState}
                 </Typography>
               </TableCell>
             </TableRow>

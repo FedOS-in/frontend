@@ -1,12 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { EMPTY_DRAFT, FIELD_TYPE_OPTIONS, createFieldKey, normalizeFieldKey, parseOptions } from "./userFormBuilderConfig"
+import { EMPTY_DRAFT, createFieldKey, getFieldTypeOptions, normalizeFieldKey, parseOptions } from "./userFormBuilderConfig"
 import { reorderFieldItems, toEditableFields } from "./userFormEditorUtils"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
 
 export function useUserFormEditor({ initialForm, onCancel }) {
+  const text = useOrganizationText()
   const [formName, setFormName] = React.useState(initialForm?.name || "")
   const [chapterOptions, setChapterOptions] = React.useState([])
   const [selectedChapter, setSelectedChapter] = React.useState(null)
@@ -28,14 +30,14 @@ export function useUserFormEditor({ initialForm, onCancel }) {
         const response = await fetch(`${backendUrl}/api/federation-nodes`, {
           signal: controller.signal,
         })
-        if (!response.ok) throw new Error("Unable to load chapters")
+        if (!response.ok) throw new Error(text.userFormBuilder.messages.loadChaptersError)
         const nodes = await response.json()
         const options = Array.isArray(nodes) ? nodes : []
         setChapterOptions(options)
         const matched = options.find((node) => node.id === initialForm?.federationNodeId) || null
         setSelectedChapter(matched)
       } catch (error) {
-        if (error.name !== "AbortError") setErrorMessage(error.message || "Unable to load chapters")
+        if (error.name !== "AbortError") setErrorMessage(error.message || text.userFormBuilder.messages.loadChaptersError)
       } finally {
         if (!controller.signal.aborted) setLoadingChapters(false)
       }
@@ -75,7 +77,7 @@ export function useUserFormEditor({ initialForm, onCancel }) {
     setFieldDraft({
       label: field.label,
       fieldKey: field.fieldKey,
-      fieldType: FIELD_TYPE_OPTIONS.find((option) => option.value === field.fieldType) || null,
+      fieldType: getFieldTypeOptions().find((option) => option.value === field.fieldType) || null,
       isRequired: field.isRequired,
       options: field.options.join("\n"),
     })
@@ -94,14 +96,14 @@ export function useUserFormEditor({ initialForm, onCancel }) {
     const fieldType = fieldDraft.fieldType
     const parsedOptions = parseOptions(fieldDraft.options)
 
-    if (!label) return setErrorMessage("Label is required")
-    if (!fieldKey) return setErrorMessage("Field key is required")
-    if (!fieldType) return setErrorMessage("Field type is required")
+    if (!label) return setErrorMessage(text.userFormBuilder.validation.labelRequired)
+    if (!fieldKey) return setErrorMessage(text.userFormBuilder.validation.fieldKeyRequired)
+    if (!fieldType) return setErrorMessage(text.userFormBuilder.validation.fieldTypeRequired)
     if (fieldType.supportsOptions && parsedOptions.length === 0) {
-      return setErrorMessage("Add options for select, multi select, checkbox, and radio")
+      return setErrorMessage(text.userFormBuilder.validation.optionsRequired)
     }
     if (fields.some((item) => item.fieldKey === fieldKey && item.id !== editingFieldId)) {
-      return setErrorMessage("Field key must be unique within the form")
+      return setErrorMessage(text.userFormBuilder.validation.duplicateFieldKey)
     }
 
     const existing = fields.find((item) => item.id === editingFieldId)
@@ -127,9 +129,9 @@ export function useUserFormEditor({ initialForm, onCancel }) {
   }
 
   const onUpdateForm = async () => {
-    if (!formName.trim()) return setErrorMessage("Form name is required")
-    if (!selectedChapter?.id) return setErrorMessage("Chapter is required")
-    if (fields.length === 0) return setErrorMessage("Add at least one field")
+    if (!formName.trim()) return setErrorMessage(text.userFormBuilder.validation.formNameRequired)
+    if (!selectedChapter?.id) return setErrorMessage(text.userFormBuilder.validation.chapterRequired)
+    if (fields.length === 0) return setErrorMessage(text.userFormBuilder.validation.addFieldFirst)
 
     setIsSubmittingForm(true)
     setErrorMessage("")
@@ -160,13 +162,13 @@ export function useUserFormEditor({ initialForm, onCancel }) {
 
       if (!response.ok) {
         const payloadError = await response.json().catch(() => null)
-        throw new Error(payloadError?.message || "Failed to update form")
+        throw new Error(payloadError?.message || text.userFormBuilder.messages.updateFailed)
       }
 
-      setSuccessMessage("Form updated successfully")
+      setSuccessMessage(text.userFormBuilder.messages.updated)
       onCancel()
     } catch (error) {
-      setErrorMessage(error.message || "Failed to update form")
+      setErrorMessage(error.message || text.userFormBuilder.messages.updateFailed)
     } finally {
       setIsSubmittingForm(false)
     }

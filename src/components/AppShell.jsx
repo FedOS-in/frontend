@@ -4,6 +4,7 @@ import * as React from "react"
 import { Box } from "@mui/material"
 import { usePathname, useRouter } from "next/navigation"
 import Sidebar from "@/components/Sidebar/Sidebar"
+import { hydrateOrganizationLocale } from "@/i18n/organizationLanguageStore"
 
 const ROUTES_BY_MENU = {
   dashboard: "/",
@@ -30,6 +31,10 @@ export default function AppShell({ children }) {
   const pathname = usePathname()
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false)
   const [orgOpen, setOrgOpen] = React.useState(true)
+
+  React.useEffect(() => {
+    hydrateOrganizationLocale()
+  }, [])
 
   const shouldHideSidebar = React.useMemo(
     () => pathname?.startsWith("/user/create/") ?? false,

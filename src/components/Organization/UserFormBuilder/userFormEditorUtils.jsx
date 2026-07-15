@@ -1,4 +1,4 @@
-import { FIELD_TYPE_OPTIONS, parseOptions } from "./userFormBuilderConfig"
+import { getFieldTypeOptions, parseOptions } from "./userFormBuilderConfig"
 
 export function toEditableFields(fields = []) {
   return fields.map((field) => ({
@@ -26,7 +26,7 @@ export function reorderFieldItems(currentFields, sourceFieldId, targetFieldId) {
 
 function getOptionLabel(fieldType) {
   return (
-    FIELD_TYPE_OPTIONS.find((option) => option.value === fieldType)?.label ||
+    getFieldTypeOptions().find((option) => option.value === fieldType)?.label ||
     String(fieldType || "")
   )
 }

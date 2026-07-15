@@ -5,25 +5,27 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import OrganizationLayout from "@/components/Organization/OrganizationLayout"
 import PageHeader from "@/components/Organization/PageHeader"
 import UserFormBuilderWorkspace from "@/components/Organization/UserFormBuilder/UserFormBuilderWorkspace"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./page.css"
 
 export default function CreateUserFormPage() {
   const router = useRouter()
+  const text = useOrganizationText()
 
   return (
     <OrganizationLayout>
       <div className="create-user-form-page">
         <PageHeader
-          title="Create User Form"
-          subtitle="Build dynamic user forms in a dedicated workspace and keep the live structure visible while you work."
+          title={text.userFormPage.createTitle}
+          subtitle={text.userFormPage.createSubtitle}
           breadcrumbs={[
-            { label: "Organization", href: true, id: "structure" },
-            { label: "User Forms", href: true, id: "userForm" },
-            { label: "Create Form", href: false },
+            { label: text.common.organization, href: true, id: "structure" },
+            { label: text.userFormPage.breadcrumbs.userForms, href: true, id: "userForm" },
+            { label: text.userFormPage.breadcrumbs.createForm, href: false },
           ]}
           actions={[
             {
-              label: "Back to forms",
+              label: text.common.backToForms,
               icon: <ArrowBackIcon />,
               variant: "outlined",
               onClick: () => router.push("/organization/userForm"),

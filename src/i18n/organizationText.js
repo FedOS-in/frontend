@@ -1,0 +1,690 @@
+export const organizationText = {
+  en: {
+    common: {
+      organization: "Organization",
+      backToForms: "Back to forms",
+      close: "Close",
+      viewAll: "View all →",
+    },
+    header: {
+      languageLabel: "Language",
+      languages: {
+        en: "English",
+        hi: "Hindi",
+        kn: "Kannada",
+        ml: "Malayalam",
+        ta: "Tamil",
+        te: "Telugu",
+      },
+    },
+    sidebar: {
+      menu: {
+        dashboard: "Dashboard",
+        applications: "Applications",
+        members: "Members",
+        renewals: "Renewals",
+        payments: "Payments",
+        receipts: "Receipts",
+        settings: "Settings",
+      },
+      organization: "Organization",
+      structure: "Structure",
+      officeBearers: "Office Bearers",
+      levels: "Levels",
+      users: "Users",
+      userForms: "User Forms",
+      collapse: "Collapse",
+      userName: "Kavin Arul",
+      userRole: "Secretary",
+    },
+    structurePage: {
+      title: "Organization Structure",
+      subtitle: "Manage hierarchy levels and chapters",
+      breadcrumbs: {
+        structure: "Structure",
+      },
+      actions: {
+        addLevel: "Add Level",
+        addChapter: "Add Chapter",
+      },
+    },
+    structureView: {
+      searchPlaceholder: "Search chapter or level...",
+      loadingError: "Unable to load federation nodes",
+      emptyState: "No federation nodes found.",
+      noNodeSelected: "No node selected",
+      status: {
+        active: "Active",
+        inactive: "Inactive",
+      },
+      details: {
+        level: "Level",
+        parent: "Parent",
+      },
+      stats: {
+        members: "Members",
+        officeBearers: "Office Bearers",
+        subOrganizations: "Sub-organizations",
+        collectedThisFY: "Collected This FY",
+      },
+      statLinks: {
+        members: "View members →",
+        officeBearers: "View all →",
+        subOrganizations: "View all →",
+        collectedThisFY: "View payments →",
+      },
+      leadership: "Leadership (Office Bearers)",
+      leaderPositions: {
+        president: "President",
+        secretary: "Secretary",
+        treasurer: "Treasurer",
+      },
+      actions: {
+        edit: "Edit",
+        manageOfficeBearers: "Manage Office Bearers",
+        move: "Move",
+        deactivate: "Deactivate",
+        delete: "Delete",
+      },
+      membersLabel: "members",
+    },
+    usersPage: {
+      title: "Users",
+      subtitle: "Filter users by federation node and manage approval status.",
+      breadcrumbs: {
+        users: "Users",
+      },
+      messages: {
+        loadSetupError: "Failed to load users setup data",
+        loadUsersError: "Failed to load users",
+        approve: "Approve",
+        reject: "Reject",
+        cancel: "Cancel",
+        updateStatusError: "Failed to update approval status",
+      },
+    },
+    usersToolbar: {
+      federationNode: "Federation Node",
+      searchUsers: "Search users",
+      totalUsers: "Total Users",
+    },
+    usersTable: {
+      columns: {
+        name: "Name",
+        email: "Email",
+        phoneNumber: "Phone",
+        approvalStatus: "Approval Status",
+        createdAt: "Created",
+      },
+      action: "Action",
+      unknown: "Unknown",
+      rowActions: "row actions",
+      emptyState: "No users found.",
+    },
+    userFormPage: {
+      title: "User Forms",
+      subtitle:
+        "Generate dynamic user forms by defining the fields, validation requirements, and reusable metadata in one place.",
+      createTitle: "Create User Form",
+      createSubtitle:
+        "Build dynamic user forms in a dedicated workspace and keep the live structure visible while you work.",
+      editTitle: "Edit User Form",
+      editSubtitle:
+        "Update form details and fields with the same workspace used for creation.",
+      breadcrumbs: {
+        userForms: "User Forms",
+        createForm: "Create Form",
+        editForm: "Edit Form",
+      },
+      actions: {
+        createForm: "Create form",
+      },
+      emptyState: {
+        title: "No forms found",
+        text: "Create a form to see it listed here.",
+        action: "Create form",
+      },
+      cards: {
+        ariaLabel: "Created forms",
+        actionsLabel: "Form actions",
+        openActions: "Open form actions",
+        view: "View",
+        edit: "Edit",
+        inviteUsers: "Invite Users",
+        delete: "Delete",
+        detailsTitle: "Form details",
+        editForm: "Edit form",
+      },
+      dialog: {
+        close: "Close",
+      },
+      messages: {
+        loadError: "Unable to load forms",
+        deleteConfirm: "Delete this form?",
+        deleteFailed: "Failed to delete form",
+        copied: "Invite link copied",
+        copyFailed: "Unable to copy share link",
+      },
+    },
+    userFormBuilder: {
+      formSetup: "Form Setup",
+      formName: "Form Name",
+      formNamePlaceholder: "Member registration form",
+      chapter: "Chapter",
+      chapterSearchPlaceholder: "Search chapter by name",
+      chapterHelper: "Select the chapter to which this form belongs",
+      loadingChapters: "Loading chapters...",
+      noChaptersAvailable: "No chapters available",
+      noMatchingChapter: "No matching chapter found",
+      topLevelNode: "Top-level node",
+      parentPrefix: "Parent:",
+      addField: "Add Field",
+      label: "Label",
+      labelPlaceholder: "Phone Number",
+      fieldKey: "Field Key",
+      fieldKeyPlaceholder: "phone_number",
+      fieldType: "Field Type",
+      fieldTypePlaceholder: "Search a field type",
+      noFieldTypesFound: "No field types found",
+      isRequired: "Is required",
+      options: "Options",
+      optionsPlaceholder:
+        "Use commas or new lines for select-style options",
+      optionsHelper:
+        "Needed for Select, Multi Select, Checkbox, and Radio",
+      cancelEdit: "Cancel Edit",
+      cancel: "Cancel",
+      updateField: "Update Field",
+      addFieldAction: "Add Field",
+      updateForm: "Update Form",
+      createForm: "Create Form",
+      creatingForm: "Creating...",
+      updatingForm: "Updating...",
+      validation: {
+        labelRequired: "Label is required before adding a field",
+        fieldKeyRequired: "Field key is required before adding a field",
+        fieldTypeRequired: "Field type is required before adding a field",
+        duplicateFieldKey: "Field key must be unique within the form",
+        optionsRequired:
+          "Add at least one option for select, multi select, checkbox, and radio fields",
+        formNameRequired: "Form name is required",
+        chapterRequired: "Chapter is required",
+        addFieldFirst: "Add at least one field before creating the form",
+      },
+      messages: {
+        created: "Form created successfully",
+        updated: "Form updated successfully",
+        loadChaptersError: "Unable to load chapters",
+        createFailed: "Failed to create form",
+        updateFailed: "Failed to update form",
+      },
+      fieldTypes: [
+        {
+          value: "TEXT",
+          label: "Text",
+          helperText: "Short single-line text input",
+        },
+        {
+          value: "NUMBER",
+          label: "Number",
+          helperText: "Numeric input",
+        },
+        {
+          value: "DATE",
+          label: "Date",
+          helperText: "Date picker input",
+        },
+        {
+          value: "SELECT",
+          label: "Select",
+          helperText: "Single-choice dropdown",
+          supportsOptions: true,
+        },
+        {
+          value: "MULTI_SELECT",
+          label: "Multi Select",
+          helperText: "Multiple-choice dropdown",
+          supportsOptions: true,
+        },
+        {
+          value: "CHECKBOX",
+          label: "Checkbox",
+          helperText: "Checkbox group",
+          supportsOptions: true,
+        },
+        {
+          value: "RADIO",
+          label: "Radio",
+          helperText: "Single-choice radio group",
+          supportsOptions: true,
+        },
+        {
+          value: "BOOLEAN",
+          label: "Boolean",
+          helperText: "Yes or no switch",
+        },
+        {
+          value: "FILE",
+          label: "File",
+          helperText: "File upload input",
+        },
+        {
+          value: "EMAIL",
+          label: "Email",
+          helperText: "Email address input",
+        },
+        {
+          value: "PHONE",
+          label: "Phone",
+          helperText: "Phone number input",
+        },
+        {
+          value: "TEXTAREA",
+          label: "Textarea",
+          helperText: "Long-form text input",
+        },
+      ],
+    },
+    userFormFieldsList: {
+      title: "Added Fields",
+      countSuffix: "items",
+      emptyTitle: "No fields added yet",
+      emptyText:
+        "Added fields stay visible here while you continue building the form.",
+      required: "Required",
+      editAriaPrefix: "Edit",
+      removeAriaPrefix: "Remove",
+      dragAriaPrefix: "Drag",
+    },
+    addChapterDrawer: {
+      title: {
+        create: "Add Chapter",
+        edit: "Edit Chapter",
+      },
+      subtitle: {
+        create: "Create a chapter under an existing federation node.",
+        edit: "Update chapter details and parent hierarchy.",
+      },
+      chapterName: "Chapter Name",
+      chapterNamePlaceholder: "Enter chapter name",
+      parentFederationNode: "Parent Federation Node",
+      parentSearchPlaceholder: "Search federation node by name",
+      parentHelper:
+        "Select the parent federation node for this chapter",
+      loadingParents: "Loading nodes...",
+      noNodesAvailable: "No federation nodes available",
+      noMatchingNode: "No matching federation node found",
+      topLevelNode: "Top-level node",
+      parentPrefix: "Parent:",
+      cancel: "Cancel",
+      create: "Create Chapter",
+      update: "Update Chapter",
+      creating: "Creating...",
+      updating: "Updating...",
+      validation: {
+        chapterNameRequired: "Chapter name is required",
+        createFailed: "Failed to create chapter",
+        loadParentsFailed: "Unable to load parent federation nodes",
+      },
+      messages: {
+        created: "Chapter created successfully",
+        updated: "Chapter updated successfully",
+      },
+    },
+  },
+
+  hi: {
+    common: {
+      organization: "संगठन",
+      backToForms: "फॉर्म पर वापस जाएँ",
+      close: "बंद करें",
+      viewAll: "सभी देखें →",
+    },
+    header: {
+      languageLabel: "भाषा",
+      languages: {
+        en: "अंग्रेज़ी",
+        hi: "हिन्दी",
+        kn: "कन्नड़",
+        ml: "मलयालम",
+        ta: "तमिल",
+        te: "तेलुगु",
+      },
+    },
+    sidebar: {
+      menu: {
+        dashboard: "डैशबोर्ड",
+        applications: "आवेदन",
+        members: "सदस्य",
+        renewals: "नवीनीकरण",
+        payments: "भुगतान",
+        receipts: "रसीदें",
+        settings: "सेटिंग्स",
+      },
+      organization: "संगठन",
+      structure: "संरचना",
+      officeBearers: "पदाधिकारी",
+      levels: "स्तर",
+      users: "उपयोगकर्ता",
+      userForms: "उपयोगकर्ता फ़ॉर्म",
+      collapse: "संकुचित करें",
+      userName: "कविन अरुल",
+      userRole: "सचिव",
+    },
+    structurePage: {
+      title: "संगठन संरचना",
+      subtitle: "पदानुक्रम स्तरों और शाखाओं को प्रबंधित करें",
+      breadcrumbs: { structure: "संरचना" },
+      actions: { addLevel: "स्तर जोड़ें", addChapter: "शाखा जोड़ें" },
+    },
+    structureView: {
+      searchPlaceholder: "शाखा या स्तर खोजें...",
+      loadingError: "फ़ेडरेशन नोड्स लोड नहीं हो सके",
+      emptyState: "कोई फ़ेडरेशन नोड नहीं मिला।",
+      noNodeSelected: "कोई नोड चयनित नहीं है",
+      status: { active: "सक्रिय", inactive: "निष्क्रिय" },
+      details: { level: "स्तर", parent: "मूल" },
+      stats: {
+        members: "सदस्य",
+        officeBearers: "पदाधिकारी",
+        subOrganizations: "उप-संगठन",
+        collectedThisFY: "इस वित्त वर्ष में संग्रह",
+      },
+      statLinks: {
+        members: "सदस्य देखें →",
+        officeBearers: "सभी देखें →",
+        subOrganizations: "सभी देखें →",
+        collectedThisFY: "भुगतान देखें →",
+      },
+      leadership: "नेतृत्व (पदाधिकारी)",
+      leaderPositions: { president: "अध्यक्ष", secretary: "सचिव", treasurer: "कोषाध्यक्ष" },
+      actions: {
+        edit: "संपादित करें",
+        manageOfficeBearers: "पदाधिकारियों को प्रबंधित करें",
+        move: "स्थानांतरित करें",
+        deactivate: "निष्क्रिय करें",
+        delete: "हटाएँ",
+      },
+      membersLabel: "सदस्य",
+    },
+    usersPage: {
+      title: "उपयोगकर्ता",
+      subtitle: "फ़ेडरेशन नोड के अनुसार उपयोगकर्ताओं को फ़िल्टर करें और अनुमोदन स्थिति प्रबंधित करें।",
+      breadcrumbs: { users: "उपयोगकर्ता" },
+      messages: {
+        loadSetupError: "उपयोगकर्ता सेटअप डेटा लोड नहीं हो सका",
+        loadUsersError: "उपयोगकर्ता लोड नहीं हो सके",
+        approve: "अनुमोदित करें",
+        reject: "अस्वीकार करें",
+        cancel: "रद्द करें",
+        updateStatusError: "अनुमोदन स्थिति अपडेट नहीं हो सकी",
+      },
+    },
+    usersToolbar: {
+      federationNode: "फ़ेडरेशन नोड",
+      searchUsers: "उपयोगकर्ता खोजें",
+      totalUsers: "कुल उपयोगकर्ता",
+    },
+    usersTable: {
+      columns: {
+        name: "नाम",
+        email: "ईमेल",
+        phoneNumber: "फ़ोन",
+        approvalStatus: "अनुमोदन स्थिति",
+        createdAt: "बनाया गया",
+      },
+      action: "क्रिया",
+      unknown: "अज्ञात",
+      rowActions: "पंक्ति क्रियाएँ",
+      emptyState: "कोई उपयोगकर्ता नहीं मिला।",
+    },
+    userFormPage: {
+      title: "उपयोगकर्ता फ़ॉर्म",
+      subtitle:
+        "फ़ील्ड, सत्यापन आवश्यकताएँ और पुन: उपयोग योग्य मेटाडेटा को एक ही स्थान पर परिभाषित करके गतिशील उपयोगकर्ता फ़ॉर्म बनाएँ।",
+      createTitle: "उपयोगकर्ता फ़ॉर्म बनाएँ",
+      createSubtitle:
+        "समर्पित कार्यक्षेत्र में गतिशील फ़ॉर्म बनाएँ और काम करते समय लाइव संरचना देखें।",
+      editTitle: "उपयोगकर्ता फ़ॉर्म संपादित करें",
+      editSubtitle:
+        "निर्माण के लिए उपयोग किए गए उसी कार्यक्षेत्र में फ़ॉर्म विवरण और फ़ील्ड अपडेट करें।",
+      breadcrumbs: {
+        userForms: "उपयोगकर्ता फ़ॉर्म",
+        createForm: "फ़ॉर्म बनाएँ",
+        editForm: "फ़ॉर्म संपादित करें",
+      },
+      actions: {
+        createForm: "फ़ॉर्म बनाएँ",
+      },
+      emptyState: {
+        title: "कोई फ़ॉर्म नहीं मिला",
+        text: "यहाँ सूची देखने के लिए एक फ़ॉर्म बनाएँ।",
+        action: "फ़ॉर्म बनाएँ",
+      },
+      cards: {
+        ariaLabel: "बनाए गए फ़ॉर्म",
+        actionsLabel: "फ़ॉर्म क्रियाएँ",
+        openActions: "फ़ॉर्म क्रियाएँ खोलें",
+        view: "देखें",
+        edit: "संपादित करें",
+        inviteUsers: "उपयोगकर्ताओं को आमंत्रित करें",
+        delete: "हटाएँ",
+        detailsTitle: "फ़ॉर्म विवरण",
+        editForm: "फ़ॉर्म संपादित करें",
+      },
+      dialog: {
+        close: "बंद करें",
+      },
+      messages: {
+        loadError: "फ़ॉर्म लोड नहीं हो सके",
+        deleteConfirm: "क्या आप यह फ़ॉर्म हटाना चाहते हैं?",
+        deleteFailed: "फ़ॉर्म हटाया नहीं जा सका",
+        copied: "आमंत्रण लिंक कॉपी हो गया",
+        copyFailed: "शेयर लिंक कॉपी नहीं हो सका",
+      },
+    },
+    userFormBuilder: {
+      formSetup: "फ़ॉर्म सेटअप",
+      formName: "फ़ॉर्म नाम",
+      formNamePlaceholder: "सदस्य पंजीकरण फ़ॉर्म",
+      chapter: "शाखा",
+      chapterSearchPlaceholder: "शाखा नाम से खोजें",
+      chapterHelper: "उस शाखा का चयन करें जिससे यह फ़ॉर्म संबंधित है",
+      loadingChapters: "शाखाएँ लोड हो रही हैं...",
+      noChaptersAvailable: "कोई शाखा उपलब्ध नहीं है",
+      noMatchingChapter: "कोई मेल खाती शाखा नहीं मिली",
+      topLevelNode: "शीर्ष-स्तर नोड",
+      parentPrefix: "मूल:",
+      addField: "फ़ील्ड जोड़ें",
+      label: "लेबल",
+      labelPlaceholder: "फ़ोन नंबर",
+      fieldKey: "फ़ील्ड कुंजी",
+      fieldKeyPlaceholder: "phone_number",
+      fieldType: "फ़ील्ड प्रकार",
+      fieldTypePlaceholder: "फ़ील्ड प्रकार खोजें",
+      noFieldTypesFound: "कोई फ़ील्ड प्रकार नहीं मिला",
+      isRequired: "आवश्यक है",
+      options: "विकल्प",
+      optionsPlaceholder:
+        "सेलेक्ट-शैली विकल्पों के लिए कॉमा या नई पंक्तियों का उपयोग करें",
+      optionsHelper:
+        "Select, Multi Select, Checkbox, और Radio के लिए आवश्यक",
+      cancelEdit: "संपादन रद्द करें",
+      cancel: "रद्द करें",
+      updateField: "फ़ील्ड अपडेट करें",
+      addFieldAction: "फ़ील्ड जोड़ें",
+      updateForm: "फ़ॉर्म अपडेट करें",
+      createForm: "फ़ॉर्म बनाएँ",
+      creatingForm: "बनाया जा रहा है...",
+      updatingForm: "अपडेट किया जा रहा है...",
+      validation: {
+        labelRequired: "फ़ील्ड जोड़ने से पहले लेबल आवश्यक है",
+        fieldKeyRequired: "फ़ील्ड जोड़ने से पहले कुंजी आवश्यक है",
+        fieldTypeRequired: "फ़ील्ड जोड़ने से पहले प्रकार आवश्यक है",
+        duplicateFieldKey: "फ़ील्ड कुंजी फ़ॉर्म में अद्वितीय होनी चाहिए",
+        optionsRequired:
+          "Select, Multi Select, Checkbox, और Radio फ़ील्ड के लिए कम से कम एक विकल्प जोड़ें",
+        formNameRequired: "फ़ॉर्म नाम आवश्यक है",
+        chapterRequired: "शाखा आवश्यक है",
+        addFieldFirst: "फ़ॉर्म बनाने से पहले कम से कम एक फ़ील्ड जोड़ें",
+      },
+      messages: {
+        created: "फ़ॉर्म सफलतापूर्वक बनाया गया",
+        updated: "फ़ॉर्म सफलतापूर्वक अपडेट किया गया",
+        loadChaptersError: "शाखाएँ लोड नहीं हो सकीं",
+        createFailed: "फ़ॉर्म बनाया नहीं जा सका",
+        updateFailed: "फ़ॉर्म अपडेट नहीं हो सका",
+      },
+      fieldTypes: [
+        { value: "TEXT", label: "पाठ", helperText: "छोटा एक-पंक्ति पाठ इनपुट" },
+        { value: "NUMBER", label: "संख्या", helperText: "संख्यात्मक इनपुट" },
+        { value: "DATE", label: "तिथि", helperText: "तिथि चयन इनपुट" },
+        { value: "SELECT", label: "चयन", helperText: "एकल चयन ड्रॉपडाउन", supportsOptions: true },
+        { value: "MULTI_SELECT", label: "बहु चयन", helperText: "बहु चयन ड्रॉपडाउन", supportsOptions: true },
+        { value: "CHECKBOX", label: "चेकबॉक्स", helperText: "चेकबॉक्स समूह", supportsOptions: true },
+        { value: "RADIO", label: "रेडियो", helperText: "एकल चयन रेडियो समूह", supportsOptions: true },
+        { value: "BOOLEAN", label: "बूलियन", helperText: "हाँ या नहीं स्विच" },
+        { value: "FILE", label: "फ़ाइल", helperText: "फ़ाइल अपलोड इनपुट" },
+        { value: "EMAIL", label: "ईमेल", helperText: "ईमेल पता इनपुट" },
+        { value: "PHONE", label: "फ़ोन", helperText: "फ़ोन नंबर इनपुट" },
+        { value: "TEXTAREA", label: "पाठ क्षेत्र", helperText: "लंबा पाठ इनपुट" },
+      ],
+    },
+    userFormFieldsList: {
+      title: "जोड़े गए फ़ील्ड",
+      countSuffix: "आइटम",
+      emptyTitle: "अभी तक कोई फ़ील्ड नहीं जोड़ा गया",
+      emptyText:
+        "फ़ॉर्म बनाते रहते समय जोड़े गए फ़ील्ड यहाँ दिखाई देते हैं।",
+      required: "आवश्यक",
+      editAriaPrefix: "संपादित करें",
+      removeAriaPrefix: "हटाएँ",
+      dragAriaPrefix: "खींचें",
+    },
+    addChapterDrawer: {
+      title: {
+        create: "शाखा जोड़ें",
+        edit: "शाखा संपादित करें",
+      },
+      subtitle: {
+        create: "मौजूदा फ़ेडरेशन नोड के अंतर्गत शाखा बनाएँ।",
+        edit: "शाखा विवरण और मूल पदानुक्रम अपडेट करें।",
+      },
+      chapterName: "शाखा नाम",
+      chapterNamePlaceholder: "शाखा नाम दर्ज करें",
+      parentFederationNode: "मूल फ़ेडरेशन नोड",
+      parentSearchPlaceholder: "फ़ेडरेशन नोड नाम से खोजें",
+      parentHelper:
+        "इस शाखा के लिए मूल फ़ेडरेशन नोड चुनें",
+      loadingParents: "नोड्स लोड हो रहे हैं...",
+      noNodesAvailable: "कोई फ़ेडरेशन नोड उपलब्ध नहीं है",
+      noMatchingNode: "कोई मेल खाता फ़ेडरेशन नोड नहीं मिला",
+      topLevelNode: "शीर्ष-स्तर नोड",
+      parentPrefix: "मूल:",
+      cancel: "रद्द करें",
+      create: "शाखा बनाएँ",
+      update: "शाखा अपडेट करें",
+      creating: "बनाया जा रहा है...",
+      updating: "अपडेट किया जा रहा है...",
+      validation: {
+        chapterNameRequired: "शाखा नाम आवश्यक है",
+        createFailed: "शाखा बनाई नहीं जा सकी",
+        loadParentsFailed: "मूल फ़ेडरेशन नोड्स लोड नहीं हो सके",
+      },
+      messages: {
+        created: "शाखा सफलतापूर्वक बनाई गई",
+        updated: "शाखा सफलतापूर्वक अपडेट की गई",
+      },
+    },
+  },
+
+  kn: {
+    common: { organization: "ಸಂಘಟನೆ", backToForms: "ಫಾರ್ಮ್‌ಗಳಿಗೆ ಹಿಂದಿರುಗಿ", close: "ಮುಚ್ಚು", viewAll: "ಎಲ್ಲವೂ ನೋಡಿ →" },
+    header: { languageLabel: "ಭಾಷೆ", languages: { en: "ಇಂಗ್ಲಿಷ್", hi: "ಹಿಂದಿ", kn: "ಕನ್ನಡ", ml: "ಮಲಯಾಳಂ", ta: "ತಮಿಳು", te: "ತೆಲುಗು" } },
+    sidebar: { menu: { dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", applications: "ಅರ್ಜಿಗಳು", members: "ಸದಸ್ಯರು", renewals: "ನವೀಕರಣಗಳು", payments: "ಪಾವತಿಗಳು", receipts: "ರಸೀದಿಗಳು", settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು" }, organization: "ಸಂಘಟನೆ", structure: "ರಚನೆ", officeBearers: "ಪದಾಧಿಕಾರಿಗಳು", levels: "ಮಟ್ಟಗಳು", users: "ಬಳಕೆದಾರರು", userForms: "ಬಳಕೆದಾರ ಫಾರ್ಮ್‌ಗಳು", collapse: "ಕುಗ್ಗಿಸಿ", userName: "ಕವಿನ್ ಅರುಲ್", userRole: "ಕಾರ್ಯದರ್ಶಿ" },
+    structurePage: { title: "ಸಂಘಟನೆಯ ರಚನೆ", subtitle: "ಪದಾನುಕ್ರಮ ಮಟ್ಟಗಳು ಮತ್ತು ಶಾಖೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ", breadcrumbs: { structure: "ರಚನೆ" }, actions: { addLevel: "ಮಟ್ಟ ಸೇರಿಸಿ", addChapter: "ಶಾಖೆ ಸೇರಿಸಿ" } },
+    structureView: { searchPlaceholder: "ಶಾಖೆ ಅಥವಾ ಮಟ್ಟ ಹುಡುಕಿ...", loadingError: "ಫೆಡರೇಷನ್ ನೋಡ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ", emptyState: "ಯಾವುದೇ ಫೆಡರೇಷನ್ ನೋಡ್ ಕಂಡುಬಂದಿಲ್ಲ.", noNodeSelected: "ಯಾವುದೇ ನೋಡ್ ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ", status: { active: "ಸಕ್ರಿಯ", inactive: "ನಿಷ್ಕ್ರಿಯ" }, details: { level: "ಮಟ್ಟ", parent: "ಮೂಲ" }, stats: { members: "ಸದಸ್ಯರು", officeBearers: "ಪದಾಧಿಕಾರಿಗಳು", subOrganizations: "ಉಪ-ಸಂಸ್ಥೆಗಳು", collectedThisFY: "ಈ ಹಣಕಾಸು ವರ್ಷದಲ್ಲಿ ಸಂಗ್ರಹ" }, statLinks: { members: "ಸದಸ್ಯರನ್ನು ನೋಡಿ →", officeBearers: "ಎಲ್ಲವನ್ನೂ ನೋಡಿ →", subOrganizations: "ಎಲ್ಲವನ್ನೂ ನೋಡಿ →", collectedThisFY: "ಪಾವತಿಗಳನ್ನು ನೋಡಿ →" }, leadership: "ನಾಯಕತ್ವ (ಪದಾಧಿಕಾರಿಗಳು)", leaderPositions: { president: "ಅಧ್ಯಕ್ಷ", secretary: "ಕಾರ್ಯದರ್ಶಿ", treasurer: "ಖಜಾಂಚಿ" }, actions: { edit: "ಸಂಪಾದಿಸಿ", manageOfficeBearers: "ಪದಾಧಿಕಾರಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ", move: "ಸರಿಸಿ", deactivate: "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", delete: "ಅಳಿಸಿ" }, membersLabel: "ಸದಸ್ಯರು" },
+    usersPage: { title: "ಬಳಕೆದಾರರು", subtitle: "ಫೆಡರೇಷನ್ ನೋಡ್ ಆಧಾರದ ಮೇಲೆ ಬಳಕೆದಾರರನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ ಮತ್ತು ಅನುಮೋದನೆ ಸ್ಥಿತಿಯನ್ನು ನಿರ್ವಹಿಸಿ.", breadcrumbs: { users: "ಬಳಕೆದಾರರು" }, messages: { loadSetupError: "ಬಳಕೆದಾರ ಸೆಟಪ್ ಡೇಟಾವನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ", loadUsersError: "ಬಳಕೆದಾರರನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ", approve: "ಅನುಮೋದಿಸಿ", reject: "ನಿರಾಕರಿಸಿ", cancel: "ರದ್ದುಮಾಡಿ", updateStatusError: "ಅನುಮೋದನೆ ಸ್ಥಿತಿಯನ್ನು ಅಪ್ಡೇಟ್ ಮಾಡಲಾಗಲಿಲ್ಲ" } },
+    usersToolbar: { federationNode: "ಫೆಡರೇಷನ್ ನೋಡ್", searchUsers: "ಬಳಕೆದಾರರನ್ನು ಹುಡುಕಿ", totalUsers: "ಒಟ್ಟು ಬಳಕೆದಾರರು" },
+    usersTable: { columns: { name: "ಹೆಸರು", email: "ಇಮೇಲ್", phoneNumber: "ಫೋನ್", approvalStatus: "ಅನುಮೋದನೆ ಸ್ಥಿತಿ", createdAt: "ರಚಿಸಿದ" }, action: "ಕ್ರಿಯೆ", unknown: "ಅಜ್ಞಾತ", rowActions: "ಸಾಲು ಕ್ರಿಯೆಗಳು", emptyState: "ಯಾವುದೇ ಬಳಕೆದಾರರು ಕಂಡುಬಂದಿಲ್ಲ." },
+    userFormPage: { title: "ಬಳಕೆದಾರ ಫಾರ್ಮ್‌ಗಳು", subtitle: "ಕ್ಷೇತ್ರಗಳು, ಪರಿಶೀಲನಾ ಅಗತ್ಯತೆಗಳು ಮತ್ತು ಮರುಬಳಕೆ ಮಾಡಬಹುದಾದ ಮೆಟಾಡೇಟಾವನ್ನು ಒಂದೇ ಸ್ಥಳದಲ್ಲಿ ನಿರ್ಧರಿಸಿ ಡೈನಾಮಿಕ್ ಬಳಕೆದಾರ ಫಾರ್ಮ್‌ಗಳನ್ನು ರಚಿಸಿ.", createTitle: "ಬಳಕೆದಾರ ಫಾರ್ಮ್ ರಚಿಸಿ", createSubtitle: "ವಿಶೇಷ ಕಾರ್ಯಸ್ಥಳದಲ್ಲಿ ಡೈನಾಮಿಕ್ ಫಾರ್ಮ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಿ ಮತ್ತು ಕೆಲಸ ಮಾಡುವಾಗ ಲೈವ್ ರಚನೆಯನ್ನು ನೋಡಿ.", editTitle: "ಬಳಕೆದಾರ ಫಾರ್ಮ್ ಸಂಪಾದಿಸಿ", editSubtitle: "ರಚನೆಗೆ ಬಳಸಿದ ಅದೇ ಕಾರ್ಯಸ್ಥಳದಲ್ಲಿ ಫಾರ್ಮ್ ವಿವರಗಳು ಮತ್ತು ಕ್ಷೇತ್ರಗಳನ್ನು ನವೀಕರಿಸಿ.", breadcrumbs: { userForms: "ಬಳಕೆದಾರ ಫಾರ್ಮ್‌ಗಳು", createForm: "ಫಾರ್ಮ್ ರಚಿಸಿ", editForm: "ಫಾರ್ಮ್ ಸಂಪಾದಿಸಿ" }, actions: { createForm: "ಫಾರ್ಮ್ ರಚಿಸಿ" }, emptyState: { title: "ಯಾವುದೇ ಫಾರ್ಮ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ", text: "ಇಲ್ಲಿ ನೋಡಲು ಫಾರ್ಮ್ ರಚಿಸಿ.", action: "ಫಾರ್ಮ್ ರಚಿಸಿ" }, cards: { ariaLabel: "ರಚಿಸಿದ ಫಾರ್ಮ್‌ಗಳು", actionsLabel: "ಫಾರ್ಮ್ ಕ್ರಿಯೆಗಳು", openActions: "ಫಾರ್ಮ್ ಕ್ರಿಯೆಗಳನ್ನು ತೆರೆಯಿರಿ", view: "ನೋಡಿ", edit: "ಸಂಪಾದಿಸಿ", inviteUsers: "ಬಳಕೆದಾರರನ್ನು ಆಹ್ವಾನಿಸಿ", delete: "ಅಳಿಸಿ", detailsTitle: "ಫಾರ್ಮ್ ವಿವರಗಳು", editForm: "ಫಾರ್ಮ್ ಸಂಪಾದಿಸಿ" }, dialog: { close: "ಮುಚ್ಚು" }, messages: { loadError: "ಫಾರ್ಮ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ", deleteConfirm: "ಈ ಫಾರ್ಮ್ ಅನ್ನು ಅಳಿಸುವುದೇ?", deleteFailed: "ಫಾರ್ಮ್ ಅಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ", copied: "ಆಮಂತ್ರಣ ಲಿಂಕ್ ನಕಲಿಸಲಾಗಿದೆ", copyFailed: "ಷೇರ್ ಲಿಂಕ್ ನಕಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ" } },
+    userFormBuilder: { formSetup: "ಫಾರ್ಮ್ ಸೆಟಪ್", formName: "ಫಾರ್ಮ್ ಹೆಸರು", formNamePlaceholder: "ಸದಸ್ಯ ನೋಂದಣಿ ಫಾರ್ಮ್", chapter: "ಶಾಖೆ", chapterSearchPlaceholder: "ಶಾಖೆ ಹೆಸರಿನಿಂದ ಹುಡುಕಿ", chapterHelper: "ಈ ಫಾರ್ಮ್ ಸೇರಿದ ಶಾಖೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ", loadingChapters: "ಶಾಖೆಗಳು ಲೋಡ್ ಆಗುತ್ತಿವೆ...", noChaptersAvailable: "ಯಾವುದೇ ಶಾಖೆಗಳು ಲಭ್ಯವಿಲ್ಲ", noMatchingChapter: "ಹೊಂದುವ ಶಾಖೆ ಕಂಡುಬಂದಿಲ್ಲ", topLevelNode: "ಮೇಲಿನ ಮಟ್ಟದ ನೋಡ್", parentPrefix: "ಮೂಲ:", addField: "ಕ್ಷೇತ್ರ ಸೇರಿಸಿ", label: "ಲೇಬಲ್", labelPlaceholder: "ಫೋನ್ ಸಂಖ್ಯೆ", fieldKey: "ಕ್ಷೇತ್ರ ಕೀ", fieldKeyPlaceholder: "phone_number", fieldType: "ಕ್ಷೇತ್ರ ಪ್ರಕಾರ", fieldTypePlaceholder: "ಕ್ಷೇತ್ರ ಪ್ರಕಾರ ಹುಡುಕಿ", noFieldTypesFound: "ಯಾವುದೇ ಕ್ಷೇತ್ರ ಪ್ರಕಾರಗಳು ಕಂಡುಬಂದಿಲ್ಲ", isRequired: "ಅಗತ್ಯವಾಗಿದೆ", options: "ವಿಕಲ್ಪಗಳು", optionsPlaceholder: "ಸೆಲೆಕ್ಟ್-ಶೈಲಿ ವಿಕಲ್ಪಗಳಿಗೆ ಕಾಮಾ ಅಥವಾ ಹೊಸ ಸಾಲುಗಳನ್ನು ಬಳಸಿ", optionsHelper: "Select, Multi Select, Checkbox, ಮತ್ತು Radio ಗೆ ಅಗತ್ಯ", cancelEdit: "ಸಂಪಾದನೆಯನ್ನು ರದ್ದುಮಾಡಿ", cancel: "ರದ್ದುಮಾಡಿ", updateField: "ಕ್ಷೇತ್ರವನ್ನು ನವೀಕರಿಸಿ", addFieldAction: "ಕ್ಷೇತ್ರ ಸೇರಿಸಿ", updateForm: "ಫಾರ್ಮ್ ನವೀಕರಿಸಿ", createForm: "ಫಾರ್ಮ್ ರಚಿಸಿ", creatingForm: "ರಚಿಸಲಾಗುತ್ತಿದೆ...", updatingForm: "ನವೀಕರಿಸಲಾಗುತ್ತಿದೆ...", validation: { labelRequired: "ಕ್ಷೇತ್ರ ಸೇರಿಸಲು ಲೇಬಲ್ ಅಗತ್ಯ", fieldKeyRequired: "ಕ್ಷೇತ್ರ ಸೇರಿಸಲು ಕೀ ಅಗತ್ಯ", fieldTypeRequired: "ಕ್ಷೇತ್ರ ಸೇರಿಸಲು ಪ್ರಕಾರ ಅಗತ್ಯ", duplicateFieldKey: "ಕ್ಷೇತ್ರ ಕೀ ಫಾರ್ಮ್‌ನಲ್ಲಿ ವಿಶಿಷ್ಟವಾಗಿರಬೇಕು", optionsRequired: "Select, Multi Select, Checkbox, ಮತ್ತು Radio ಕ್ಷೇತ್ರಗಳಿಗೆ ಕನಿಷ್ಠ ಒಂದು ವಿಕಲ್ಪ ಸೇರಿಸಿ", formNameRequired: "ಫಾರ್ಮ್ ಹೆಸರು ಅಗತ್ಯ", chapterRequired: "ಶಾಖೆ ಅಗತ್ಯ", addFieldFirst: "ಫಾರ್ಮ್ ರಚಿಸುವ ಮೊದಲು ಕನಿಷ್ಠ ಒಂದು ಕ್ಷೇತ್ರ ಸೇರಿಸಿ" }, messages: { created: "ಫಾರ್ಮ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ", updated: "ಫಾರ್ಮ್ ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ", loadChaptersError: "ಶಾಖೆಗಳು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ", createFailed: "ಫಾರ್ಮ್ ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ", updateFailed: "ಫಾರ್ಮ್ ನವೀಕರಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ" }, fieldTypes: [ { value: "TEXT", label: "ಪಠ್ಯ", helperText: "ಸಣ್ಣ ಒಂದೇ ಸಾಲಿನ ಪಠ್ಯ ಇನ್ಪುಟ್" }, { value: "NUMBER", label: "ಸಂಖ್ಯೆ", helperText: "ಸಂಖ್ಯಾತ್ಮಕ ಇನ್ಪುಟ್" }, { value: "DATE", label: "ದಿನಾಂಕ", helperText: "ದಿನಾಂಕ ಆರಿಸುವ ಇನ್ಪುಟ್" }, { value: "SELECT", label: "ಆಯ್ಕೆ", helperText: "ಏಕ ಆಯ್ಕೆ ಡ್ರಾಪ್‌ಡೌನ್", supportsOptions: true }, { value: "MULTI_SELECT", label: "ಬಹು ಆಯ್ಕೆ", helperText: "ಬಹು ಆಯ್ಕೆ ಡ್ರಾಪ್‌ಡೌನ್", supportsOptions: true }, { value: "CHECKBOX", label: "ಚೆಕ್‌ಬಾಕ್ಸ್", helperText: "ಚೆಕ್‌ಬಾಕ್ಸ್ ಗ್ರೂಪ್", supportsOptions: true }, { value: "RADIO", label: "ರೇಡಿಯೋ", helperText: "ಏಕ ಆಯ್ಕೆ ರೇಡಿಯೋ ಗ್ರೂಪ್", supportsOptions: true }, { value: "BOOLEAN", label: "ಬೂಲಿಯನ್", helperText: "ಹೌದು ಅಥವಾ ಇಲ್ಲ ಸ್ವಿಚ್" }, { value: "FILE", label: "ಫೈಲ್", helperText: "ಫೈಲ್ ಅಪ್ಲೋಡ್ ಇನ್ಪುಟ್" }, { value: "EMAIL", label: "ಇಮೇಲ್", helperText: "ಇಮೇಲ್ ವಿಳಾಸ ಇನ್ಪುಟ್" }, { value: "PHONE", label: "ಫೋನ್", helperText: "ಫೋನ್ ಸಂಖ್ಯೆ ಇನ್ಪುಟ್" }, { value: "TEXTAREA", label: "ಪಠ್ಯ ಪ್ರದೇಶ", helperText: "ದೀರ್ಘ ಪಠ್ಯ ಇನ್ಪುಟ್" } ] },
+    userFormFieldsList: { title: "ಸೇರಿಸಿದ ಕ್ಷೇತ್ರಗಳು", countSuffix: "ಐಟಂಗಳು", emptyTitle: "ಇನ್ನೂ ಯಾವುದೇ ಕ್ಷೇತ್ರಗಳನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ", emptyText: "ನೀವು ಫಾರ್ಮ್ ನಿರ್ಮಿಸುತ್ತಿರುವಾಗ ಸೇರಿಸಿದ ಕ್ಷೇತ್ರಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ.", required: "ಅಗತ್ಯ", editAriaPrefix: "ಸಂಪಾದಿಸಿ", removeAriaPrefix: "ತೆಗೆದುಹಾಕಿ", dragAriaPrefix: "ಎಳೆ" },
+    addChapterDrawer: { title: { create: "ಶಾಖೆ ಸೇರಿಸಿ", edit: "ಶಾಖೆ ಸಂಪಾದಿಸಿ" }, subtitle: { create: "ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಫೆಡರೇಷನ್ ನೋಡ್ ಅಡಿಯಲ್ಲಿ ಶಾಖೆ ರಚಿಸಿ.", edit: "ಶಾಖೆ ವಿವರಗಳು ಮತ್ತು ಮೂಲ ಕ್ರಮವನ್ನು ನವೀಕರಿಸಿ." }, chapterName: "ಶಾಖೆ ಹೆಸರು", chapterNamePlaceholder: "ಶಾಖೆ ಹೆಸರನ್ನು ನಮೂದಿಸಿ", parentFederationNode: "ಮೂಲ ಫೆಡರೇಷನ್ ನೋಡ್", parentSearchPlaceholder: "ಫೆಡರೇಷನ್ ನೋಡ್ ಹೆಸರಿನಿಂದ ಹುಡುಕಿ", parentHelper: "ಈ ಶಾಖೆಗೆ ಮೂಲ ಫೆಡರೇಷನ್ ನೋಡ್ ಆಯ್ಕೆಮಾಡಿ", loadingParents: "ನೋಡ್‌ಗಳು ಲೋಡ್ ಆಗುತ್ತಿವೆ...", noNodesAvailable: "ಫೆಡರೇಷನ್ ನೋಡ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ", noMatchingNode: "ಹೊಂದುವ ಫೆಡರೇಷನ್ ನೋಡ್ ಕಂಡುಬಂದಿಲ್ಲ", topLevelNode: "ಮೇಲಿನ ಮಟ್ಟದ ನೋಡ್", parentPrefix: "ಮೂಲ:", cancel: "ರದ್ದುಮಾಡಿ", create: "ಶಾಖೆ ರಚಿಸಿ", update: "ಶಾಖೆ ನವೀಕರಿಸಿ", creating: "ರಚಿಸಲಾಗುತ್ತಿದೆ...", updating: "ನವೀಕರಿಸಲಾಗುತ್ತಿದೆ...", validation: { chapterNameRequired: "ಶಾಖೆ ಹೆಸರು ಅಗತ್ಯ", createFailed: "ಶಾಖೆ ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ", loadParentsFailed: "ಮೂಲ ಫೆಡರೇಷನ್ ನೋಡ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ" }, messages: { created: "ಶಾಖೆ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ", updated: "ಶಾಖೆ ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ" } },
+  },
+
+  ml: {
+    common: { organization: "സംഘടന", backToForms: "ഫോമുകളിലേക്ക് മടങ്ങുക", close: "അടയ്ക്കുക", viewAll: "എല്ലാം കാണുക →" },
+    header: { languageLabel: "ഭാഷ", languages: { en: "ഇംഗ്ലീഷ്", hi: "ഹിന്ദി", kn: "കന്നഡ", ml: "മലയാളം", ta: "തമിഴ്", te: "തെലുങ്ക്" } },
+    sidebar: { menu: { dashboard: "ഡാഷ്ബോർഡ്", applications: "അപേക്ഷകൾ", members: "അംഗങ്ങൾ", renewals: "പുതുക്കലുകൾ", payments: "പേയ്‌മെന്റുകൾ", receipts: "രസീതുകൾ", settings: "ക്രമീകരണങ്ങൾ" }, organization: "സംഘടന", structure: "ഘടന", officeBearers: "പദവിവാഹകർ", levels: "തലങ്ങൾ", users: "ഉപയോക്താക്കൾ", userForms: "ഉപയോക്തൃ ഫോമുകൾ", collapse: "ചുരുക്കുക", userName: "കവിൻ അരുൾ", userRole: "സെക്രട്ടറി" },
+    structurePage: { title: "സംഘടനാ ഘടന", subtitle: "അനുക്രമ തലങ്ങളും ശാഖകളും നിയന്ത്രിക്കുക", breadcrumbs: { structure: "ഘടന" }, actions: { addLevel: "തലം ചേർക്കുക", addChapter: "ശാഖ ചേർക്കുക" } },
+    structureView: { searchPlaceholder: "ശാഖയോ തലമോ തിരയുക...", loadingError: "ഫെഡറേഷൻ നോഡുകൾ ലോഡ് ചെയ്യാനായില്ല", emptyState: "ഫെഡറേഷൻ നോഡുകളൊന്നും കണ്ടെത്തിയില്ല.", noNodeSelected: "ഒരു നോഡും തിരഞ്ഞെടുത്തിട്ടില്ല", status: { active: "സജീവം", inactive: "നിഷ്ക്രിയം" }, details: { level: "തലം", parent: "മാതൃ" }, stats: { members: "അംഗങ്ങൾ", officeBearers: "പദവിവാഹകർ", subOrganizations: "ഉപസംഘടനകൾ", collectedThisFY: "ഈ സാമ്പത്തിക വർഷത്തിലെ ശേഖരം" }, statLinks: { members: "അംഗങ്ങളെ കാണുക →", officeBearers: "എല്ലാം കാണുക →", subOrganizations: "എല്ലാം കാണുക →", collectedThisFY: "പേയ്മെന്റുകൾ കാണുക →" }, leadership: "നേതൃത്വം (പദവിവാഹകർ)", leaderPositions: { president: "പ്രസിഡന്റ്", secretary: "സെക്രട്ടറി", treasurer: "ട്രഷറർ" }, actions: { edit: "തിരുത്തുക", manageOfficeBearers: "പദവിവാഹകരെ നിയന്ത്രിക്കുക", move: "നീക്കുക", deactivate: "നിഷ്ക്രിയമാക്കുക", delete: "ഇല്ലാതാക്കുക" }, membersLabel: "അംഗങ്ങൾ" },
+    usersPage: { title: "ഉപയോക്താക്കൾ", subtitle: "ഫെഡറേഷൻ നോഡിന്റെ അടിസ്ഥാനത്തിൽ ഉപയോക്താക്കളെ ഫിൽട്ടർ ചെയ്യുകയും അംഗീകാര നില നിയന്ത്രിക്കുകയും ചെയ്യുക.", breadcrumbs: { users: "ഉപയോക്താക്കൾ" }, messages: { loadSetupError: "ഉപയോക്തൃ സെറ്റപ്പ് ഡാറ്റ ലോഡ് ചെയ്യാനായില്ല", loadUsersError: "ഉപയോക്താക്കളെ ലോഡ് ചെയ്യാനായില്ല", approve: "അംഗീകരിക്കുക", reject: "നിരസിക്കുക", cancel: "റദ്ദാക്കുക", updateStatusError: "അംഗീകാര നില പുതുക്കാനായില്ല" } },
+    usersToolbar: { federationNode: "ഫെഡറേഷൻ നോഡ്", searchUsers: "ഉപയോക്താക്കളെ തിരയുക", totalUsers: "ആകെ ഉപയോക്താക്കൾ" },
+    usersTable: { columns: { name: "പേര്", email: "ഇമെയിൽ", phoneNumber: "ഫോൺ", approvalStatus: "അംഗീകാര നില", createdAt: "സൃഷ്ടിച്ചത്" }, action: "നടപടി", unknown: "അജ്ഞാതം", rowActions: "നിര പ്രവർത്തികൾ", emptyState: "ഉപയോക്താക്കളൊന്നും കണ്ടെത്തിയില്ല." },
+    userFormPage: { title: "ഉപയോക്തൃ ഫോമുകൾ", subtitle: "ഫീൽഡുകൾ, സാധൂകരണ ആവശ്യകതകൾ, പുനരുപയോഗിക്കാവുന്ന മെറ്റാഡാറ്റ എന്നിവ ഒരിടത്ത് നിർവ്വചിച്ച് ഡൈനാമിക് ഉപയോക്തൃ ഫോമുകൾ സൃഷ്ടിക്കുക.", createTitle: "ഉപയോക്തൃ ഫോം സൃഷ്ടിക്കുക", createSubtitle: "പ്രത്യേക പ്രവർത്തനപരിസരത്തിൽ ഡൈനാമിക് ഫോമുകൾ നിർമ്മിച്ച് പ്രവർത്തിക്കുമ്പോൾ ലൈവ് ഘടന കാണുക.", editTitle: "ഉപയോക്തൃ ഫോം തിരുത്തുക", editSubtitle: "സൃഷ്ടിക്കാൻ ഉപയോഗിച്ച അതേ പ്രവർത്തനപരിസരത്തിൽ ഫോം വിശദാംശങ്ങളും ഫീൽഡുകളും പുതുക്കുക.", breadcrumbs: { userForms: "ഉപയോക്തൃ ഫോമുകൾ", createForm: "ഫോം സൃഷ്ടിക്കുക", editForm: "ഫോം തിരുത്തുക" }, actions: { createForm: "ഫോം സൃഷ്ടിക്കുക" }, emptyState: { title: "ഫോമുകളൊന്നും കണ്ടെത്തിയില്ല", text: "ഇവിടെ കാണാൻ ഒരു ഫോം സൃഷ്ടിക്കുക.", action: "ഫോം സൃഷ്ടിക്കുക" }, cards: { ariaLabel: "സൃഷ്ടിച്ച ഫോമുകൾ", actionsLabel: "ഫോം പ്രവർത്തനങ്ങൾ", openActions: "ഫോം പ്രവർത്തനങ്ങൾ തുറക്കുക", view: "കാണുക", edit: "തിരുത്തുക", inviteUsers: "ഉപയോക്താക്കളെ ക്ഷണിക്കുക", delete: "ഇല്ലാതാക്കുക", detailsTitle: "ഫോം വിശദാംശങ്ങൾ", editForm: "ഫോം തിരുത്തുക" }, dialog: { close: "അടയ്ക്കുക" }, messages: { loadError: "ഫോമുകൾ ലോഡ് ചെയ്യാനായില്ല", deleteConfirm: "ഈ ഫോം ഇല്ലാതാക്കണോ?", deleteFailed: "ഫോം ഇല്ലാതാക്കാനായില്ല", copied: "ആഹ്വാന ലിങ്ക് പകർത്തി", copyFailed: "ഷെയർ ലിങ്ക് പകർത്താനായില്ല" } },
+    userFormBuilder: { formSetup: "ഫോം ക്രമീകരണം", formName: "ഫോം പേര്", formNamePlaceholder: "അംഗ രജിസ്ട്രേഷൻ ഫോം", chapter: "ശാഖ", chapterSearchPlaceholder: "ശാഖയുടെ പേരിൽ തിരയുക", chapterHelper: "ഈ ഫോം ഉൾപ്പെടുന്ന ശാഖ തിരഞ്ഞെടുക്കുക", loadingChapters: "ശാഖകൾ ലോഡ് ചെയ്യുന്നു...", noChaptersAvailable: "ശാഖകൾ ലഭ്യമല്ല", noMatchingChapter: "തക്ക ശാഖ കണ്ടെത്തിയില്ല", topLevelNode: "മുകളിലെ തല നോഡ്", parentPrefix: "മാതൃ:", addField: "ഫീൽഡ് ചേർക്കുക", label: "ലേബൽ", labelPlaceholder: "ഫോൺ നമ്പർ", fieldKey: "ഫീൽഡ് കീ", fieldKeyPlaceholder: "phone_number", fieldType: "ഫീൽഡ് തരം", fieldTypePlaceholder: "ഫീൽഡ് തരം തിരയുക", noFieldTypesFound: "ഫീൽഡ് തരങ്ങൾ ഒന്നും കണ്ടെത്തിയില്ല", isRequired: "അവശ്യമാണ്", options: "ഓപ്ഷനുകൾ", optionsPlaceholder: "സെലക്ട്-ശൈലി ഓപ്ഷനുകൾക്കായി കോമകളോ പുതിയ വരികളോ ഉപയോഗിക്കുക", optionsHelper: "Select, Multi Select, Checkbox, Radio എന്നിവയ്ക്ക് ആവശ്യമാണ്", cancelEdit: "തിരുത്തൽ റദ്ദാക്കുക", cancel: "റദ്ദാക്കുക", updateField: "ഫീൽഡ് പുതുക്കുക", addFieldAction: "ഫീൽഡ് ചേർക്കുക", updateForm: "ഫോം പുതുക്കുക", createForm: "ഫോം സൃഷ്ടിക്കുക", creatingForm: "സൃഷ്ടിക്കുന്നു...", updatingForm: "പുതുക്കുന്നു...", validation: { labelRequired: "ഫീൽഡ് ചേർക്കാൻ ലേബൽ ആവശ്യമാണ്", fieldKeyRequired: "ഫീൽഡ് ചേർക്കാൻ കീ ആവശ്യമാണ്", fieldTypeRequired: "ഫീൽഡ് ചേർക്കാൻ തരം ആവശ്യമാണ്", duplicateFieldKey: "ഫോത്തിനകത്ത് ഫീൽഡ് കീ ഏകത്വമായിരിക്കണം", optionsRequired: "Select, Multi Select, Checkbox, Radio ഫീൽഡുകൾക്ക് കുറഞ്ഞത് ഒരു ഓപ്ഷൻ ചേർക്കുക", formNameRequired: "ഫോം പേര് ആവശ്യമാണ്", chapterRequired: "ശാഖ ആവശ്യമാണ്", addFieldFirst: "ഫോം സൃഷ്ടിക്കുന്നതിന് മുൻപ് കുറഞ്ഞത് ഒരു ഫീൽഡ് ചേർക്കുക" }, messages: { created: "ഫോം വിജയകരമായി സൃഷ്ടിച്ചു", updated: "ഫോം വിജയകരമായി പുതുക്കി", loadChaptersError: "ശാഖകൾ ലോഡ് ചെയ്യാനായില്ല", createFailed: "ഫോം സൃഷ്ടിക്കാനായില്ല", updateFailed: "ഫോം പുതുക്കാനായില്ല" }, fieldTypes: [ { value: "TEXT", label: "പാഠ്യം", helperText: "ചുരുങ്ങിയ ഒറ്റ വരി പാഠ്യ ഇൻപുട്ട്" }, { value: "NUMBER", label: "സംഖ്യ", helperText: "അക്കം ഇൻപുട്ട്" }, { value: "DATE", label: "തീയതി", helperText: "തീയതി തിരഞ്ഞെടുപ്പ് ഇൻപുട്ട്" }, { value: "SELECT", label: "തിരഞ്ഞെടുപ്പ്", helperText: "ഒറ്റ തിരഞ്ഞെടുപ്പ് ഡ്രോപ്പ്ഡൗൺ", supportsOptions: true }, { value: "MULTI_SELECT", label: "പല തിരഞ്ഞെടുപ്പ്", helperText: "പല തിരഞ്ഞെടുപ്പ് ഡ്രോപ്പ്ഡൗൺ", supportsOptions: true }, { value: "CHECKBOX", label: "ചെക്ക് ബോക്സ്", helperText: "ചെക്ക് ബോക്സ് ഗ്രൂപ്പ്", supportsOptions: true }, { value: "RADIO", label: "റേഡിയോ", helperText: "ഒറ്റ തിരഞ്ഞെടുപ്പ് റേഡിയോ ഗ്രൂപ്പ്", supportsOptions: true }, { value: "BOOLEAN", label: "ബൂളിയൻ", helperText: "അതോ അല്ലയോ സ്വിച്ച്" }, { value: "FILE", label: "ഫയൽ", helperText: "ഫയൽ അപ്‌ലോഡ് ഇൻപുട്ട്" }, { value: "EMAIL", label: "ഇമെയിൽ", helperText: "ഇമെയിൽ വിലാസ ഇൻപുട്ട്" }, { value: "PHONE", label: "ഫോൺ", helperText: "ഫോൺ നമ്പർ ഇൻപുട്ട്" }, { value: "TEXTAREA", label: "ദീർഘ പാഠ്യം", helperText: "ദീർഘമായ പാഠ്യ ഇൻപുട്ട്" } ] },
+    userFormFieldsList: { title: "ചേർത്ത ഫീൽഡുകൾ", countSuffix: "ഇനങ്ങൾ", emptyTitle: "ഇനിയും ഫീൽഡുകൾ ചേർത്തിട്ടില്ല", emptyText: "നിങ്ങൾ ഫോം നിർമ്മിക്കുന്നത് തുടരുമ്പോൾ ചേർത്ത ഫീൽഡുകൾ ഇവിടെ കാണിക്കും.", required: "അവശ്യമാണ്", editAriaPrefix: "തിരുത്തുക", removeAriaPrefix: "നീക്കം ചെയ്യുക", dragAriaPrefix: "വലിക്കുക" },
+    addChapterDrawer: { title: { create: "ശാഖ ചേർക്കുക", edit: "ശാഖ തിരുത്തുക" }, subtitle: { create: "ഇരുപക്ഷ്യ ഫെഡറേഷൻ നോഡിന് കീഴിൽ ഒരു ശാഖ സൃഷ്ടിക്കുക.", edit: "ശാഖ വിശദാംശങ്ങളും മാതൃക്രമവും പുതുക്കുക." }, chapterName: "ശാഖയുടെ പേര്", chapterNamePlaceholder: "ശാഖയുടെ പേര് നൽകുക", parentFederationNode: "മാതൃ ഫെഡറേഷൻ നോഡ്", parentSearchPlaceholder: "ഫെഡറേഷൻ നോഡ് പേരിൽ തിരയുക", parentHelper: "ഈ ശാഖയ്ക്കുള്ള മാതൃ ഫെഡറേഷൻ നോഡ് തിരഞ്ഞെടുക്കുക", loadingParents: "നോഡുകൾ ലോഡ് ചെയ്യുന്നു...", noNodesAvailable: "ഫെഡറേഷൻ നോഡുകൾ ലഭ്യമല്ല", noMatchingNode: "തക്ക ഫെഡറേഷൻ നോഡ് കണ്ടെത്തിയില്ല", topLevelNode: "മുകളിലെ തല നോഡ്", parentPrefix: "മാതൃ:", cancel: "റദ്ദാക്കുക", create: "ശാഖ സൃഷ്ടിക്കുക", update: "ശാഖ പുതുക്കുക", creating: "സൃഷ്ടിക്കുന്നു...", updating: "പുതുക്കുന്നു...", validation: { chapterNameRequired: "ശാഖയുടെ പേര് ആവശ്യമാണ്", createFailed: "ശാഖ സൃഷ്ടിക്കാനായില്ല", loadParentsFailed: "മാതൃ ഫെഡറേഷൻ നോഡുകൾ ലോഡ് ചെയ്യാനായില്ല" }, messages: { created: "ശാഖ വിജയകരമായി സൃഷ്ടിച്ചു", updated: "ശാഖ വിജയകരമായി പുതുക്കി" } },
+  },
+
+  ta: {
+    common: { organization: "அமைப்பு", backToForms: "படிவங்களுக்கு திரும்பு", close: "மூடு", viewAll: "அனைத்தையும் காண்க →" },
+    header: { languageLabel: "மொழி", languages: { en: "ஆங்கிலம்", hi: "இந்தி", kn: "கன்னடம்", ml: "மலையாளம்", ta: "தமிழ்", te: "தெலுங்கு" } },
+    sidebar: { menu: { dashboard: "டாஷ்போர்டு", applications: "விண்ணப்பங்கள்", members: "உறுப்பினர்கள்", renewals: "புதுப்பிப்புகள்", payments: "கட்டணங்கள்", receipts: "ரசீதுகள்", settings: "அமைப்புகள்" }, organization: "அமைப்பு", structure: "கட்டமைப்பு", officeBearers: "பதவியாளர்கள்", levels: "நிலைகள்", users: "பயனர்கள்", userForms: "பயனர் படிவங்கள்", collapse: "சுருக்கு", userName: "கவின் அருள்", userRole: "செயலாளர்" },
+    structurePage: { title: "அமைப்பு கட்டமைப்பு", subtitle: "படிநிலை நிலைகள் மற்றும் கிளைகளை நிர்வகிக்கவும்", breadcrumbs: { structure: "கட்டமைப்பு" }, actions: { addLevel: "நிலை சேர்க்கவும்", addChapter: "கிளை சேர்க்கவும்" } },
+    structureView: { searchPlaceholder: "கிளை அல்லது நிலை தேடுக...", loadingError: "ஃபெடரேஷன் நோட்களை ஏற்ற முடியவில்லை", emptyState: "எந்த ஃபெடரேஷன் நோடும் காணப்படவில்லை.", noNodeSelected: "எந்த நோடும் தேர்ந்தெடுக்கப்படவில்லை", status: { active: "செயலில்", inactive: "செயலற்ற" }, details: { level: "நிலை", parent: "மூலம்" }, stats: { members: "உறுப்பினர்கள்", officeBearers: "பதவியாளர்கள்", subOrganizations: "உப-அமைப்புகள்", collectedThisFY: "இந்த நிதியாண்டில் வசூல்" }, statLinks: { members: "உறுப்பினர்களைக் காண்க →", officeBearers: "அனைத்தையும் காண்க →", subOrganizations: "அனைத்தையும் காண்க →", collectedThisFY: "கட்டணங்களை காண்க →" }, leadership: "தலைமை (பதவியாளர்கள்)", leaderPositions: { president: "தலைவர்", secretary: "செயலாளர்", treasurer: "பொருளாளர்" }, actions: { edit: "திருத்து", manageOfficeBearers: "பதவியாளர்களை நிர்வகி", move: "நகர்த்து", deactivate: "செயலிழக்கு செய்", delete: "நீக்கு" }, membersLabel: "உறுப்பினர்கள்" },
+    usersPage: { title: "பயனர்கள்", subtitle: "ஃபெடரேஷன் நோடின் அடிப்படையில் பயனர்களை வடிகட்டி ஒப்புதல் நிலையை நிர்வகிக்கவும்.", breadcrumbs: { users: "பயனர்கள்" }, messages: { loadSetupError: "பயனர் அமைப்பு தரவை ஏற்ற முடியவில்லை", loadUsersError: "பயனர்களை ஏற்ற முடியவில்லை", approve: "ஒப்புதல்", reject: "நிராகரி", cancel: "ரத்து", updateStatusError: "ஒப்புதல் நிலையை புதுப்பிக்க முடியவில்லை" } },
+    usersToolbar: { federationNode: "ஃபெடரேஷன் நோடு", searchUsers: "பயனர்களைத் தேடு", totalUsers: "மொத்த பயனர்கள்" },
+    usersTable: { columns: { name: "பெயர்", email: "மின்னஞ்சல்", phoneNumber: "தொலைபேசி", approvalStatus: "ஒப்புதல் நிலை", createdAt: "உருவாக்கப்பட்டது" }, action: "செயல்", unknown: "தெரியாது", rowActions: "வரிசை செயல்கள்", emptyState: "பயனர்கள் எவரும் இல்லை." },
+    userFormPage: { title: "பயனர் படிவங்கள்", subtitle: "களங்கள், சரிபார்ப்பு தேவைகள் மற்றும் மறுபயன்படுத்தக்கூடிய மெட்டாடேட்டாவை ஒரே இடத்தில் வரையறுத்து டைனமிக் பயனர் படிவங்களை உருவாக்கவும்.", createTitle: "பயனர் படிவத்தை உருவாக்கு", createSubtitle: "தனிப்பட்ட பணிச்சூழலில் டைனமிக் படிவங்களை உருவாக்கி வேலை செய்யும் போது உயிர் அமைப்பைக் காண்க.", editTitle: "பயனர் படிவத்தைத் திருத்து", editSubtitle: "உருவாக்கத்தில் பயன்படுத்திய அதே பணிச்சூழலில் படிவ விவரங்களையும் களங்களையும் புதுப்பிக்கவும்.", breadcrumbs: { userForms: "பயனர் படிவங்கள்", createForm: "படிவம் உருவாக்கு", editForm: "படிவம் திருத்து" }, actions: { createForm: "படிவம் உருவாக்கு" }, emptyState: { title: "படிவங்கள் எதுவும் இல்லை", text: "இங்கே பார்க்க ஒரு படிவத்தை உருவாக்கவும்.", action: "படிவம் உருவாக்கு" }, cards: { ariaLabel: "உருவாக்கப்பட்ட படிவங்கள்", actionsLabel: "படிவ செயல்கள்", openActions: "படிவ செயல்களைத் திறக்கவும்", view: "பார்", edit: "திருத்து", inviteUsers: "பயனர்களை அழை", delete: "நீக்கு", detailsTitle: "படிவ விவரங்கள்", editForm: "படிவம் திருத்து" }, dialog: { close: "மூடு" }, messages: { loadError: "படிவங்களை ஏற்ற முடியவில்லை", deleteConfirm: "இந்தப் படிவத்தை நீக்கவா?", deleteFailed: "படிவத்தை நீக்க முடியவில்லை", copied: "அழைப்பு இணைப்பு நகலெடுக்கப்பட்டது", copyFailed: "பகிர்வு இணைப்பை நகலெடுக்க முடியவில்லை" } },
+    userFormBuilder: { formSetup: "படிவ அமைப்பு", formName: "படிவ பெயர்", formNamePlaceholder: "உறுப்பினர் பதிவு படிவம்", chapter: "கிளை", chapterSearchPlaceholder: "கிளை பெயரால் தேடு", chapterHelper: "இந்த படிவம் சேர்ந்துள்ள கிளையைத் தேர்ந்தெடுக்கவும்", loadingChapters: "கிளைகள் ஏற்றப்படுகின்றன...", noChaptersAvailable: "கிளைகள் கிடைக்கவில்லை", noMatchingChapter: "பொருந்தும் கிளை கிடைக்கவில்லை", topLevelNode: "முதல் நிலை நோடு", parentPrefix: "மூலம்:", addField: "களம் சேர்க்கவும்", label: "லேபல்", labelPlaceholder: "தொலைபேசி எண்", fieldKey: "கள விசை", fieldKeyPlaceholder: "phone_number", fieldType: "கள வகை", fieldTypePlaceholder: "கள வகையைத் தேடு", noFieldTypesFound: "கள வகைகள் எதுவும் இல்லை", isRequired: "தேவை", options: "விருப்பங்கள்", optionsPlaceholder: "தேர்வு-பாணி விருப்பங்களுக்கு கமா அல்லது புதிய வரிகளைப் பயன்படுத்தவும்", optionsHelper: "Select, Multi Select, Checkbox, Radio ஆகியவற்றிற்கு தேவை", cancelEdit: "திருத்தலை ரத்து செய்", cancel: "ரத்து", updateField: "களத்தைப் புதுப்பி", addFieldAction: "களம் சேர்க்கவும்", updateForm: "படிவத்தைப் புதுப்பி", createForm: "படிவத்தை உருவாக்கு", creatingForm: "உருவாக்கப்படுகிறது...", updatingForm: "புதுப்பிக்கப்படுகிறது...", validation: { labelRequired: "களம் சேர்க்க லேபல் தேவை", fieldKeyRequired: "களம் சேர்க்க விசை தேவை", fieldTypeRequired: "களம் சேர்க்க வகை தேவை", duplicateFieldKey: "படிவத்தில் கள விசை தனித்துவமாக இருக்க வேண்டும்", optionsRequired: "Select, Multi Select, Checkbox, Radio களங்களுக்கு குறைந்தது ஒரு விருப்பத்தைச் சேர்க்கவும்", formNameRequired: "படிவ பெயர் தேவை", chapterRequired: "கிளை தேவை", addFieldFirst: "படிவத்தை உருவாக்கும் முன் குறைந்தது ஒரு களத்தைச் சேர்க்கவும்" }, messages: { created: "படிவம் வெற்றிகரமாக உருவாக்கப்பட்டது", updated: "படிவம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது", loadChaptersError: "கிளைகளை ஏற்ற முடியவில்லை", createFailed: "படிவத்தை உருவாக்க முடியவில்லை", updateFailed: "படிவத்தைப் புதுப்பிக்க முடியவில்லை" }, fieldTypes: [ { value: "TEXT", label: "உரை", helperText: "சுருக்கமான ஒரே வரி உரை உள்ளீடு" }, { value: "NUMBER", label: "எண்", helperText: "எண் உள்ளீடு" }, { value: "DATE", label: "தேதி", helperText: "தேதி தேர்வு உள்ளீடு" }, { value: "SELECT", label: "தேர்வு", helperText: "ஒற்றைத் தேர்வு கீழிறக்க பட்டி", supportsOptions: true }, { value: "MULTI_SELECT", label: "பலத் தேர்வு", helperText: "பலத் தேர்வு கீழிறக்க பட்டி", supportsOptions: true }, { value: "CHECKBOX", label: "செக் பாக்ஸ்", helperText: "செக் பாக்ஸ் குழு", supportsOptions: true }, { value: "RADIO", label: "ரேடியோ", helperText: "ஒற்றைத் தேர்வு ரேடியோ குழு", supportsOptions: true }, { value: "BOOLEAN", label: "பூலியன்", helperText: "ஆம் அல்லது இல்லை மாறி" }, { value: "FILE", label: "கோப்பு", helperText: "கோப்பு பதிவேற்ற உள்ளீடு" }, { value: "EMAIL", label: "மின்னஞ்சல்", helperText: "மின்னஞ்சல் முகவரி உள்ளீடு" }, { value: "PHONE", label: "தொலைபேசி", helperText: "தொலைபேசி எண் உள்ளீடு" }, { value: "TEXTAREA", label: "நீண்ட உரை", helperText: "நீண்ட உரை உள்ளீடு" } ] },
+    userFormFieldsList: { title: "சேர்க்கப்பட்ட களங்கள்", countSuffix: "உருப்படிகள்", emptyTitle: "இன்னும் களங்கள் சேர்க்கப்படவில்லை", emptyText: "நீங்கள் படிவத்தை உருவாக்கும் போது சேர்க்கப்பட்ட களங்கள் இங்கே காணப்படும்.", required: "தேவை", editAriaPrefix: "திருத்து", removeAriaPrefix: "நீக்கு", dragAriaPrefix: "இழு" },
+    addChapterDrawer: { title: { create: "கிளை சேர்க்கவும்", edit: "கிளையைத் திருத்து" }, subtitle: { create: "இருக்கும் ஃபெடரேஷன் நோடின் கீழ் ஒரு கிளையை உருவாக்கவும்.", edit: "கிளை விவரங்களையும் பெற்றோர் வரிசையையும் புதுப்பிக்கவும்." }, chapterName: "கிளை பெயர்", chapterNamePlaceholder: "கிளை பெயரை உள்ளிடவும்", parentFederationNode: "பெற்றோர் ஃபெடரேஷன் நோடு", parentSearchPlaceholder: "ஃபெடரேஷன் நோடு பெயரால் தேடு", parentHelper: "இந்தக் கிளைக்கான பெற்றோர் ஃபெடரேஷன் நோட்டைத் தேர்ந்தெடுக்கவும்", loadingParents: "நோடுகள் ஏற்றப்படுகின்றன...", noNodesAvailable: "ஃபெடரேஷன் நோடுகள் கிடைக்கவில்லை", noMatchingNode: "பொருந்தும் ஃபெடரேஷன் நோடு கிடைக்கவில்லை", topLevelNode: "முதல் நிலை நோடு", parentPrefix: "பெற்றோர்:", cancel: "ரத்து", create: "கிளையை உருவாக்கு", update: "கிளையைப் புதுப்பி", creating: "உருவாக்கப்படுகிறது...", updating: "புதுப்பிக்கப்படுகிறது...", validation: { chapterNameRequired: "கிளை பெயர் தேவை", createFailed: "கிளையை உருவாக்க முடியவில்லை", loadParentsFailed: "பெற்றோர் ஃபெடரேஷன் நோடுகளை ஏற்ற முடியவில்லை" }, messages: { created: "கிளை வெற்றிகரமாக உருவாக்கப்பட்டது", updated: "கிளை வெற்றிகரமாக புதுப்பிக்கப்பட்டது" } },
+  },
+
+  te: {
+    common: { organization: "సంస్థ", backToForms: "ఫారమ్‌లకు తిరిగి", close: "మూసివేయి", viewAll: "అన్నీ చూడండి →" },
+    header: { languageLabel: "భాష", languages: { en: "ఇంగ్లీష్", hi: "హిందీ", kn: "కన్నడ", ml: "మలయాళం", ta: "తమిళం", te: "తెలుగు" } },
+    sidebar: { menu: { dashboard: "డాష్‌బోర్డ్", applications: "అప్లికేషన్లు", members: "సభ్యులు", renewals: "పునరుద్ధరణలు", payments: "చెల్లింపులు", receipts: "రసీదులు", settings: "సెట్టింగ్‌లు" }, organization: "సంస్థ", structure: "నిర్మాణం", officeBearers: "పదాధికారులు", levels: "స్థాయిలు", users: "వినియోగదారులు", userForms: "వినియోగదారు ఫారమ్‌లు", collapse: "కుదించు", userName: "కవిన్ అరుల్", userRole: "కార్యదర్శి" },
+    structurePage: { title: "సంస్థ నిర్మాణం", subtitle: "పరిపాలనా స్థాయిలు మరియు శాఖలను నిర్వహించండి", breadcrumbs: { structure: "నిర్మాణం" }, actions: { addLevel: "స్థాయి జోడించు", addChapter: "శాఖ జోడించు" } },
+    structureView: { searchPlaceholder: "శాఖ లేదా స్థాయి వెతకండి...", loadingError: "ఫెడరేషన్ నోడ్‌లను లోడ్ చేయలేకపోయాం", emptyState: "ఫెడరేషన్ నోడ్‌లు కనుగొనబడలేదు.", noNodeSelected: "ఏ నోడ్ కూడా ఎంపిక కాలేదు", status: { active: "క్రియాశీలం", inactive: "నిష్క్రియం" }, details: { level: "స్థాయి", parent: "మాతృ" }, stats: { members: "సభ్యులు", officeBearers: "పదాధికారులు", subOrganizations: "ఉప-సంస్థలు", collectedThisFY: "ఈ ఆర్థిక సంవత్సరంలో సేకరణ" }, statLinks: { members: "సభ్యులను చూడండి →", officeBearers: "అన్నీ చూడండి →", subOrganizations: "అన్నీ చూడండి →", collectedThisFY: "చెల్లింపులను చూడండి →" }, leadership: "నాయకత్వం (పదాధికారులు)", leaderPositions: { president: "అధ్యక్షుడు", secretary: "కార్యదర్శి", treasurer: "ఖజాంచి" }, actions: { edit: "సవరించు", manageOfficeBearers: "పదాధికారులను నిర్వహించు", move: "తరలించు", deactivate: "నిష్క్రియం చేయి", delete: "తొలగించు" }, membersLabel: "సభ్యులు" },
+    usersPage: { title: "వినియోగదారులు", subtitle: "ఫెడరేషన్ నోడ్ ఆధారంగా వినియోగదారులను ఫిల్టర్ చేసి ఆమోద స్థితిని నిర్వహించండి.", breadcrumbs: { users: "వినియోగదారులు" }, messages: { loadSetupError: "వినియోగదారు సెటప్ డేటాను లోడ్ చేయలేకపోయాం", loadUsersError: "వినియోగదారులను లోడ్ చేయలేకపోయాం", approve: "ఆమోదించు", reject: "తిరస్కరించు", cancel: "రద్దు", updateStatusError: "ఆమోద స్థితిని నవీకరించలేకపోయాం" } },
+    usersToolbar: { federationNode: "ఫెడరేషన్ నోడ్", searchUsers: "వినియోగదారులను వెతకండి", totalUsers: "మొత్తం వినియోగదారులు" },
+    usersTable: { columns: { name: "పేరు", email: "ఇమెయిల్", phoneNumber: "ఫోన్", approvalStatus: "ఆమోద స్థితి", createdAt: "సృష్టించబడింది" }, action: "చర్య", unknown: "తెలియదు", rowActions: "వరుస చర్యలు", emptyState: "వినియోగదారులు కనబడలేదు." },
+    userFormPage: { title: "వినియోగదారు ఫారమ్‌లు", subtitle: "ఫీల్డ్‌లు, ధృవీకరణ అవసరాలు మరియు పునర్వినియోగ మెటాడేటాను ఒకేచోట నిర్వచించి డైనమిక్ ఫారమ్‌లను సృష్టించండి.", createTitle: "వినియోగదారు ఫారమ్ సృష్టించండి", createSubtitle: "ప్రత్యేక వర్క్‌స్పేస్‌లో డైనమిక్ ఫారమ్‌లను నిర్మించి పని చేస్తూ ప్రత్యక్ష నిర్మాణాన్ని చూడండి.", editTitle: "వినియోగదారు ఫారమ్ సవరించండి", editSubtitle: "సృష్టించేందుకు ఉపయోగించిన అదే వర్క్‌స్పేస్‌లో ఫారమ్ వివరాలు మరియు ఫీల్డ్‌లను నవీకరించండి.", breadcrumbs: { userForms: "వినియోగదారు ఫారమ్‌లు", createForm: "ఫారమ్ సృష్టించండి", editForm: "ఫారమ్ సవరించండి" }, actions: { createForm: "ఫారమ్ సృష్టించండి" }, emptyState: { title: "ఫారమ్‌లు కనబడలేదు", text: "ఇక్కడ చూడటానికి ఒక ఫారమ్ సృష్టించండి.", action: "ఫారమ్ సృష్టించండి" }, cards: { ariaLabel: "సృష్టించిన ఫారమ్‌లు", actionsLabel: "ఫారమ్ చర్యలు", openActions: "ఫారమ్ చర్యలను తెరవండి", view: "చూడండి", edit: "సవరించండి", inviteUsers: "వినియోగదారులను ఆహ్వానించండి", delete: "తొలగించు", detailsTitle: "ఫారమ్ వివరాలు", editForm: "ఫారమ్ సవరించండి" }, dialog: { close: "మూసివేయి" }, messages: { loadError: "ఫారమ్‌లను లోడ్ చేయలేకపోయాం", deleteConfirm: "ఈ ఫారమ్‌ను తొలగించాలా?", deleteFailed: "ఫారమ్‌ను తొలగించలేకపోయాం", copied: "ఆహ్వాన లింక్ కాపీ అయింది", copyFailed: "షేర్ లింక్ కాపీ చేయలేకపోయాం" } },
+    userFormBuilder: { formSetup: "ఫారమ్ సెటప్", formName: "ఫారమ్ పేరు", formNamePlaceholder: "సభ్యుల నమోదు ఫారమ్", chapter: "శాఖ", chapterSearchPlaceholder: "శాఖ పేరుతో వెతకండి", chapterHelper: "ఈ ఫారమ్‌కు చెందిన శాఖను ఎంచుకోండి", loadingChapters: "శాఖలు లోడ్ అవుతున్నాయి...", noChaptersAvailable: "శాఖలు అందుబాటులో లేవు", noMatchingChapter: "సరిపోలే శాఖ కనబడలేదు", topLevelNode: "టాప్-లెవల్ నోడ్", parentPrefix: "మాతృ:", addField: "ఫీల్డ్ జోడించు", label: "లేబుల్", labelPlaceholder: "ఫోన్ నంబర్", fieldKey: "ఫీల్డ్ కీ", fieldKeyPlaceholder: "phone_number", fieldType: "ఫీల్డ్ రకం", fieldTypePlaceholder: "ఫీల్డ్ రకం వెతకండి", noFieldTypesFound: "ఫీల్డ్ రకాలేవీ కనబడలేదు", isRequired: "అవసరం", options: "ఎంపికలు", optionsPlaceholder: "సెలెక్ట్-శైలి ఎంపికలకు కామాలు లేదా కొత్త పంక్తులు ఉపయోగించండి", optionsHelper: "Select, Multi Select, Checkbox, Radio కోసం అవసరం", cancelEdit: "సవరణను రద్దు చేయి", cancel: "రద్దు", updateField: "ఫీల్డ్ నవీకరించు", addFieldAction: "ఫీల్డ్ జోడించు", updateForm: "ఫారమ్ నవీకరించు", createForm: "ఫారమ్ సృష్టించు", creatingForm: "సృష్టిస్తోంది...", updatingForm: "నవీకరిస్తోంది...", validation: { labelRequired: "ఫీల్డ్ జోడించడానికి లేబుల్ అవసరం", fieldKeyRequired: "ఫీల్డ్ జోడించడానికి కీ అవసరం", fieldTypeRequired: "ఫీల్డ్ జోడించడానికి రకం అవసరం", duplicateFieldKey: "ఫారమ్‌లో ఫీల్డ్ కీ ప్రత్యేకంగా ఉండాలి", optionsRequired: "Select, Multi Select, Checkbox, Radio ఫీల్డ్‌లకు కనీసం ఒక ఎంపిక జోడించండి", formNameRequired: "ఫారమ్ పేరు అవసరం", chapterRequired: "శాఖ అవసరం", addFieldFirst: "ఫారమ్ సృష్టించే ముందు కనీసం ఒక ఫీల్డ్ జోడించండి" }, messages: { created: "ఫారమ్ విజయవంతంగా సృష్టించబడింది", updated: "ఫారమ్ విజయవంతంగా నవీకరించబడింది", loadChaptersError: "శాఖలను లోడ్ చేయలేకపోయాం", createFailed: "ఫారమ్ సృష్టించలేకపోయాం", updateFailed: "ఫారమ్ నవీకరించలేకపోయాం" }, fieldTypes: [ { value: "TEXT", label: "పాఠ్యం", helperText: "చిన్న ఒక్క పంక్తి పాఠ్య ఇన్‌పుట్" }, { value: "NUMBER", label: "సంఖ్య", helperText: "సంఖ్యాత్మక ఇన్‌పుట్" }, { value: "DATE", label: "తేదీ", helperText: "తేదీ ఎంపిక ఇన్‌పుట్" }, { value: "SELECT", label: "ఎంపిక", helperText: "ఒక్క ఎంపిక డ్రాప్‌డౌన్", supportsOptions: true }, { value: "MULTI_SELECT", label: "బహుళ ఎంపిక", helperText: "బహుళ ఎంపిక డ్రాప్‌డౌన్", supportsOptions: true }, { value: "CHECKBOX", label: "చెక్‌బాక్స్", helperText: "చెక్‌బాక్స్ గ్రూప్", supportsOptions: true }, { value: "RADIO", label: "రేడియో", helperText: "ఒక్క ఎంపిక రేడియో గ్రూప్", supportsOptions: true }, { value: "BOOLEAN", label: "బూలియన్", helperText: "అవును లేదా కాదు స్విచ్" }, { value: "FILE", label: "ఫైల్", helperText: "ఫైల్ అప్‌లోడ్ ఇన్‌పుట్" }, { value: "EMAIL", label: "ఇమెయిల్", helperText: "ఇమెయిల్ చిరునామా ఇన్‌పుట్" }, { value: "PHONE", label: "ఫోన్", helperText: "ఫోన్ నంబర్ ఇన్‌పుట్" }, { value: "TEXTAREA", label: "పొడవైన పాఠ్యం", helperText: "దీర్ఘ పాఠ్య ఇన్‌పుట్" } ] },
+    userFormFieldsList: { title: "జోడించిన ఫీల్డ్‌లు", countSuffix: "అంశాలు", emptyTitle: "ఇంకా ఫీల్డ్‌లు జోడించలేదు", emptyText: "మీరు ఫారమ్‌ను నిర్మించడం కొనసాగిస్తున్నప్పుడు జోడించిన ఫీల్డ్‌లు ఇక్కడ కనిపిస్తాయి.", required: "అవసరం", editAriaPrefix: "సవరించు", removeAriaPrefix: "తొలగించు", dragAriaPrefix: "లాగు" },
+    addChapterDrawer: { title: { create: "శాఖ జోడించండి", edit: "శాఖను సవరించండి" }, subtitle: { create: "ఇప్పటికే ఉన్న ఫెడరేషన్ నోడ్ కింద శాఖను సృష్టించండి.", edit: "శాఖ వివరాలు మరియు మాతృ క్రమాన్ని నవీకరించండి." }, chapterName: "శాఖ పేరు", chapterNamePlaceholder: "శాఖ పేరును నమోదు చేయండి", parentFederationNode: "మాతృ ఫెడరేషన్ నోడ్", parentSearchPlaceholder: "ఫెడరేషన్ నోడ్ పేరుతో వెతకండి", parentHelper: "ఈ శాఖకు మాతృ ఫెడరేషన్ నోడ్‌ను ఎంచుకోండి", loadingParents: "నోడ్‌లు లోడ్ అవుతున్నాయి...", noNodesAvailable: "ఫెడరేషన్ నోడ్‌లు అందుబాటులో లేవు", noMatchingNode: "సరిపోలే ఫెడరేషన్ నోడ్ కనబడలేదు", topLevelNode: "టాప్-లెవల్ నోడ్", parentPrefix: "మాతృ:", cancel: "రద్దు", create: "శాఖను సృష్టించండి", update: "శాఖను నవీకరించండి", creating: "సృష్టిస్తోంది...", updating: "నవీకరిస్తోంది...", validation: { chapterNameRequired: "శాఖ పేరు అవసరం", createFailed: "శాఖను సృష్టించలేకపోయాం", loadParentsFailed: "మాతృ ఫెడరేషన్ నోడ్‌లను లోడ్ చేయలేకపోయాం" }, messages: { created: "శాఖ విజయవంతంగా సృష్టించబడింది", updated: "శాఖ విజయవంతంగా నవీకరించబడింది" } },
+  },
+}
+
+function deepMerge(base, override) {
+  if (Array.isArray(base)) {
+    return Array.isArray(override) ? override : base
+  }
+
+  if (!base || typeof base !== "object") {
+    return override ?? base
+  }
+
+  const result = { ...base }
+  if (!override || typeof override !== "object") {
+    return result
+  }
+
+  for (const [key, value] of Object.entries(override)) {
+    if (Array.isArray(value) || typeof value !== "object" || value === null) {
+      result[key] = value
+      continue
+    }
+
+    result[key] = deepMerge(base[key], value)
+  }
+
+  return result
+}
+
+export function getOrganizationText(locale = "en") {
+  return deepMerge(organizationText.en, organizationText[locale] || {})
+}

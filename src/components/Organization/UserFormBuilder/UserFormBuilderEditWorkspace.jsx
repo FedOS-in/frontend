@@ -6,9 +6,11 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import UserFormBuilderForm from "./UserFormBuilderForm"
 import UserFormFieldsList from "./UserFormFieldsList"
 import { useUserFormEditor } from "./useUserFormEditor"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./UserFormBuilderWorkspace.css"
 
 export default function UserFormBuilderEditWorkspace({ initialForm, onCancel }) {
+  const text = useOrganizationText()
   const state = useUserFormEditor({ initialForm, onCancel })
 
   return (
@@ -48,7 +50,7 @@ export default function UserFormBuilderEditWorkspace({ initialForm, onCancel }) 
           endIcon={<EditOutlinedIcon />}
           onClick={state.onUpdateForm}
           disabled={state.isSubmittingForm}>
-          {state.isSubmittingForm ? "Updating..." : "Update Form"}
+          {state.isSubmittingForm ? text.userFormBuilder.updatingForm : text.userFormBuilder.updateForm}
         </Button>
       </div>
     </div>

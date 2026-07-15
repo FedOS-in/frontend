@@ -4,15 +4,16 @@ import * as React from "react"
 import Alert from "@mui/material/Alert"
 import Button from "@mui/material/Button"
 import AddIcon from "@mui/icons-material/Add"
-import { EMPTY_DRAFT, FIELD_TYPE_OPTIONS, createFieldKey, normalizeFieldKey, parseOptions } from "./userFormBuilderConfig"
+import { EMPTY_DRAFT, createFieldKey, getFieldTypeOptions, normalizeFieldKey, parseOptions } from "./userFormBuilderConfig"
 import UserFormBuilderForm from "./UserFormBuilderForm"
 import UserFormFieldsList from "./UserFormFieldsList"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./UserFormBuilderWorkspace.css"
 
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
-
 export default function UserFormBuilderWorkspace({ onCancel }) {
+  const text = useOrganizationText()
   const [formName, setFormName] = React.useState("")
   const [chapterOptions, setChapterOptions] = React.useState([])
   const [selectedChapter, setSelectedChapter] = React.useState(null)
@@ -37,14 +38,14 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
         })
 
         if (!response.ok) {
-          throw new Error("Unable to load chapters")
+          throw new Error(text.userFormBuilder.messages.loadChaptersError)
         }
 
         const nodes = await response.json()
         setChapterOptions(Array.isArray(nodes) ? nodes : [])
       } catch (error) {
         if (error.name !== "AbortError") {
-          setErrorMessage(error.message || "Unable to load chapters")
+          setErrorMessage(error.message || text.userFormBuilder.messages.loadChaptersError)
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -97,7 +98,7 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
       label: fieldToEdit.label,
       fieldKey: fieldToEdit.fieldKey,
       fieldType:
-        FIELD_TYPE_OPTIONS.find(
+        getFieldTypeOptions().find(
           (option) => option.value === fieldToEdit.fieldType,
         ) || null,
       isRequired: fieldToEdit.isRequired,
@@ -119,17 +120,17 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
     const parsedOptions = parseOptions(fieldDraft.options)
 
     if (!normalizedLabel) {
-      setErrorMessage("Label is required before adding a field")
+      setErrorMessage(text.userFormBuilder.validation.labelRequired)
       return
     }
 
     if (!normalizedFieldKey) {
-      setErrorMessage("Field key is required before adding a field")
+      setErrorMessage(text.userFormBuilder.validation.fieldKeyRequired)
       return
     }
 
     if (!selectedType) {
-      setErrorMessage("Field type is required before adding a field")
+      setErrorMessage(text.userFormBuilder.validation.fieldTypeRequired)
       return
     }
 
@@ -139,12 +140,12 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
           field.fieldKey === normalizedFieldKey && field.id !== editingFieldId,
       )
     ) {
-      setErrorMessage("Field key must be unique within the form")
+      setErrorMessage(text.userFormBuilder.validation.duplicateFieldKey)
       return
     }
 
     if (selectedType.supportsOptions && parsedOptions.length === 0) {
-      setErrorMessage("Add at least one option for select, multi select, checkbox, and radio fields")
+      setErrorMessage(text.userFormBuilder.validation.optionsRequired)
       return
     }
 
@@ -205,19 +206,19 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
 
     if (!normalizedFormName) {
       setSuccessMessage("")
-      setErrorMessage("Form name is required")
+      setErrorMessage(text.userFormBuilder.validation.formNameRequired)
       return
     }
 
     if (!selectedChapter?.id) {
       setSuccessMessage("")
-      setErrorMessage("Chapter is required")
+      setErrorMessage(text.userFormBuilder.validation.chapterRequired)
       return
     }
 
     if (fields.length === 0) {
       setSuccessMessage("")
-      setErrorMessage("Add at least one field before creating the form")
+      setErrorMessage(text.userFormBuilder.validation.addFieldFirst)
       return
     }
 
@@ -253,13 +254,13 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
 
       if (!response.ok) {
         const payloadError = await response.json().catch(() => null)
-        throw new Error(payloadError?.message || "Failed to create form")
+        throw new Error(payloadError?.message || text.userFormBuilder.messages.createFailed)
       }
 
-      setSuccessMessage("Form created successfully")
+      setSuccessMessage(text.userFormBuilder.messages.created)
       onCancel()
     } catch (error) {
-      setErrorMessage(error.message || "Failed to create form")
+      setErrorMessage(error.message || text.userFormBuilder.messages.createFailed)
     } finally {
       setIsSubmittingForm(false)
     }
@@ -302,7 +303,7 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
           endIcon={<AddIcon />}
           onClick={handleCreateForm}
           disabled={isSubmittingForm}>
-          {isSubmittingForm ? "Creating..." : "Create Form"}
+          {isSubmittingForm ? text.userFormBuilder.creatingForm : text.userFormBuilder.createForm}
         </Button>
       </div>
     </div>

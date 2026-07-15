@@ -4,11 +4,13 @@ import {
   filterAndSortUsers,
   resolveStatusValue,
 } from "@/components/Organization/Users/organizationUsersUtils"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
 
 export default function useOrganizationUsersData() {
+  const text = useOrganizationText()
   const [nodes, setNodes] = React.useState([])
   const [selectedNodeId, setSelectedNodeId] = React.useState("")
   const [users, setUsers] = React.useState([])
@@ -34,7 +36,7 @@ export default function useOrganizationUsersData() {
         ])
 
         if (!nodesResponse.ok || !statusesResponse.ok) {
-          throw new Error("Failed to load users setup data")
+          throw new Error(text.usersPage.messages.loadSetupError)
         }
 
         const [nodesData, statusesData] = await Promise.all([
@@ -51,7 +53,7 @@ export default function useOrganizationUsersData() {
         }
       } catch (loadError) {
         if (loadError.name !== "AbortError") {
-          setError(loadError.message || "Failed to load users setup data")
+          setError(loadError.message || text.usersPage.messages.loadSetupError)
         }
       }
     }
@@ -59,7 +61,7 @@ export default function useOrganizationUsersData() {
     loadInitialData()
 
     return () => controller.abort()
-  }, [])
+  }, [text])
 
   React.useEffect(() => {
     const controller = new AbortController()
@@ -80,14 +82,14 @@ export default function useOrganizationUsersData() {
         )
 
         if (!response.ok) {
-          throw new Error("Failed to load users")
+          throw new Error(text.usersPage.messages.loadUsersError)
         }
 
         const usersData = await response.json()
         setUsers(Array.isArray(usersData) ? usersData : [])
       } catch (loadError) {
         if (loadError.name !== "AbortError") {
-          setError(loadError.message || "Failed to load users")
+          setError(loadError.message || text.usersPage.messages.loadUsersError)
           setUsers([])
         }
       } finally {
@@ -100,7 +102,7 @@ export default function useOrganizationUsersData() {
     loadUsersByNode()
 
     return () => controller.abort()
-  }, [selectedNodeId])
+  }, [selectedNodeId, text])
 
   const statusLabelMap = React.useMemo(
     () => buildStatusLabelMap(statuses),
@@ -145,38 +147,38 @@ export default function useOrganizationUsersData() {
 
       if (pendingValue !== null && user.approvalStatus === pendingValue) {
         if (approvedValue !== null) {
-          actions.push({ label: "Approve", value: approvedValue })
+          actions.push({ label: text.usersPage.messages.approve, value: approvedValue })
         }
         if (rejectedValue !== null) {
-          actions.push({ label: "Reject", value: rejectedValue })
+          actions.push({ label: text.usersPage.messages.reject, value: rejectedValue })
         }
       } else if (approvedValue !== null && user.approvalStatus === approvedValue) {
         if (rejectedValue !== null) {
-          actions.push({ label: "Reject", value: rejectedValue })
+          actions.push({ label: text.usersPage.messages.reject, value: rejectedValue })
         }
       } else if (rejectedValue !== null && user.approvalStatus === rejectedValue) {
         if (approvedValue !== null) {
-          actions.push({ label: "Approve", value: approvedValue })
+          actions.push({ label: text.usersPage.messages.approve, value: approvedValue })
         }
       } else {
         if (approvedValue !== null && user.approvalStatus !== approvedValue) {
-          actions.push({ label: "Approve", value: approvedValue })
+          actions.push({ label: text.usersPage.messages.approve, value: approvedValue })
         }
         if (rejectedValue !== null && user.approvalStatus !== rejectedValue) {
-          actions.push({ label: "Reject", value: rejectedValue })
+          actions.push({ label: text.usersPage.messages.reject, value: rejectedValue })
         }
       }
 
       if (cancelledValue !== null) {
         actions.push({
-          label: "Cancel",
+          label: text.usersPage.messages.cancel,
           value: cancelledValue,
         })
       }
 
       return actions
     },
-    [statusActions],
+    [statusActions, text],
   )
 
   const handleSort = (columnId) => {
@@ -184,6 +186,7 @@ export default function useOrganizationUsersData() {
       setOrder((current) => (current === "asc" ? "desc" : "asc"))
       return
     }
+
     setOrderBy(columnId)
     setOrder("asc")
   }
@@ -200,7 +203,7 @@ export default function useOrganizationUsersData() {
       )
 
       if (!response.ok) {
-        throw new Error("Failed to update approval status")
+        throw new Error(text.usersPage.messages.updateStatusError)
       }
 
       const updatedUser = await response.json()
@@ -208,7 +211,7 @@ export default function useOrganizationUsersData() {
         current.map((user) => (user.id === userId ? updatedUser : user)),
       )
     } catch (updateError) {
-      setError(updateError.message || "Failed to update approval status")
+      setError(updateError.message || text.usersPage.messages.updateStatusError)
     }
   }
 

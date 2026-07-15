@@ -3,11 +3,13 @@ import * as React from "react"
 import { Avatar } from "@mui/material"
 import CollapseIcon from "@mui/icons-material/MenuOpen"
 import SidebarUserCard from "./SidebarUserCard"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 export default function SidebarFooter({
   sidebarCollapsed,
   setSidebarCollapsed,
 }) {
+  const text = useOrganizationText()
   return (
     <div className="sidebar__footer">
       {!sidebarCollapsed && <SidebarUserCard />}
@@ -22,7 +24,7 @@ export default function SidebarFooter({
           }}
         />
         {!sidebarCollapsed && (
-          <span className="sidebar__menu-text">Collapse</span>
+          <span className="sidebar__menu-text">{text.sidebar.collapse}</span>
         )}
       </div>
     </div>

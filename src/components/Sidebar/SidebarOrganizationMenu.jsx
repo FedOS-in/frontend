@@ -4,6 +4,7 @@ import { Collapse } from "@mui/material"
 import OrgIcon from "@mui/icons-material/CorporateFare"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
+import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 export default function SidebarOrganizationMenu({
   activeMenu,
@@ -12,17 +13,18 @@ export default function SidebarOrganizationMenu({
   orgOpen,
   setOrgOpen,
 }) {
+  const text = useOrganizationText()
   const isOrgActive =
     ["levels", "structure", "bearers", "userForms", "users"].includes(
       activeMenu,
     ) || activeMenu === "create-position"
 
   const submenuItems = [
-    { id: "structure", label: "Structure" },
-    { id: "bearers", label: "Office Bearers" },
-    { id: "levels", label: "Levels" },
-    { id: "users", label: "Users" },
-    { id: "userForms", label: "User Forms" },
+    { id: "structure", label: text.sidebar.structure },
+    { id: "bearers", label: text.sidebar.officeBearers },
+    { id: "levels", label: text.sidebar.levels },
+    { id: "users", label: text.sidebar.users },
+    { id: "userForms", label: text.sidebar.userForms },
   ]
 
   return (
@@ -33,7 +35,7 @@ export default function SidebarOrganizationMenu({
         <div className="sidebar__menu-content">
           <OrgIcon className="sidebar__menu-icon" />
           {!sidebarCollapsed && (
-            <span className="sidebar__menu-text">Organization</span>
+            <span className="sidebar__menu-text">{text.sidebar.organization}</span>
           )}
         </div>
         {!sidebarCollapsed &&

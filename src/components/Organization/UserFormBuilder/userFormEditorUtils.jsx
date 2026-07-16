@@ -1,5 +1,57 @@
 import { getFieldTypeOptions, parseOptions } from "./userFormBuilderConfig"
 
+export function validateFormSetup({
+  formName,
+  selectedChapter,
+  subscriptionAmount,
+  paymentPeriod,
+  fields,
+  validation,
+}) {
+  if (!formName?.trim()) return validation.formNameRequired
+  if (!selectedChapter?.id) return validation.chapterRequired
+
+  const normalizedAmount = Number(subscriptionAmount)
+  if (
+    subscriptionAmount === "" ||
+    Number.isNaN(normalizedAmount) ||
+    normalizedAmount < 0
+  ) {
+    return validation.subscriptionAmountRequired
+  }
+  if (!paymentPeriod) return validation.paymentPeriodRequired
+  if (!fields?.length) return validation.addFieldFirst
+  return null
+}
+
+export function buildFormPayload({
+  selectedChapter,
+  formName,
+  subscriptionAmount,
+  paymentPeriod,
+  isActive,
+  version,
+  fields,
+}) {
+  return {
+    federationNodeId: selectedChapter.id,
+    name: formName.trim(),
+    subscriptionAmount: Number(subscriptionAmount),
+    paymentPeriod,
+    isActive,
+    version,
+    fields: fields.map((field, index) => ({
+      ...(field.serverFieldId ? { id: field.serverFieldId } : {}),
+      fieldKey: field.fieldKey,
+      label: field.label,
+      fieldType: field.fieldType,
+      isRequired: field.isRequired,
+      sortOrder: index + 1,
+      ...(field.options?.length ? { options: field.options.join(",") } : {}),
+    })),
+  }
+}
+
 export function toEditableFields(fields = []) {
   return fields.map((field) => ({
     id: field.id || crypto.randomUUID(),

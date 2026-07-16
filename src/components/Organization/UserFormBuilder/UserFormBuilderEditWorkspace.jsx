@@ -28,8 +28,12 @@ export default function UserFormBuilderEditWorkspace({ initialForm, onCancel }) 
           onDraftChange={state.onDraftChange}
           onFieldKeyChange={state.onFieldKeyChange}
           onFormNameChange={state.onFormNameChange}
+          onPaymentPeriodChange={state.onPaymentPeriodChange}
           onSubmitField={state.onSubmitField}
+          onSubscriptionAmountChange={state.onSubscriptionAmountChange}
+          paymentPeriod={state.paymentPeriod}
           selectedChapter={state.selectedChapter}
+          subscriptionAmount={state.subscriptionAmount}
         />
         {state.errorMessage ? <Alert severity="error">{state.errorMessage}</Alert> : null}
         {state.successMessage ? <Alert severity="success">{state.successMessage}</Alert> : null}

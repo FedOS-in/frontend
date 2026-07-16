@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material"
 import { getFieldTypeOptions } from "./userFormBuilderConfig"
+import UserFormBuilderSetupFields from "./UserFormBuilderSetupFields"
 import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./UserFormBuilderForm.css"
 
@@ -28,66 +29,28 @@ export default function UserFormBuilderForm({
   onDraftChange,
   onFieldKeyChange,
   onFormNameChange,
+  onPaymentPeriodChange,
   onSubmitField,
+  onSubscriptionAmountChange,
+  paymentPeriod,
   selectedChapter,
+  subscriptionAmount,
 }) {
   const text = useOrganizationText()
   return (
     <Paper variant="outlined" className="user-form-builder-form">
-      <div className="user-form-builder-form__section">
-        <Typography variant="h6" className="user-form-builder-form__title">
-          {text.userFormBuilder.formSetup}
-        </Typography>
-        <TextField
-          label={text.userFormBuilder.formName}
-          value={formName}
-          onChange={(event) => onFormNameChange(event.target.value)}
-          placeholder={text.userFormBuilder.formNamePlaceholder}
-          fullWidth
-          required
-        />
-        <Autocomplete
-          options={chapterOptions ?? []}
-          value={selectedChapter}
-          onChange={(_, value) => onChapterChange(value ?? null)}
-          loading={loadingChapters}
-          getOptionLabel={(option) => option?.name || ""}
-          isOptionEqualToValue={(option, value) => option.id === value?.id}
-          renderOption={(props, option) => (
-            <Box component="li" {...props} key={option.id}>
-              <Box>
-                <Typography sx={{ fontWeight: 600 }}>{option.name}</Typography>
-                <Typography variant="caption" sx={{ color: "text.secondary" }}>
-                  {option.parent?.name
-                    ? `${text.userFormBuilder.parentPrefix} ${option.parent.name}`
-                    : text.userFormBuilder.topLevelNode}
-                </Typography>
-              </Box>
-            </Box>
-          )}
-          filterOptions={(options, state) =>
-            options.filter((option) =>
-              option.name.toLowerCase().includes(state.inputValue.toLowerCase()),
-            )
-          }
-          noOptionsText={
-            loadingChapters
-              ? text.userFormBuilder.loadingChapters
-              : chapterOptions.length === 0
-                ? text.userFormBuilder.noChaptersAvailable
-                : text.userFormBuilder.noMatchingChapter
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label={text.userFormBuilder.chapter}
-              placeholder={text.userFormBuilder.chapterSearchPlaceholder}
-              helperText={text.userFormBuilder.chapterHelper}
-              required
-            />
-          )}
-        />
-      </div>
+      <UserFormBuilderSetupFields
+        chapterOptions={chapterOptions}
+        formName={formName}
+        loadingChapters={loadingChapters}
+        onChapterChange={onChapterChange}
+        onFormNameChange={onFormNameChange}
+        onPaymentPeriodChange={onPaymentPeriodChange}
+        onSubscriptionAmountChange={onSubscriptionAmountChange}
+        paymentPeriod={paymentPeriod}
+        selectedChapter={selectedChapter}
+        subscriptionAmount={subscriptionAmount}
+      />
 
       <div className="user-form-builder-form__divider" />
 

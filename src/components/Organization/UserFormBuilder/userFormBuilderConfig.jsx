@@ -5,6 +5,11 @@ export function getFieldTypeOptions() {
   return getOrganizationText(getOrganizationLocale()).userFormBuilder.fieldTypes
 }
 
+export function getPaymentPeriodOptions() {
+  return getOrganizationText(getOrganizationLocale()).userFormBuilder
+    .paymentPeriodOptions
+}
+
 export const EMPTY_DRAFT = {
   label: "",
   fieldKey: "",

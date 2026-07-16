@@ -299,7 +299,7 @@ export default function UserFormPage() {
               value={shareUrl}
               fullWidth
               size="small"
-              InputProps={{ readOnly: true }}
+              slotProps={{ input: { readOnly: true } }}
             />
             <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
               <Button

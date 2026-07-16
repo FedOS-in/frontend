@@ -7,6 +7,8 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import ContentCopyIcon from "@mui/icons-material/ContentCopy"
+import WhatsAppIcon from "@mui/icons-material/WhatsApp"
+import EmailIcon from "@mui/icons-material/Email"
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import {
   Alert,
@@ -20,6 +22,8 @@ import {
   ListItem,
   Paper,
   Snackbar,
+  Stack,
+  TextField,
   Typography,
 } from "@mui/material"
 import OrganizationLayout from "@/components/Organization/OrganizationLayout"
@@ -47,6 +51,33 @@ export default function UserFormPage() {
   const [errorMessage, setErrorMessage] = React.useState("")
   const [successMessage, setSuccessMessage] = React.useState("")
   const [selectedForm, setSelectedForm] = React.useState(null)
+  const [shareForm, setShareForm] = React.useState(null)
+
+  const shareUrl = React.useMemo(() => {
+    if (!shareForm?.id || typeof window === "undefined") {
+      return ""
+    }
+
+    return new URL(`/user/create/${shareForm.id}`, window.location.origin).toString()
+  }, [shareForm])
+
+  const whatsappShareUrl = React.useMemo(() => {
+    if (!shareUrl) return ""
+    return `https://wa.me/?text=${encodeURIComponent(shareUrl)}`
+  }, [shareUrl])
+
+  const emailShareUrl = React.useMemo(() => {
+    if (!shareUrl) return ""
+
+    const subject = encodeURIComponent(
+      shareForm?.name || text.userFormPage.shareModal.title,
+    )
+    const body = encodeURIComponent(
+      `${shareForm?.name ? `${shareForm.name}\n\n` : ""}${shareUrl}`,
+    )
+
+    return `mailto:?subject=${subject}&body=${body}`
+  }, [shareForm, shareUrl, text.userFormPage.shareModal.title])
 
   React.useEffect(() => {
     const controller = new AbortController()
@@ -97,10 +128,15 @@ export default function UserFormPage() {
     }
   }
 
-  const handleShare = async (formId) => {
+  const handleOpenShareDialog = (form) => {
+    setErrorMessage("")
+    setSuccessMessage("")
+    setShareForm(form)
+  }
+
+  const handleCopyShareUrl = async () => {
     try {
-      const shareUrl = new URL(`/user/create/${formId}`, window.location.origin)
-      await navigator.clipboard.writeText(shareUrl.toString())
+      await navigator.clipboard.writeText(shareUrl)
       setSuccessMessage(text.userFormPage.messages.copied)
     } catch {
       setErrorMessage(text.userFormPage.messages.copyFailed)
@@ -182,7 +218,7 @@ export default function UserFormPage() {
                   <button
                     type="button"
                     className="user-form-card__menu-item user-form-card__menu-item--share"
-                    onClick={() => handleShare(form.id)}>
+                    onClick={() => handleOpenShareDialog(form)}>
                     <ContentCopyIcon /> {text.userFormPage.cards.inviteUsers}
                   </button>
                   <button
@@ -245,6 +281,70 @@ export default function UserFormPage() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setSelectedForm(null)}>{text.common.close}</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={Boolean(shareForm)}
+        onClose={() => setShareForm(null)}
+        fullWidth
+        maxWidth="sm">
+        <DialogTitle className="user-form-modal__title">
+          <span>{text.userFormPage.shareModal.title}</span>
+        </DialogTitle>
+        <DialogContent dividers>
+          <Stack spacing={2}>
+            <TextField
+              label={text.userFormPage.shareModal.urlLabel}
+              value={shareUrl}
+              fullWidth
+              size="small"
+              InputProps={{ readOnly: true }}
+            />
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+              <Button
+                component="a"
+                href={whatsappShareUrl || undefined}
+                target="_blank"
+                rel="noreferrer"
+                fullWidth
+                variant="contained"
+                disabled={!whatsappShareUrl}
+                sx={{
+                  bgcolor: "#25D366",
+                  color: "#ffffff",
+                  "&:hover": { bgcolor: "#1fa855" },
+                }}>
+                <WhatsAppIcon sx={{ color: "#ffffff" }} />
+                {text.userFormPage.shareModal.whatsapp}
+              </Button>
+              <Button
+                component="a"
+                href={emailShareUrl || undefined}
+                fullWidth
+                variant="outlined"
+                disabled={!emailShareUrl}
+                startIcon={<EmailIcon />}
+                sx={{
+                  borderColor: "rgba(9, 30, 66, 0.15)",
+                  color: "var(--mui-palette-text-primary, #091e42)",
+                }}>
+                {text.userFormPage.shareModal.email}
+              </Button>
+              <Button
+                type="button"
+                fullWidth
+                variant="text"
+                onClick={handleCopyShareUrl}
+                disabled={!shareUrl}
+                startIcon={<ContentCopyIcon />}>
+                {text.userFormPage.shareModal.copy}
+              </Button>
+            </Stack>
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShareForm(null)}>{text.common.close}</Button>
         </DialogActions>
       </Dialog>
 

@@ -2,6 +2,26 @@ export function buildStatusLabelMap(statuses) {
   return new Map(statuses.map((status) => [status.value, status.name]))
 }
 
+export function formatDynamicFieldValue(value, emptyLabel = "—") {
+  if (value === null || value === undefined || value === "") {
+    return emptyLabel
+  }
+
+  if (typeof value === "boolean") {
+    return value ? "Yes" : "No"
+  }
+
+  if (Array.isArray(value)) {
+    return value.length > 0 ? value.join(", ") : emptyLabel
+  }
+
+  if (typeof value === "object") {
+    return JSON.stringify(value)
+  }
+
+  return String(value)
+}
+
 export function resolveStatusValue(statuses, keyword, fallbackValue = null) {
   const normalizedKeyword = keyword.toLowerCase()
   const match = statuses.find((status) =>

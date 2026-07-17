@@ -1,0 +1,50 @@
+.user-details-modal__title {
+  font-weight: 600;
+}
+
+.user-details-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-details-modal__section-title {
+  margin-top: 4px;
+  color: #172b4d;
+  font-weight: 600;
+}
+
+.user-details-modal__list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-details-modal__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 40%) 1fr;
+  gap: 8px 16px;
+  align-items: start;
+}
+
+.user-details-modal__label {
+  color: #5e6c84;
+  margin: 0;
+}
+
+.user-details-modal__value {
+  color: #172b4d;
+  margin: 0;
+  word-break: break-word;
+}
+
+.user-details-modal__loading {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.user-details-modal__empty {
+  color: #5e6c84;
+}

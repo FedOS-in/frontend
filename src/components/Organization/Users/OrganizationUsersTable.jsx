@@ -16,6 +16,8 @@ import {
   Typography,
 } from "@mui/material"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
+import UserDetailsModal from "./UserDetailsModal"
 import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./OrganizationUsersTable.css"
 
@@ -38,6 +40,7 @@ export default function OrganizationUsersTable({
   ]
   const [menuAnchor, setMenuAnchor] = React.useState(null)
   const [selectedUserId, setSelectedUserId] = React.useState("")
+  const [viewUser, setViewUser] = React.useState(null)
 
   const selectedRow = rows.find((row) => row.id === selectedUserId) || null
   const availableActions = selectedRow ? getRowActions(selectedRow) : []
@@ -53,73 +56,94 @@ export default function OrganizationUsersTable({
   }
 
   return (
-    <TableContainer component={Paper} className="org-users-table">
-      <Table>
-        <TableHead>
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell key={column.id}>
-                <TableSortLabel
-                  active={orderBy === column.id}
-                  direction={orderBy === column.id ? order : "asc"}
-                  onClick={() => onSort(column.id)}>
-                  {column.label}
-                </TableSortLabel>
-              </TableCell>
-            ))}
-            <TableCell align="center">{text.usersTable.action}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id} hover>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell>{row.phoneNumber}</TableCell>
-              <TableCell>
-                {statusLabelMap.get(row.approvalStatus) || text.usersTable.unknown}
-              </TableCell>
-              <TableCell>
-                {new Date(row.createdAt).toLocaleDateString()}
-              </TableCell>
-              <TableCell align="center">
-                <IconButton
-                  aria-label={text.usersTable.rowActions}
-                  onClick={(event) => handleMenuOpen(event, row.id)}
-                  size="small">
-                  <MoreVertIcon fontSize="small" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
-
-          {rows.length === 0 ? (
+    <>
+      <TableContainer component={Paper} className="org-users-table">
+        <Table>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan={6} align="center">
-                <Typography className="org-users-table__empty">
-                  {text.usersTable.emptyState}
-                </Typography>
+              {columns.map((column) => (
+                <TableCell key={column.id}>
+                  <TableSortLabel
+                    active={orderBy === column.id}
+                    direction={orderBy === column.id ? order : "asc"}
+                    onClick={() => onSort(column.id)}>
+                    {column.label}
+                  </TableSortLabel>
+                </TableCell>
+              ))}
+              <TableCell align="center">
+                {text.usersTable.columns.view}
               </TableCell>
+              <TableCell align="center">{text.usersTable.action}</TableCell>
             </TableRow>
-          ) : null}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} hover>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.email}</TableCell>
+                <TableCell>{row.phoneNumber}</TableCell>
+                <TableCell>
+                  {statusLabelMap.get(row.approvalStatus) ||
+                    text.usersTable.unknown}
+                </TableCell>
+                <TableCell>
+                  {new Date(row.createdAt).toLocaleDateString()}
+                </TableCell>
+                <TableCell align="center">
+                  <IconButton
+                    aria-label={text.usersTable.columns.view}
+                    onClick={() => setViewUser(row)}
+                    size="small">
+                    <VisibilityOutlinedIcon fontSize="small" />
+                  </IconButton>
+                </TableCell>
+                <TableCell align="center">
+                  <IconButton
+                    aria-label={text.usersTable.rowActions}
+                    onClick={(event) => handleMenuOpen(event, row.id)}
+                    size="small">
+                    <MoreVertIcon fontSize="small" />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
 
-      <Menu
-        anchorEl={menuAnchor}
-        open={Boolean(menuAnchor)}
-        onClose={handleMenuClose}>
-        {availableActions.map((action) => (
-          <MenuItem
-            key={action.label}
-            onClick={() => {
-              onAction(selectedUserId, action.value)
-              handleMenuClose()
-            }}>
-            {action.label}
-          </MenuItem>
-        ))}
-      </Menu>
-    </TableContainer>
+            {rows.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  <Typography className="org-users-table__empty">
+                    {text.usersTable.emptyState}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ) : null}
+          </TableBody>
+        </Table>
+
+        <Menu
+          anchorEl={menuAnchor}
+          open={Boolean(menuAnchor)}
+          onClose={handleMenuClose}>
+          {availableActions.map((action) => (
+            <MenuItem
+              key={action.label}
+              onClick={() => {
+                onAction(selectedUserId, action.value)
+                handleMenuClose()
+              }}>
+              {action.label}
+            </MenuItem>
+          ))}
+        </Menu>
+      </TableContainer>
+
+      <UserDetailsModal
+        open={Boolean(viewUser)}
+        user={viewUser}
+        statusLabelMap={statusLabelMap}
+        onClose={() => setViewUser(null)}
+      />
+    </>
   )
 }

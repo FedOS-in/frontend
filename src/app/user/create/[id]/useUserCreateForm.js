@@ -102,6 +102,7 @@ export default function useUserCreateForm(formId) {
           pincode: staticFields.pincode,
           password: staticFields.password,
           dynamicFields: dynamicValues,
+          ...(fromPayment ? { paymentStatus: 2 } : {}),
         }),
       })
       if (!response.ok) {

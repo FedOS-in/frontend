@@ -16,6 +16,7 @@ export default function PaymentStep({
   paymentError,
   onMethodChange,
   onCouponChange,
+  hideHeading = false,
 }) {
   const displayAmount =
     amount === null || amount === undefined || amount === ""
@@ -24,9 +25,11 @@ export default function PaymentStep({
 
   return (
     <div className="payment-step">
-      <Typography variant="h6" className="payment-step__heading">
-        Payment
-      </Typography>
+      {hideHeading ? null : (
+        <Typography variant="h6" className="payment-step__heading">
+          Payment
+        </Typography>
+      )}
 
       <div className="payment-step__amount">
         <Typography variant="body2" className="payment-step__amount-label">

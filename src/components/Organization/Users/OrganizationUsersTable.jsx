@@ -26,9 +26,13 @@ export default function OrganizationUsersTable({
   orderBy,
   order,
   statusLabelMap,
+  paymentLabelMap = null,
+  showPaymentStatus = false,
+  emptyState,
   onSort,
   getRowActions,
   onAction,
+  onRequestPayment,
 }) {
   const text = useOrganizationText()
   const columns = [
@@ -36,6 +40,14 @@ export default function OrganizationUsersTable({
     { id: "email", label: text.usersTable.columns.email },
     { id: "phoneNumber", label: text.usersTable.columns.phoneNumber },
     { id: "approvalStatus", label: text.usersTable.columns.approvalStatus },
+    ...(showPaymentStatus
+      ? [
+          {
+            id: "paymentStatus",
+            label: text.usersTable.columns.paymentStatus,
+          },
+        ]
+      : []),
     { id: "createdAt", label: text.usersTable.columns.createdAt },
   ]
   const [menuAnchor, setMenuAnchor] = React.useState(null)
@@ -44,6 +56,7 @@ export default function OrganizationUsersTable({
 
   const selectedRow = rows.find((row) => row.id === selectedUserId) || null
   const availableActions = selectedRow ? getRowActions(selectedRow) : []
+  const colSpan = columns.length + 2
 
   const handleMenuOpen = (event, userId) => {
     setMenuAnchor(event.currentTarget)
@@ -53,6 +66,15 @@ export default function OrganizationUsersTable({
   const handleMenuClose = () => {
     setMenuAnchor(null)
     setSelectedUserId("")
+  }
+
+  const handleActionClick = (action) => {
+    if (action.type === "requestPayment") {
+      onRequestPayment?.(selectedRow)
+    } else {
+      onAction(selectedUserId, action.value)
+    }
+    handleMenuClose()
   }
 
   return (
@@ -87,6 +109,12 @@ export default function OrganizationUsersTable({
                   {statusLabelMap.get(row.approvalStatus) ||
                     text.usersTable.unknown}
                 </TableCell>
+                {showPaymentStatus ? (
+                  <TableCell>
+                    {paymentLabelMap?.get(row.paymentStatus) ||
+                      text.usersTable.unknown}
+                  </TableCell>
+                ) : null}
                 <TableCell>
                   {new Date(row.createdAt).toLocaleDateString()}
                 </TableCell>
@@ -111,9 +139,9 @@ export default function OrganizationUsersTable({
 
             {rows.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} align="center">
+                <TableCell colSpan={colSpan} align="center">
                   <Typography className="org-users-table__empty">
-                    {text.usersTable.emptyState}
+                    {emptyState || text.usersTable.emptyState}
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -128,10 +156,7 @@ export default function OrganizationUsersTable({
           {availableActions.map((action) => (
             <MenuItem
               key={action.label}
-              onClick={() => {
-                onAction(selectedUserId, action.value)
-                handleMenuClose()
-              }}>
+              onClick={() => handleActionClick(action)}>
               {action.label}
             </MenuItem>
           ))}

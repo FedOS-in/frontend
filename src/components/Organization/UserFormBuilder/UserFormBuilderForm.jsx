@@ -19,16 +19,23 @@ import "./UserFormBuilderForm.css"
 
 export default function UserFormBuilderForm({
   chapterOptions,
+  currencyId,
+  currencyOptions,
   fieldDraft,
   formName,
   isEditing,
   loadingChapters,
+  loadingLookups,
+  membershipPeriodId,
+  membershipPeriodOptions,
   onCancel,
   onCancelEdit,
   onChapterChange,
+  onCurrencyChange,
   onDraftChange,
   onFieldKeyChange,
   onFormNameChange,
+  onMembershipPeriodChange,
   onPaymentPeriodChange,
   onSubmitField,
   onSubscriptionAmountChange,
@@ -41,10 +48,17 @@ export default function UserFormBuilderForm({
     <Paper variant="outlined" className="user-form-builder-form">
       <UserFormBuilderSetupFields
         chapterOptions={chapterOptions}
+        currencyId={currencyId}
+        currencyOptions={currencyOptions}
         formName={formName}
         loadingChapters={loadingChapters}
+        loadingLookups={loadingLookups}
+        membershipPeriodId={membershipPeriodId}
+        membershipPeriodOptions={membershipPeriodOptions}
         onChapterChange={onChapterChange}
+        onCurrencyChange={onCurrencyChange}
         onFormNameChange={onFormNameChange}
+        onMembershipPeriodChange={onMembershipPeriodChange}
         onPaymentPeriodChange={onPaymentPeriodChange}
         onSubscriptionAmountChange={onSubscriptionAmountChange}
         paymentPeriod={paymentPeriod}
@@ -134,13 +148,17 @@ export default function UserFormBuilderForm({
           <Button
             variant="outlined"
             onClick={isEditing ? onCancelEdit : onCancel}>
-            {isEditing ? text.userFormBuilder.cancelEdit : text.userFormBuilder.cancel}
+            {isEditing
+              ? text.userFormBuilder.cancelEdit
+              : text.userFormBuilder.cancel}
           </Button>
           <Button
             variant="contained"
             endIcon={isEditing ? <EditOutlinedIcon /> : <AddIcon />}
             onClick={onSubmitField}>
-            {isEditing ? text.userFormBuilder.updateField : text.userFormBuilder.addFieldAction}
+            {isEditing
+              ? text.userFormBuilder.updateField
+              : text.userFormBuilder.addFieldAction}
           </Button>
         </div>
       </div>

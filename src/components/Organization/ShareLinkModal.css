@@ -1,0 +1,25 @@
+.share-link-modal__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.share-link-modal__whatsapp {
+  background-color: #25d366;
+  color: #ffffff;
+}
+
+.share-link-modal__whatsapp:hover {
+  background-color: #1fa855;
+}
+
+.share-link-modal__whatsapp-icon {
+  color: #ffffff;
+  margin-right: 8px;
+}
+
+.share-link-modal__email {
+  border-color: rgba(9, 30, 66, 0.15);
+  color: var(--mui-palette-text-primary, #091e42);
+}

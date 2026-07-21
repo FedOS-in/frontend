@@ -25,6 +25,7 @@ export default function useOrganizationUsersData({ membersOnly = false } = {}) {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState("")
   const [successMessage, setSuccessMessage] = React.useState("")
+  const [paymentShareUser, setPaymentShareUser] = React.useState(null)
 
   const approvedValue = React.useMemo(
     () => resolveStatusValue(statuses, "approve"),
@@ -119,18 +120,20 @@ export default function useOrganizationUsersData({ membersOnly = false } = {}) {
     }
   }
 
-  const handleRequestPayment = async (user) => {
+  const handleRequestPayment = (user) => {
     if (!user?.id) return
     setError("")
     setSuccessMessage("")
-    const paymentUrl = `${window.location.origin}/payment/${user.id}`
-    try {
-      await navigator.clipboard.writeText(paymentUrl)
-      setSuccessMessage(text.membersPage.messages.paymentLinkCopied)
-    } catch {
-      setError(text.membersPage.messages.paymentLinkCopyFailed)
-    }
+    setPaymentShareUser(user)
   }
+
+  const paymentShareUrl = React.useMemo(() => {
+    if (!paymentShareUser?.id || typeof window === "undefined") return ""
+    return new URL(
+      `/payment/${paymentShareUser.id}`,
+      window.location.origin,
+    ).toString()
+  }, [paymentShareUser])
 
   return {
     nodes,
@@ -145,10 +148,15 @@ export default function useOrganizationUsersData({ membersOnly = false } = {}) {
     loading,
     error,
     successMessage,
+    setError,
+    setSuccessMessage,
     statusLabelMap,
     paymentLabelMap,
     getRowActions,
     handleUpdateStatus,
     handleRequestPayment,
+    paymentShareUser,
+    paymentShareUrl,
+    closePaymentShare: () => setPaymentShareUser(null),
   }
 }

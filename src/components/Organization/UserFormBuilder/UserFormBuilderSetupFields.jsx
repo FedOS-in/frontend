@@ -1,24 +1,22 @@
 "use client"
 
-import {
-  Autocomplete,
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material"
-import { getPaymentPeriodOptions } from "./userFormBuilderConfig"
+import { Autocomplete, Box, TextField, Typography } from "@mui/material"
+import UserFormBuilderBillingFields from "./UserFormBuilderBillingFields"
 import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 export default function UserFormBuilderSetupFields({
   chapterOptions,
+  currencyId,
+  currencyOptions,
   formName,
   loadingChapters,
+  loadingLookups,
+  membershipPeriodId,
+  membershipPeriodOptions,
   onChapterChange,
+  onCurrencyChange,
   onFormNameChange,
+  onMembershipPeriodChange,
   onPaymentPeriodChange,
   onSubscriptionAmountChange,
   paymentPeriod,
@@ -26,7 +24,6 @@ export default function UserFormBuilderSetupFields({
   subscriptionAmount,
 }) {
   const text = useOrganizationText()
-  const paymentPeriodOptions = getPaymentPeriodOptions()
 
   return (
     <div className="user-form-builder-form__section">
@@ -90,37 +87,19 @@ export default function UserFormBuilderSetupFields({
           />
         </div>
 
-        <div className="user-form-builder-form__cell">
-          <TextField
-            label={text.userFormBuilder.subscriptionAmount}
-            value={subscriptionAmount}
-            onChange={(event) => onSubscriptionAmountChange(event.target.value)}
-            placeholder={text.userFormBuilder.subscriptionAmountPlaceholder}
-            type="number"
-            slotProps={{ htmlInput: { min: 0, step: "0.01" } }}
-            fullWidth
-            required
-          />
-        </div>
-
-        <div className="user-form-builder-form__cell">
-          <FormControl fullWidth required>
-            <InputLabel id="user-form-payment-period-label">
-              {text.userFormBuilder.paymentPeriod}
-            </InputLabel>
-            <Select
-              labelId="user-form-payment-period-label"
-              label={text.userFormBuilder.paymentPeriod}
-              value={paymentPeriod || ""}
-              onChange={(event) => onPaymentPeriodChange(event.target.value)}>
-              {paymentPeriodOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
+        <UserFormBuilderBillingFields
+          currencyId={currencyId}
+          currencyOptions={currencyOptions}
+          loadingLookups={loadingLookups}
+          membershipPeriodId={membershipPeriodId}
+          membershipPeriodOptions={membershipPeriodOptions}
+          onCurrencyChange={onCurrencyChange}
+          onMembershipPeriodChange={onMembershipPeriodChange}
+          onPaymentPeriodChange={onPaymentPeriodChange}
+          onSubscriptionAmountChange={onSubscriptionAmountChange}
+          paymentPeriod={paymentPeriod}
+          subscriptionAmount={subscriptionAmount}
+        />
       </Box>
     </div>
   )

@@ -33,10 +33,41 @@
   grid-column: 1 / -1;
 }
 
+.user-form-builder-form__amount-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 8px;
+  align-items: end;
+  grid-column: 1 / -1;
+}
+
+.user-form-builder-form__cell--currency {
+  width: 56px;
+  min-width: 56px;
+  max-width: 56px;
+}
+
+.user-form-builder-form__cell--currency .MuiSelect-select {
+  padding-left: 8px;
+  padding-right: 28px;
+  text-align: center;
+}
+
+.user-form-builder-form__cell--amount,
+.user-form-builder-form__cell--payment-period {
+  min-width: 0;
+}
+
 .user-form-builder-form__cell--checkbox {
   display: flex;
   align-items: center;
   min-height: 56px;
+}
+
+.user-form-builder-form__radio-group {
+  display: grid;
+  gap: 4px;
 }
 
 .user-form-builder-form__actions {
@@ -52,6 +83,14 @@
 
   .user-form-builder-form__grid {
     grid-template-columns: 1fr;
+  }
+
+  .user-form-builder-form__amount-row {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .user-form-builder-form__cell--payment-period {
+    grid-column: 1 / -1;
   }
 
   .user-form-builder-form__actions {

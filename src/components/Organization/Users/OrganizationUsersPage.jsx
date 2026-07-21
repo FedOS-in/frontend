@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material"
 import OrganizationUsersTable from "./OrganizationUsersTable"
+import ShareLinkModal from "@/components/Organization/ShareLinkModal"
 import useOrganizationUsersData from "@/utils/useOrganizationUsersData"
 import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 import "./OrganizationUsersPage.css"
@@ -38,7 +39,13 @@ export default function OrganizationUsersPage({ variant = "applicants" }) {
     getRowActions,
     handleUpdateStatus,
     handleRequestPayment,
+    paymentShareUser,
+    paymentShareUrl,
+    closePaymentShare,
+    setError,
+    setSuccessMessage,
   } = useOrganizationUsersData({ membersOnly })
+  const shareModalText = text.userFormPage.shareModal
 
   return (
     <div className="org-users">
@@ -93,6 +100,34 @@ export default function OrganizationUsersPage({ variant = "applicants" }) {
         onAction={handleUpdateStatus}
         onRequestPayment={handleRequestPayment}
       />
+
+      {membersOnly ? (
+        <ShareLinkModal
+          open={Boolean(paymentShareUser)}
+          onClose={closePaymentShare}
+          url={paymentShareUrl}
+          title={text.membersPage.messages.requestPayment}
+          urlLabel={shareModalText.urlLabel}
+          whatsappLabel={shareModalText.whatsapp}
+          emailLabel={shareModalText.email}
+          copyLabel={shareModalText.copy}
+          closeLabel={text.common.close}
+          emailSubject={
+            paymentShareUser?.name || text.membersPage.messages.requestPayment
+          }
+          emailBody={
+            paymentShareUser?.name
+              ? `${paymentShareUser.name}\n\n${paymentShareUrl}`
+              : paymentShareUrl
+          }
+          onCopySuccess={() => {
+            setSuccessMessage(text.membersPage.messages.paymentLinkCopied)
+          }}
+          onCopyError={() => {
+            setError(text.membersPage.messages.paymentLinkCopyFailed)
+          }}
+        />
+      ) : null}
     </div>
   )
 }

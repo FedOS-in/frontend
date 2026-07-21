@@ -10,6 +10,19 @@ export function getPaymentPeriodOptions() {
     .paymentPeriodOptions
 }
 
+const CURRENCY_SYMBOLS = {
+  rupee: "₹",
+  dollar: "$",
+  euro: "€",
+}
+
+export function getCurrencySymbol(currency) {
+  const key = String(currency?.name || "")
+    .trim()
+    .toLowerCase()
+  return CURRENCY_SYMBOLS[key] || currency?.name || ""
+}
+
 export const EMPTY_DRAFT = {
   label: "",
   fieldKey: "",

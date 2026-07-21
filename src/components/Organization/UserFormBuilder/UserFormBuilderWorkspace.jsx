@@ -9,6 +9,7 @@ import {
   reorderFieldItems,
   validateFormSetup,
 } from "./userFormEditorUtils"
+import { useFormSetupLookups } from "./useFormSetupLookups"
 import { useUserFormFieldDraft } from "./useUserFormFieldDraft"
 import UserFormBuilderForm from "./UserFormBuilderForm"
 import UserFormFieldsList from "./UserFormFieldsList"
@@ -21,8 +22,10 @@ const backendUrl =
 export default function UserFormBuilderWorkspace({ onCancel }) {
   const text = useOrganizationText()
   const [formName, setFormName] = React.useState("")
+  const [currencyId, setCurrencyId] = React.useState("")
   const [subscriptionAmount, setSubscriptionAmount] = React.useState("")
   const [paymentPeriod, setPaymentPeriod] = React.useState("")
+  const [membershipPeriodId, setMembershipPeriodId] = React.useState("")
   const [chapterOptions, setChapterOptions] = React.useState([])
   const [selectedChapter, setSelectedChapter] = React.useState(null)
   const [loadingChapters, setLoadingChapters] = React.useState(false)
@@ -30,6 +33,9 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
   const [errorMessage, setErrorMessage] = React.useState("")
   const [successMessage, setSuccessMessage] = React.useState("")
   const [isSubmittingForm, setIsSubmittingForm] = React.useState(false)
+  const lookups = useFormSetupLookups(
+    text.userFormBuilder.messages.loadLookupsError,
+  )
 
   const fieldDraftState = useUserFormFieldDraft({
     fields,
@@ -67,12 +73,18 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
     return () => controller.abort()
   }, [])
 
+  React.useEffect(() => {
+    if (lookups.lookupError) setErrorMessage(lookups.lookupError)
+  }, [lookups.lookupError])
+
   const handleCreateForm = async () => {
     const setupError = validateFormSetup({
       formName,
       selectedChapter,
+      currencyId,
       subscriptionAmount,
       paymentPeriod,
+      membershipPeriodId,
       fields,
       validation: text.userFormBuilder.validation,
     })
@@ -90,8 +102,10 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
       const payload = buildFormPayload({
         selectedChapter,
         formName,
+        currencyId,
         subscriptionAmount,
         paymentPeriod,
+        membershipPeriodId,
         isActive: true,
         version: 1,
         fields,
@@ -124,16 +138,23 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
       <div className="user-form-builder-workspace__main">
         <UserFormBuilderForm
           chapterOptions={chapterOptions}
+          currencyId={currencyId}
+          currencyOptions={lookups.currencyOptions}
           fieldDraft={fieldDraftState.fieldDraft}
           formName={formName}
           isEditing={fieldDraftState.isEditing}
           loadingChapters={loadingChapters}
+          loadingLookups={lookups.loadingLookups}
+          membershipPeriodId={membershipPeriodId}
+          membershipPeriodOptions={lookups.membershipPeriodOptions}
           onCancelEdit={fieldDraftState.onCancelEdit}
           onCancel={onCancel}
           onChapterChange={setSelectedChapter}
+          onCurrencyChange={setCurrencyId}
           onDraftChange={fieldDraftState.onDraftChange}
           onFieldKeyChange={fieldDraftState.onFieldKeyChange}
           onFormNameChange={setFormName}
+          onMembershipPeriodChange={setMembershipPeriodId}
           onPaymentPeriodChange={setPaymentPeriod}
           onSubmitField={fieldDraftState.onSubmitField}
           onSubscriptionAmountChange={setSubscriptionAmount}
@@ -155,7 +176,9 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
             )
           }
           onRemoveField={(fieldId) =>
-            setFields((current) => current.filter((field) => field.id !== fieldId))
+            setFields((current) =>
+              current.filter((field) => field.id !== fieldId),
+            )
           }
         />
       </div>

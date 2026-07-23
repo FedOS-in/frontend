@@ -3,27 +3,15 @@ import { getFieldTypeOptions, parseOptions } from "./userFormBuilderConfig"
 export function validateFormSetup({
   formName,
   selectedChapter,
-  currencyId,
-  subscriptionAmount,
   paymentPeriod,
-  membershipPeriodId,
+  membershipTypeId,
   fields,
   validation,
 }) {
   if (!formName?.trim()) return validation.formNameRequired
   if (!selectedChapter?.id) return validation.chapterRequired
-  if (!currencyId) return validation.currencyTypeRequired
-
-  const normalizedAmount = Number(subscriptionAmount)
-  if (
-    subscriptionAmount === "" ||
-    Number.isNaN(normalizedAmount) ||
-    normalizedAmount < 0
-  ) {
-    return validation.subscriptionAmountRequired
-  }
   if (!paymentPeriod) return validation.paymentPeriodRequired
-  if (!membershipPeriodId) return validation.membershipPeriodRequired
+  if (!membershipTypeId) return validation.membershipTypeRequired
   if (!fields?.length) return validation.addFieldFirst
   return null
 }
@@ -31,10 +19,8 @@ export function validateFormSetup({
 export function buildFormPayload({
   selectedChapter,
   formName,
-  currencyId,
-  subscriptionAmount,
   paymentPeriod,
-  membershipPeriodId,
+  membershipTypeId,
   isActive,
   version,
   fields,
@@ -42,10 +28,8 @@ export function buildFormPayload({
   return {
     federationNodeId: selectedChapter.id,
     name: formName.trim(),
-    currencyId: Number(currencyId),
-    subscriptionAmount: Number(subscriptionAmount),
     paymentPeriod,
-    membershipPeriodId: Number(membershipPeriodId),
+    membershipTypeId,
     isActive,
     version,
     fields: fields.map((field, index) => ({

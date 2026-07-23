@@ -19,51 +19,41 @@ import "./UserFormBuilderForm.css"
 
 export default function UserFormBuilderForm({
   chapterOptions,
-  currencyId,
-  currencyOptions,
   fieldDraft,
   formName,
   isEditing,
   loadingChapters,
   loadingLookups,
-  membershipPeriodId,
-  membershipPeriodOptions,
+  membershipTypeId,
+  membershipTypeOptions,
   onCancel,
   onCancelEdit,
   onChapterChange,
-  onCurrencyChange,
   onDraftChange,
   onFieldKeyChange,
   onFormNameChange,
-  onMembershipPeriodChange,
+  onMembershipTypeChange,
   onPaymentPeriodChange,
   onSubmitField,
-  onSubscriptionAmountChange,
   paymentPeriod,
   selectedChapter,
-  subscriptionAmount,
 }) {
   const text = useOrganizationText()
   return (
     <Paper variant="outlined" className="user-form-builder-form">
       <UserFormBuilderSetupFields
         chapterOptions={chapterOptions}
-        currencyId={currencyId}
-        currencyOptions={currencyOptions}
         formName={formName}
         loadingChapters={loadingChapters}
         loadingLookups={loadingLookups}
-        membershipPeriodId={membershipPeriodId}
-        membershipPeriodOptions={membershipPeriodOptions}
+        membershipTypeId={membershipTypeId}
+        membershipTypeOptions={membershipTypeOptions}
         onChapterChange={onChapterChange}
-        onCurrencyChange={onCurrencyChange}
         onFormNameChange={onFormNameChange}
-        onMembershipPeriodChange={onMembershipPeriodChange}
+        onMembershipTypeChange={onMembershipTypeChange}
         onPaymentPeriodChange={onPaymentPeriodChange}
-        onSubscriptionAmountChange={onSubscriptionAmountChange}
         paymentPeriod={paymentPeriod}
         selectedChapter={selectedChapter}
-        subscriptionAmount={subscriptionAmount}
       />
 
       <div className="user-form-builder-form__divider" />

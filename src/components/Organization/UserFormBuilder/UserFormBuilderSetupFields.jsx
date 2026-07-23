@@ -6,22 +6,17 @@ import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 export default function UserFormBuilderSetupFields({
   chapterOptions,
-  currencyId,
-  currencyOptions,
   formName,
   loadingChapters,
   loadingLookups,
-  membershipPeriodId,
-  membershipPeriodOptions,
+  membershipTypeId,
+  membershipTypeOptions,
   onChapterChange,
-  onCurrencyChange,
   onFormNameChange,
-  onMembershipPeriodChange,
+  onMembershipTypeChange,
   onPaymentPeriodChange,
-  onSubscriptionAmountChange,
   paymentPeriod,
   selectedChapter,
-  subscriptionAmount,
 }) {
   const text = useOrganizationText()
 
@@ -88,17 +83,12 @@ export default function UserFormBuilderSetupFields({
         </div>
 
         <UserFormBuilderBillingFields
-          currencyId={currencyId}
-          currencyOptions={currencyOptions}
           loadingLookups={loadingLookups}
-          membershipPeriodId={membershipPeriodId}
-          membershipPeriodOptions={membershipPeriodOptions}
-          onCurrencyChange={onCurrencyChange}
-          onMembershipPeriodChange={onMembershipPeriodChange}
+          membershipTypeId={membershipTypeId}
+          membershipTypeOptions={membershipTypeOptions}
+          onMembershipTypeChange={onMembershipTypeChange}
           onPaymentPeriodChange={onPaymentPeriodChange}
-          onSubscriptionAmountChange={onSubscriptionAmountChange}
           paymentPeriod={paymentPeriod}
-          subscriptionAmount={subscriptionAmount}
         />
       </Box>
     </div>

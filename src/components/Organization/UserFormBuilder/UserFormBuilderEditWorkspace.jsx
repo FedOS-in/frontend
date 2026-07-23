@@ -18,29 +18,24 @@ export default function UserFormBuilderEditWorkspace({ initialForm, onCancel }) 
       <div className="user-form-builder-workspace__main">
         <UserFormBuilderForm
           chapterOptions={state.chapterOptions}
-          currencyId={state.currencyId}
-          currencyOptions={state.currencyOptions}
           fieldDraft={state.fieldDraft}
           formName={state.formName}
           isEditing={state.isEditing}
           loadingChapters={state.loadingChapters}
           loadingLookups={state.loadingLookups}
-          membershipPeriodId={state.membershipPeriodId}
-          membershipPeriodOptions={state.membershipPeriodOptions}
+          membershipTypeId={state.membershipTypeId}
+          membershipTypeOptions={state.membershipTypeOptions}
           onCancelEdit={state.onCancelEdit}
           onCancel={onCancel}
           onChapterChange={state.onChapterChange}
-          onCurrencyChange={state.onCurrencyChange}
           onDraftChange={state.onDraftChange}
           onFieldKeyChange={state.onFieldKeyChange}
           onFormNameChange={state.onFormNameChange}
-          onMembershipPeriodChange={state.onMembershipPeriodChange}
+          onMembershipTypeChange={state.onMembershipTypeChange}
           onPaymentPeriodChange={state.onPaymentPeriodChange}
           onSubmitField={state.onSubmitField}
-          onSubscriptionAmountChange={state.onSubscriptionAmountChange}
           paymentPeriod={state.paymentPeriod}
           selectedChapter={state.selectedChapter}
-          subscriptionAmount={state.subscriptionAmount}
         />
         {state.errorMessage ? (
           <Alert severity="error">{state.errorMessage}</Alert>

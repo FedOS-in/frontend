@@ -22,10 +22,8 @@ const backendUrl =
 export default function UserFormBuilderWorkspace({ onCancel }) {
   const text = useOrganizationText()
   const [formName, setFormName] = React.useState("")
-  const [currencyId, setCurrencyId] = React.useState("")
-  const [subscriptionAmount, setSubscriptionAmount] = React.useState("")
   const [paymentPeriod, setPaymentPeriod] = React.useState("")
-  const [membershipPeriodId, setMembershipPeriodId] = React.useState("")
+  const [membershipTypeId, setMembershipTypeId] = React.useState("")
   const [chapterOptions, setChapterOptions] = React.useState([])
   const [selectedChapter, setSelectedChapter] = React.useState(null)
   const [loadingChapters, setLoadingChapters] = React.useState(false)
@@ -35,6 +33,7 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
   const [isSubmittingForm, setIsSubmittingForm] = React.useState(false)
   const lookups = useFormSetupLookups(
     text.userFormBuilder.messages.loadLookupsError,
+    selectedChapter?.id,
   )
 
   const fieldDraftState = useUserFormFieldDraft({
@@ -77,14 +76,16 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
     if (lookups.lookupError) setErrorMessage(lookups.lookupError)
   }, [lookups.lookupError])
 
+  React.useEffect(() => {
+    setMembershipTypeId("")
+  }, [selectedChapter?.id])
+
   const handleCreateForm = async () => {
     const setupError = validateFormSetup({
       formName,
       selectedChapter,
-      currencyId,
-      subscriptionAmount,
       paymentPeriod,
-      membershipPeriodId,
+      membershipTypeId,
       fields,
       validation: text.userFormBuilder.validation,
     })
@@ -102,10 +103,8 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
       const payload = buildFormPayload({
         selectedChapter,
         formName,
-        currencyId,
-        subscriptionAmount,
         paymentPeriod,
-        membershipPeriodId,
+        membershipTypeId,
         isActive: true,
         version: 1,
         fields,
@@ -138,29 +137,24 @@ export default function UserFormBuilderWorkspace({ onCancel }) {
       <div className="user-form-builder-workspace__main">
         <UserFormBuilderForm
           chapterOptions={chapterOptions}
-          currencyId={currencyId}
-          currencyOptions={lookups.currencyOptions}
           fieldDraft={fieldDraftState.fieldDraft}
           formName={formName}
           isEditing={fieldDraftState.isEditing}
           loadingChapters={loadingChapters}
           loadingLookups={lookups.loadingLookups}
-          membershipPeriodId={membershipPeriodId}
-          membershipPeriodOptions={lookups.membershipPeriodOptions}
+          membershipTypeId={membershipTypeId}
+          membershipTypeOptions={lookups.membershipTypeOptions}
           onCancelEdit={fieldDraftState.onCancelEdit}
           onCancel={onCancel}
           onChapterChange={setSelectedChapter}
-          onCurrencyChange={setCurrencyId}
           onDraftChange={fieldDraftState.onDraftChange}
           onFieldKeyChange={fieldDraftState.onFieldKeyChange}
           onFormNameChange={setFormName}
-          onMembershipPeriodChange={setMembershipPeriodId}
+          onMembershipTypeChange={setMembershipTypeId}
           onPaymentPeriodChange={setPaymentPeriod}
           onSubmitField={fieldDraftState.onSubmitField}
-          onSubscriptionAmountChange={setSubscriptionAmount}
           paymentPeriod={paymentPeriod}
           selectedChapter={selectedChapter}
-          subscriptionAmount={subscriptionAmount}
         />
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         {successMessage && <Alert severity="success">{successMessage}</Alert>}

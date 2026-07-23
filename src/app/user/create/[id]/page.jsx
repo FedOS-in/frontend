@@ -113,7 +113,7 @@ export default function UserCreateByFormIdPage() {
             ) : null}
             {requiresPayment && stepIndex === paymentIndex ? (
               <PaymentStep
-                amount={form?.subscriptionAmount}
+                amount={form?.membershipType?.joiningFee}
                 selectedMethod={paymentMethod}
                 coupon={couponCode}
                 paymentError={paymentError}

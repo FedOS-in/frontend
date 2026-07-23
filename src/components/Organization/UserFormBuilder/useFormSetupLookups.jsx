@@ -5,11 +5,8 @@ import * as React from "react"
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
 
-export function useFormSetupLookups(errorFallback) {
-  const [currencyOptions, setCurrencyOptions] = React.useState([])
-  const [membershipPeriodOptions, setMembershipPeriodOptions] = React.useState(
-    [],
-  )
+export function useFormSetupLookups(errorFallback, federationNodeId) {
+  const [membershipTypeOptions, setMembershipTypeOptions] = React.useState([])
   const [loadingLookups, setLoadingLookups] = React.useState(false)
   const [lookupError, setLookupError] = React.useState("")
 
@@ -20,27 +17,23 @@ export function useFormSetupLookups(errorFallback) {
       setLoadingLookups(true)
       setLookupError("")
       try {
-        const [currencyRes, membershipRes] = await Promise.all([
-          fetch(`${backendUrl}/api/currency-types`, {
-            signal: controller.signal,
-          }),
-          fetch(`${backendUrl}/api/membership-periods`, {
-            signal: controller.signal,
-          }),
-        ])
+        const query = new URLSearchParams({ status: "1" })
+        if (federationNodeId) {
+          query.set("federationNodeId", federationNodeId)
+        }
 
-        if (!currencyRes.ok || !membershipRes.ok) {
+        const membershipRes = await fetch(
+          `${backendUrl}/api/membership-types?${query.toString()}`,
+          { signal: controller.signal },
+        )
+
+        if (!membershipRes.ok) {
           throw new Error(errorFallback)
         }
 
-        const [currencies, membershipPeriods] = await Promise.all([
-          currencyRes.json(),
-          membershipRes.json(),
-        ])
-
-        setCurrencyOptions(Array.isArray(currencies) ? currencies : [])
-        setMembershipPeriodOptions(
-          Array.isArray(membershipPeriods) ? membershipPeriods : [],
+        const membershipTypes = await membershipRes.json()
+        setMembershipTypeOptions(
+          Array.isArray(membershipTypes) ? membershipTypes : [],
         )
       } catch (error) {
         if (error.name !== "AbortError") {
@@ -53,12 +46,11 @@ export function useFormSetupLookups(errorFallback) {
 
     loadLookups()
     return () => controller.abort()
-  }, [errorFallback])
+  }, [errorFallback, federationNodeId])
 
   return {
-    currencyOptions,
     loadingLookups,
     lookupError,
-    membershipPeriodOptions,
+    membershipTypeOptions,
   }
 }

@@ -81,7 +81,7 @@ export default function MemberPaymentPage() {
         {!isLoading && !errorMessage && !paymentDone ? (
           <div className="member-payment-page__body">
             <PaymentStep
-              amount={form?.subscriptionAmount}
+              amount={form?.membershipType?.joiningFee}
               selectedMethod={paymentMethod}
               coupon={couponCode}
               paymentError={resolvedError}

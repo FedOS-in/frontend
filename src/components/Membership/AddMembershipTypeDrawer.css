@@ -1,0 +1,37 @@
+.add-membership-type-drawer {
+  width: 320px;
+  padding: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .add-membership-type-drawer {
+    width: 460px;
+  }
+}
+
+.add-membership-type-drawer__form {
+  width: 100%;
+}
+
+.add-membership-type-drawer__title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.add-membership-type-drawer__subtitle {
+  color: var(--mui-palette-text-secondary, rgba(0, 0, 0, 0.6));
+}
+
+.add-membership-type-drawer__option-name {
+  font-weight: 600;
+}
+
+.add-membership-type-drawer__option-meta {
+  color: var(--mui-palette-text-secondary, rgba(0, 0, 0, 0.6));
+}
+
+.add-membership-type-drawer__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}

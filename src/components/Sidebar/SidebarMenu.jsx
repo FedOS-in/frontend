@@ -9,6 +9,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt"
 import SettingsIcon from "@mui/icons-material/Settings"
 import SidebarMenuItem from "./SidebarMenuItem"
 import SidebarOrganizationMenu from "./SidebarOrganizationMenu"
+import SidebarMembershipMenu from "./SidebarMembershipMenu"
 import { useOrganizationText } from "@/i18n/organizationLanguageStore"
 
 export default function SidebarMenu({
@@ -17,6 +18,8 @@ export default function SidebarMenu({
   sidebarCollapsed,
   orgOpen,
   setOrgOpen,
+  membershipOpen,
+  setMembershipOpen,
 }) {
   const text = useOrganizationText()
 
@@ -49,6 +52,14 @@ export default function SidebarMenu({
         sidebarCollapsed={sidebarCollapsed}
         orgOpen={orgOpen}
         setOrgOpen={setOrgOpen}
+      />
+
+      <SidebarMembershipMenu
+        activeMenu={activeMenu}
+        onNavigate={onNavigate}
+        sidebarCollapsed={sidebarCollapsed}
+        membershipOpen={membershipOpen}
+        setMembershipOpen={setMembershipOpen}
       />
     </div>
   )

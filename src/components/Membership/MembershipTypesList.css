@@ -1,0 +1,17 @@
+.membership-types-list__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+}
+
+.membership-types-list__empty {
+  padding: 2rem;
+  text-align: center;
+  border: 1px dashed var(--mui-palette-divider, #e0e0e0);
+  background: transparent;
+}
+
+.membership-types-list__table {
+  border: 1px solid var(--mui-palette-divider, #e0e0e0);
+}

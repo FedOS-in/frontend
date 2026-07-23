@@ -14,6 +14,7 @@ const ROUTES_BY_MENU = {
   bearers: "/organization/officebearers",
   users: "/organization/users",
   userForms: "/organization/userForm",
+  membershipTypes: "/membership/membershipTypes",
 }
 
 function getActiveMenu(pathname) {
@@ -25,6 +26,9 @@ function getActiveMenu(pathname) {
   if (pathname.startsWith("/organization/officebearers")) return "bearers"
   if (pathname.startsWith("/organization/users")) return "users"
   if (pathname.startsWith("/organization/userForm")) return "userForms"
+  if (pathname.startsWith("/membership/membershipTypes")) {
+    return "membershipTypes"
+  }
   return "dashboard"
 }
 
@@ -33,6 +37,7 @@ export default function AppShell({ children }) {
   const pathname = usePathname()
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false)
   const [orgOpen, setOrgOpen] = React.useState(true)
+  const [membershipOpen, setMembershipOpen] = React.useState(true)
 
   React.useEffect(() => {
     hydrateOrganizationLocale()
@@ -71,6 +76,8 @@ export default function AppShell({ children }) {
           setSidebarCollapsed={setSidebarCollapsed}
           orgOpen={orgOpen}
           setOrgOpen={setOrgOpen}
+          membershipOpen={membershipOpen}
+          setMembershipOpen={setMembershipOpen}
         />
       )}
 

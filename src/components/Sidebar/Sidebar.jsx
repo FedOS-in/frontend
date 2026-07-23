@@ -13,6 +13,8 @@ export default function Sidebar({
   setSidebarCollapsed,
   orgOpen,
   setOrgOpen,
+  membershipOpen,
+  setMembershipOpen,
 }) {
   return (
     <Box
@@ -31,6 +33,8 @@ export default function Sidebar({
         sidebarCollapsed={sidebarCollapsed}
         orgOpen={orgOpen}
         setOrgOpen={setOrgOpen}
+        membershipOpen={membershipOpen}
+        setMembershipOpen={setMembershipOpen}
       />
       <SidebarFooter
         sidebarCollapsed={sidebarCollapsed}

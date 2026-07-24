@@ -1,0 +1,43 @@
+.membership-types-help__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #091e42;
+  margin-bottom: 0.85rem;
+}
+
+.membership-types-help__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.membership-types-help__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.membership-types-help__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #f4f5f7;
+  color: #42526e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.membership-types-help__item-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #172b4d;
+}
+
+.membership-types-help__item-text {
+  font-size: 0.75rem;
+  color: #6b778c;
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}

@@ -1,0 +1,33 @@
+.membership-types-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.membership-types-workspace__main {
+  min-width: 0;
+}
+
+.membership-types-workspace__side {
+  min-width: 0;
+  position: sticky;
+  top: 1rem;
+}
+
+.membership-types-workspace__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+}
+
+@media (max-width: 1100px) {
+  .membership-types-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .membership-types-workspace__side {
+    position: static;
+  }
+}

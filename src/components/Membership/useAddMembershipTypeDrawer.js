@@ -1,23 +1,27 @@
 "use client"
 
 import * as React from "react"
+import {
+  INITIAL_MEMBERSHIP_TYPE_FORM,
+  buildFormFromMembershipType,
+  validateMembershipTypeForm,
+  buildMembershipTypePayload,
+} from "./membershipTypeFormUtils"
 
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
 
-export const INITIAL_MEMBERSHIP_TYPE_FORM = {
-  federationNode: null,
-  title: "",
-  description: "",
-  code: "",
-  validityId: "",
-  currencyId: "",
-  joiningFee: "",
-  renewalFee: "",
-  status: "1",
-}
+export { INITIAL_MEMBERSHIP_TYPE_FORM }
 
-export function useAddMembershipTypeDrawer({ open, onClose, onSaved, t }) {
+export function useAddMembershipTypeDrawer({
+  open,
+  onClose,
+  onSaved,
+  t,
+  mode = "create",
+  membershipTypeToEdit = null,
+}) {
+  const isEditMode = mode === "edit" && Boolean(membershipTypeToEdit?.id)
   const [form, setForm] = React.useState(INITIAL_MEMBERSHIP_TYPE_FORM)
   const [federationOptions, setFederationOptions] = React.useState([])
   const [validityOptions, setValidityOptions] = React.useState([])
@@ -62,9 +66,18 @@ export function useAddMembershipTypeDrawer({ open, onClose, onSaved, t }) {
           currenciesRes.json(),
         ])
 
-        setFederationOptions(Array.isArray(nodes) ? nodes : [])
+        const federationList = Array.isArray(nodes) ? nodes : []
+        setFederationOptions(federationList)
         setValidityOptions(Array.isArray(validities) ? validities : [])
         setCurrencyOptions(Array.isArray(currencies) ? currencies : [])
+
+        if (isEditMode) {
+          setForm(
+            buildFormFromMembershipType(membershipTypeToEdit, federationList),
+          )
+        } else {
+          setForm(INITIAL_MEMBERSHIP_TYPE_FORM)
+        }
       } catch (error) {
         if (error.name !== "AbortError") {
           setErrorMessage(error.message || t.validation.loadLookupsFailed)
@@ -81,7 +94,7 @@ export function useAddMembershipTypeDrawer({ open, onClose, onSaved, t }) {
     return () => {
       controller.abort()
     }
-  }, [open, t.validation.loadLookupsFailed])
+  }, [open, isEditMode, membershipTypeToEdit, t.validation.loadLookupsFailed])
 
   const handleClose = () => {
     if (submitting) return
@@ -89,28 +102,10 @@ export function useAddMembershipTypeDrawer({ open, onClose, onSaved, t }) {
     onClose()
   }
 
-  const validateForm = () => {
-    if (!form.federationNode?.id) return t.validation.federationRequired
-    if (!form.title.trim()) return t.validation.titleRequired
-    if (!form.code.trim()) return t.validation.codeRequired
-    if (!/^[A-Z0-9_]+$/.test(form.code.trim())) {
-      return t.validation.codeUppercase
-    }
-    if (!form.validityId) return t.validation.validityRequired
-    if (!form.currencyId) return t.validation.currencyRequired
-    if (form.joiningFee === "" || Number.isNaN(Number(form.joiningFee))) {
-      return t.validation.joiningFeeRequired
-    }
-    if (form.renewalFee === "" || Number.isNaN(Number(form.renewalFee))) {
-      return t.validation.renewalFeeRequired
-    }
-    return ""
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const validationError = validateForm()
+    const validationError = validateMembershipTypeForm(form, t)
     if (validationError) {
       setErrorMessage(validationError)
       return
@@ -120,20 +115,13 @@ export function useAddMembershipTypeDrawer({ open, onClose, onSaved, t }) {
     setErrorMessage("")
 
     try {
-      const response = await fetch(`${backendUrl}/api/membership-types`, {
-        method: "POST",
+      const endpoint = isEditMode
+        ? `${backendUrl}/api/membership-types/${membershipTypeToEdit.id}`
+        : `${backendUrl}/api/membership-types`
+      const response = await fetch(endpoint, {
+        method: isEditMode ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          label: form.title.trim(),
-          description: form.description.trim(),
-          code: form.code.trim().toUpperCase(),
-          federationNodeId: form.federationNode.id,
-          validityId: Number(form.validityId),
-          currencyId: Number(form.currencyId),
-          joiningFee: Number(form.joiningFee),
-          renewalFee: Number(form.renewalFee),
-          status: Number(form.status),
-        }),
+        body: JSON.stringify(buildMembershipTypePayload(form)),
       })
 
       const payload = await response.json().catch(() => null)
@@ -142,21 +130,30 @@ export function useAddMembershipTypeDrawer({ open, onClose, onSaved, t }) {
         if (response.status === 409) {
           throw new Error(payload?.message || t.validation.codeExists)
         }
-        throw new Error(payload?.message || t.validation.createFailed)
+        throw new Error(
+          payload?.message ||
+            (isEditMode
+              ? t.validation.updateFailed
+              : t.validation.createFailed),
+        )
       }
 
       resetForm()
-      setSuccessMessage(t.messages.created)
+      setSuccessMessage(isEditMode ? t.messages.updated : t.messages.created)
       onSaved?.(payload)
       onClose()
     } catch (error) {
-      setErrorMessage(error.message || t.validation.createFailed)
+      setErrorMessage(
+        error.message ||
+          (isEditMode ? t.validation.updateFailed : t.validation.createFailed),
+      )
     } finally {
       setSubmitting(false)
     }
   }
 
   return {
+    isEditMode,
     form,
     setForm,
     federationOptions,

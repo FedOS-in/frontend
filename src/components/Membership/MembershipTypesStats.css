@@ -1,0 +1,94 @@
+.membership-types-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.membership-types-stats__card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid #dfe1e6;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.85rem 0.95rem;
+  min-width: 0;
+}
+
+.membership-types-stats__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.membership-types-stats__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.membership-types-stats__title {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #6b778c;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.membership-types-stats__value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #091e42;
+  line-height: 1.2;
+}
+
+.membership-types-stats__subtitle {
+  font-size: 0.68rem;
+  color: #97a0af;
+  line-height: 1.25;
+}
+
+.membership-types-stats__card--total .membership-types-stats__icon {
+  background: #deebff;
+  color: #0052cc;
+}
+
+.membership-types-stats__card--active .membership-types-stats__icon {
+  background: #e3fcef;
+  color: #006644;
+}
+
+.membership-types-stats__card--inactive .membership-types-stats__icon {
+  background: #fff0b3;
+  color: #ff8b00;
+}
+
+.membership-types-stats__card--forms .membership-types-stats__icon {
+  background: #eae6ff;
+  color: #5243aa;
+}
+
+.membership-types-stats__card--members .membership-types-stats__icon {
+  background: #e6fcff;
+  color: #00a3bf;
+}
+
+@media (max-width: 1100px) {
+  .membership-types-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .membership-types-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,23 @@
+.membership-types-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.membership-types-toolbar__search {
+  flex: 1 1 240px;
+  background: #fff;
+}
+
+.membership-types-toolbar__status {
+  min-width: 140px;
+  background: #fff;
+}
+
+.membership-types-toolbar__filters {
+  border-color: #dfe1e6;
+  color: #091e42;
+  text-transform: none;
+}

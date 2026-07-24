@@ -1,0 +1,64 @@
+.membership-types-table {
+  border: 1px solid #dfe1e6;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.membership-types-table__empty {
+  padding: 1.5rem 0.5rem;
+  text-align: center;
+}
+
+.membership-types-table__type {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.membership-types-table__type-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #deebff;
+  color: #0052cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.membership-types-table__type-name {
+  display: block;
+  font-weight: 700;
+  color: #091e42;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.membership-types-table__type-desc {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #97a0af;
+  margin-top: 0.15rem;
+  max-width: 240px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.membership-types-table__code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #42526e;
+}
+
+.membership-types-table__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  justify-content: flex-end;
+}

@@ -15,10 +15,17 @@ import AddMembershipTypeFormFields from "./AddMembershipTypeFormFields"
 import { useAddMembershipTypeDrawer } from "./useAddMembershipTypeDrawer"
 import "./AddMembershipTypeDrawer.css"
 
-export default function AddMembershipTypeDrawer({ open, onClose, onSaved }) {
+export default function AddMembershipTypeDrawer({
+  open,
+  onClose,
+  onSaved,
+  mode = "create",
+  membershipTypeToEdit = null,
+}) {
   const text = useOrganizationText()
   const t = text.addMembershipTypeDrawer
   const {
+    isEditMode,
     form,
     setForm,
     federationOptions,
@@ -31,7 +38,14 @@ export default function AddMembershipTypeDrawer({ open, onClose, onSaved }) {
     setSuccessMessage,
     handleClose,
     handleSubmit,
-  } = useAddMembershipTypeDrawer({ open, onClose, onSaved, t })
+  } = useAddMembershipTypeDrawer({
+    open,
+    onClose,
+    onSaved,
+    t,
+    mode,
+    membershipTypeToEdit,
+  })
 
   return (
     <>
@@ -46,12 +60,12 @@ export default function AddMembershipTypeDrawer({ open, onClose, onSaved }) {
               <Typography
                 variant="h6"
                 className="add-membership-type-drawer__title">
-                {t.title}
+                {isEditMode ? t.titleEdit : t.title}
               </Typography>
               <Typography
                 variant="body2"
                 className="add-membership-type-drawer__subtitle">
-                {t.subtitle}
+                {isEditMode ? t.subtitleEdit : t.subtitle}
               </Typography>
             </Box>
 
@@ -77,7 +91,13 @@ export default function AddMembershipTypeDrawer({ open, onClose, onSaved }) {
                 {t.cancel}
               </Button>
               <Button type="submit" variant="contained" disabled={submitting}>
-                {submitting ? t.creating : t.create}
+                {submitting
+                  ? isEditMode
+                    ? t.updating
+                    : t.creating
+                  : isEditMode
+                    ? t.update
+                    : t.create}
               </Button>
             </Box>
           </Stack>

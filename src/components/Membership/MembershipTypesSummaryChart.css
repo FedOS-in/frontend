@@ -1,0 +1,120 @@
+.membership-types-chart {
+  margin-bottom: 1.25rem;
+}
+
+.membership-types-chart__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #091e42;
+  margin-bottom: 1rem;
+}
+
+.membership-types-chart__donut-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.membership-types-chart__donut {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #0052cc 0% 47%,
+    #36b37e 47% 65%,
+    #ffab00 65% 77%,
+    #6554c0 77% 85%,
+    #00b8d9 85% 95%,
+    #ff5630 95% 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.membership-types-chart__donut-hole {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.membership-types-chart__total-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #091e42;
+  line-height: 1.1;
+}
+
+.membership-types-chart__total-label {
+  font-size: 0.65rem;
+  color: #6b778c;
+  margin-top: 0.15rem;
+}
+
+.membership-types-chart__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.membership-types-chart__legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.membership-types-chart__legend-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.membership-types-chart__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.membership-types-chart__swatch--individual {
+  background-color: #0052cc;
+}
+
+.membership-types-chart__swatch--student {
+  background-color: #36b37e;
+}
+
+.membership-types-chart__swatch--corporate {
+  background-color: #ffab00;
+}
+
+.membership-types-chart__swatch--associate {
+  background-color: #6554c0;
+}
+
+.membership-types-chart__swatch--life {
+  background-color: #00b8d9;
+}
+
+.membership-types-chart__swatch--honorary {
+  background-color: #ff5630;
+}
+
+.membership-types-chart__legend-label {
+  font-size: 0.8rem;
+  color: #172b4d;
+}
+
+.membership-types-chart__legend-meta {
+  font-size: 0.75rem;
+  color: #6b778c;
+  white-space: nowrap;
+}

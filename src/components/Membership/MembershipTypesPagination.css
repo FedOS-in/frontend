@@ -1,0 +1,32 @@
+.membership-types-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.membership-types-pagination__summary {
+  font-size: 0.8rem;
+  color: #6b778c;
+}
+
+.membership-types-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.membership-types-pagination__page {
+  min-width: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #172b4d;
+}
+
+.membership-types-pagination__rows {
+  min-width: 100px;
+  margin-left: 0.5rem;
+}

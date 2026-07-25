@@ -1,14 +1,12 @@
 "use client"
 
 import {
+  Autocomplete,
   FormControl,
-  FormControlLabel,
-  FormLabel,
   InputLabel,
   MenuItem,
-  Radio,
-  RadioGroup,
   Select,
+  TextField,
 } from "@mui/material"
 import { getPaymentPeriodOptions } from "./userFormBuilderConfig"
 import { useOrganizationText } from "@/i18n/organizationLanguageStore"
@@ -23,6 +21,10 @@ export default function UserFormBuilderBillingFields({
 }) {
   const text = useOrganizationText()
   const paymentPeriodOptions = getPaymentPeriodOptions()
+  const selectedMembershipType =
+    membershipTypeOptions.find(
+      (option) => String(option.id) === String(membershipTypeId),
+    ) || null
 
   return (
     <>
@@ -46,27 +48,43 @@ export default function UserFormBuilderBillingFields({
       </div>
 
       <div className="user-form-builder-form__cell user-form-builder-form__cell--full">
-        <FormControl required className="user-form-builder-form__radio-group">
-          <FormLabel id="user-form-membership-type-label">
-            {text.userFormBuilder.membershipType}
-          </FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="user-form-membership-type-label"
-            name="membership-type"
-            value={membershipTypeId || ""}
-            onChange={(event) => onMembershipTypeChange(event.target.value)}>
-            {membershipTypeOptions.map((option) => (
-              <FormControlLabel
-                key={option.id}
-                value={String(option.id)}
-                control={<Radio />}
-                label={option.label}
-                disabled={loadingLookups}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
+        <Autocomplete
+          options={membershipTypeOptions ?? []}
+          value={selectedMembershipType}
+          onChange={(_, value) =>
+            onMembershipTypeChange(value ? String(value.id) : "")
+          }
+          loading={loadingLookups}
+          disabled={loadingLookups}
+          getOptionLabel={(option) => option?.label || ""}
+          isOptionEqualToValue={(option, value) => option.id === value?.id}
+          filterOptions={(options, state) =>
+            options.filter((option) => {
+              const query = state.inputValue.toLowerCase()
+              return (
+                (option.label || "").toLowerCase().includes(query) ||
+                (option.code || "").toLowerCase().includes(query)
+              )
+            })
+          }
+          noOptionsText={
+            loadingLookups
+              ? text.userFormBuilder.loadingMembershipTypes
+              : membershipTypeOptions.length === 0
+                ? text.userFormBuilder.noMembershipTypesAvailable
+                : text.userFormBuilder.noMatchingMembershipType
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={text.userFormBuilder.membershipType}
+              placeholder={
+                text.userFormBuilder.membershipTypeSearchPlaceholder
+              }
+              required
+            />
+          )}
+        />
       </div>
     </>
   )

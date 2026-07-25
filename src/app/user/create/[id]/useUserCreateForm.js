@@ -7,6 +7,7 @@ import {
   backendUrl,
   getCreateSteps,
   isStrongPassword,
+  resolveJoiningFee,
 } from "./createFormUtils"
 
 export default function useUserCreateForm(formId) {
@@ -27,6 +28,10 @@ export default function useUserCreateForm(formId) {
   const otherDetailsIndex = 2
   const paymentIndex = requiresPayment ? 3 : -1
   const successIndex = steps.length - 1
+  const joiningFee = React.useMemo(
+    () => resolveJoiningFee({ form }),
+    [form],
+  )
 
   React.useEffect(() => {
     if (!formId) return
@@ -38,7 +43,19 @@ export default function useUserCreateForm(formId) {
           signal: controller.signal,
         })
         if (!response.ok) throw new Error("Unable to load form details")
-        setForm(await response.json())
+        const formData = await response.json()
+
+        if (formData.membershipTypeId && !formData.membershipType) {
+          const membershipResponse = await fetch(
+            `${backendUrl}/api/membership-types/${formData.membershipTypeId}`,
+            { signal: controller.signal },
+          )
+          if (membershipResponse.ok) {
+            formData.membershipType = await membershipResponse.json()
+          }
+        }
+
+        setForm(formData)
       } catch (error) {
         if (error.name !== "AbortError") {
           setErrorMessage(error.message || "Unable to load form details")
@@ -102,7 +119,9 @@ export default function useUserCreateForm(formId) {
           pincode: staticFields.pincode,
           password: staticFields.password,
           dynamicFields: dynamicValues,
-          ...(fromPayment ? { paymentStatus: 2 } : {}),
+          ...(fromPayment
+            ? { paymentStatus: 2, paymentMethod: "ONLINE" }
+            : {}),
         }),
       })
       if (!response.ok) {
@@ -134,6 +153,7 @@ export default function useUserCreateForm(formId) {
 
   return {
     form,
+    joiningFee,
     isLoading,
     errorMessage,
     stepIndex,

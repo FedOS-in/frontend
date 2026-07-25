@@ -23,6 +23,7 @@ export default function UserCreateByFormIdPage() {
   const formState = useUserCreateForm(formId)
   const {
     form,
+    joiningFee,
     isLoading,
     errorMessage,
     stepIndex,
@@ -113,7 +114,7 @@ export default function UserCreateByFormIdPage() {
             ) : null}
             {requiresPayment && stepIndex === paymentIndex ? (
               <PaymentStep
-                amount={form?.membershipType?.joiningFee}
+                amount={joiningFee}
                 selectedMethod={paymentMethod}
                 coupon={couponCode}
                 paymentError={paymentError}

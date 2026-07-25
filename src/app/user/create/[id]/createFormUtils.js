@@ -20,6 +20,15 @@ export function areRequiredDynamicFieldsFilled(fields, values) {
   })
 }
 
+export function resolveJoiningFee({ user, form } = {}) {
+  const fee =
+    user?.membershipType?.joiningFee ??
+    form?.membershipType?.joiningFee ??
+    null
+  if (fee === null || fee === undefined || fee === "") return null
+  return fee
+}
+
 export const INITIAL_STATIC_FIELDS = {
   name: "",
   email: "",

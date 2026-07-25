@@ -14,7 +14,7 @@ export default function MemberPaymentPage() {
   const pageText = text.paymentPage
   const {
     user,
-    form,
+    joiningFee,
     isLoading,
     errorMessage,
     paymentMethod,
@@ -81,7 +81,7 @@ export default function MemberPaymentPage() {
         {!isLoading && !errorMessage && !paymentDone ? (
           <div className="member-payment-page__body">
             <PaymentStep
-              amount={form?.membershipType?.joiningFee}
+              amount={joiningFee}
               selectedMethod={paymentMethod}
               coupon={couponCode}
               paymentError={resolvedError}

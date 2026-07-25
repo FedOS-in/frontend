@@ -1,4 +1,5 @@
 import React from "react"
+import { resolveJoiningFee } from "@/app/user/create/[id]/createFormUtils"
 
 const backendUrl =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001"
@@ -49,13 +50,38 @@ export default function useMemberPayment(userId) {
         setUser(userData)
         setPaymentDone(userData.paymentStatus === PAYMENT_DONE_ID)
 
+        let formData = null
         if (userData.formId) {
           const formResponse = await fetch(
             `${backendUrl}/api/forms/${userData.formId}`,
             { signal: controller.signal },
           )
           if (formResponse.ok) {
-            setForm(await formResponse.json())
+            formData = await formResponse.json()
+            setForm(formData)
+          }
+        }
+
+        const hasJoiningFee =
+          resolveJoiningFee({ user: userData, form: formData }) != null
+
+        if (
+          !hasJoiningFee &&
+          (userData.membershipTypeId || formData?.membershipTypeId)
+        ) {
+          const membershipTypeId =
+            userData.membershipTypeId || formData.membershipTypeId
+          const membershipResponse = await fetch(
+            `${backendUrl}/api/membership-types/${membershipTypeId}`,
+            { signal: controller.signal },
+          )
+          if (membershipResponse.ok) {
+            const membershipType = await membershipResponse.json()
+            setUser((current) =>
+              current
+                ? { ...current, membershipType }
+                : current,
+            )
           }
         }
       } catch (loadError) {
@@ -72,6 +98,11 @@ export default function useMemberPayment(userId) {
     loadPaymentData()
     return () => controller.abort()
   }, [userId])
+
+  const joiningFee = React.useMemo(
+    () => resolveJoiningFee({ user, form }),
+    [user, form],
+  )
 
   const handleCouponChange = (value) => {
     setCouponCode(value)
@@ -93,7 +124,10 @@ export default function useMemberPayment(userId) {
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ paymentStatus: PAYMENT_DONE_ID }),
+          body: JSON.stringify({
+            paymentStatus: PAYMENT_DONE_ID,
+            paymentMethod: "ONLINE",
+          }),
         },
       )
 
@@ -114,6 +148,7 @@ export default function useMemberPayment(userId) {
   return {
     user,
     form,
+    joiningFee,
     isLoading,
     errorMessage,
     paymentMethod,

@@ -1,0 +1,31 @@
+.renewals-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.renewals-pagination__summary {
+  font-size: 0.85rem;
+  color: #6b778c;
+}
+
+.renewals-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.renewals-pagination__page {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #091e42;
+}
+
+.renewals-pagination__rows {
+  margin-left: 0.5rem;
+  min-width: 110px;
+}

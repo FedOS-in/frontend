@@ -1,0 +1,99 @@
+.renewals-table {
+  border: 1px solid #dfe1e6;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.renewals-table__row {
+  cursor: pointer;
+}
+
+.renewals-table__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.renewals-table__actions .MuiIconButton-root {
+  color: #6b778c;
+}
+
+.renewals-table__actions .MuiIconButton-root:hover {
+  color: #0052cc;
+  background: #deebff;
+}
+
+.renewals-table__empty {
+  padding: 1.5rem 0.5rem;
+  text-align: center;
+}
+
+.renewals-table__member {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.renewals-table__member-name {
+  font-weight: 600;
+  color: #091e42;
+  font-size: 0.875rem;
+}
+
+.renewals-table__member-phone {
+  font-size: 0.75rem;
+  color: #6b778c;
+}
+
+.renewals-table__type-chip {
+  background: #deebff;
+  color: #0052cc;
+  font-weight: 600;
+}
+
+.renewals-table__days {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.renewals-table__days--due_30,
+.renewals-table__days--due_15,
+.renewals-table__days--active {
+  color: #006644;
+}
+
+.renewals-table__days--due_today {
+  color: #ff8b00;
+}
+
+.renewals-table__days--overdue,
+.renewals-table__days--expired {
+  color: #de350b;
+}
+
+.renewals-table__chip {
+  font-weight: 600;
+}
+
+.renewals-table__chip--active,
+.renewals-table__chip--paid {
+  background: #e3fcef;
+  color: #006644;
+}
+
+.renewals-table__chip--due_soon,
+.renewals-table__chip--due_today {
+  background: #deebff;
+  color: #0052cc;
+}
+
+.renewals-table__chip--pending {
+  background: #fff0b3;
+  color: #ff8b00;
+}
+
+.renewals-table__chip--overdue,
+.renewals-table__chip--expired {
+  background: #ffebe6;
+  color: #de350b;
+}

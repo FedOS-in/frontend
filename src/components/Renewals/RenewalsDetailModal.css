@@ -1,0 +1,79 @@
+.renewals-detail-modal__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.renewals-detail-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.renewals-detail-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.renewals-detail-modal__section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6b778c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.renewals-detail-modal__row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.renewals-detail-modal__label {
+  font-size: 0.8rem;
+  color: #6b778c;
+}
+
+.renewals-detail-modal__value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #091e42;
+}
+
+.renewals-detail-modal__chip {
+  font-weight: 600;
+}
+
+.renewals-detail-modal__chip--active,
+.renewals-detail-modal__chip--paid {
+  background: #e3fcef;
+  color: #006644;
+}
+
+.renewals-detail-modal__chip--due_soon,
+.renewals-detail-modal__chip--due_today {
+  background: #deebff;
+  color: #0052cc;
+}
+
+.renewals-detail-modal__chip--pending {
+  background: #fff0b3;
+  color: #ff8b00;
+}
+
+.renewals-detail-modal__chip--overdue,
+.renewals-detail-modal__chip--expired {
+  background: #ffebe6;
+  color: #de350b;
+}
+
+@media (max-width: 600px) {
+  .renewals-detail-modal__row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}

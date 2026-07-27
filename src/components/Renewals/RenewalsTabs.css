@@ -1,0 +1,15 @@
+.renewals-tabs {
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #ebecf0;
+}
+
+.renewals-tabs .MuiTab-root {
+  text-transform: none;
+  min-height: 42px;
+  font-weight: 600;
+  color: #6b778c;
+}
+
+.renewals-tabs .Mui-selected {
+  color: #0052cc;
+}

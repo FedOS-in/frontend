@@ -1,0 +1,26 @@
+.renewals-offline-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.renewals-offline-modal__alert {
+  margin-bottom: 0.75rem;
+}
+
+.renewals-offline-modal__label {
+  font-size: 0.75rem;
+  color: #6b778c;
+  margin-top: 0.5rem;
+}
+
+.renewals-offline-modal__value {
+  font-weight: 600;
+  color: #091e42;
+}
+
+.renewals-offline-modal__amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #091e42;
+}

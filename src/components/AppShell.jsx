@@ -9,6 +9,7 @@ import { hydrateOrganizationLocale } from "@/i18n/organizationLanguageStore"
 const ROUTES_BY_MENU = {
   dashboard: "/",
   members: "/members",
+  renewals: "/renewals",
   structure: "/organization/structure",
   levels: "/organization/levels",
   bearers: "/organization/officebearers",
@@ -21,6 +22,7 @@ function getActiveMenu(pathname) {
   if (!pathname) return "dashboard"
   if (pathname === "/") return "dashboard"
   if (pathname.startsWith("/members")) return "members"
+  if (pathname.startsWith("/renewals")) return "renewals"
   if (pathname.startsWith("/organization/structure")) return "structure"
   if (pathname.startsWith("/organization/levels")) return "levels"
   if (pathname.startsWith("/organization/officebearers")) return "bearers"

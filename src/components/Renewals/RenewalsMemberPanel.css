@@ -1,0 +1,116 @@
+.renewals-member-panel .MuiDrawer-paper {
+  width: min(380px, 100vw);
+}
+
+.renewals-member-panel__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.renewals-member-panel__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.renewals-member-panel__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #091e42;
+}
+
+.renewals-member-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.renewals-member-panel__identity {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.renewals-member-panel__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #0052cc;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.renewals-member-panel__name {
+  font-weight: 700;
+  color: #091e42;
+}
+
+.renewals-member-panel__meta {
+  font-size: 0.8rem;
+  color: #6b778c;
+  margin-bottom: 0.35rem;
+}
+
+.renewals-member-panel__active-chip {
+  background: #e3fcef;
+  color: #006644;
+  font-weight: 600;
+}
+
+.renewals-member-panel__section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b778c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.renewals-member-panel__plan {
+  font-weight: 700;
+  color: #091e42;
+  margin-bottom: 0.85rem;
+}
+
+.renewals-member-panel__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.renewals-member-panel__label {
+  font-size: 0.72rem;
+  color: #6b778c;
+  margin-bottom: 0.15rem;
+}
+
+.renewals-member-panel__value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #091e42;
+}
+
+.renewals-member-panel__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: auto;
+}
+
+.renewals-member-panel__actions .MuiButton-root {
+  text-transform: none;
+  justify-content: flex-start;
+}
+
+.renewals-member-panel__actions .MuiButton-contained {
+  background: #0052cc;
+}

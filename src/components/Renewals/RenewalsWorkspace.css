@@ -1,0 +1,28 @@
+.renewals-workspace {
+  min-width: 0;
+}
+
+.renewals-workspace__bulk {
+  display: flex;
+  justify-content: flex-end;
+  margin: -2.5rem 0 1rem;
+}
+
+.renewals-workspace__bulk .MuiButton-contained {
+  background: #0052cc;
+  text-transform: none;
+}
+
+.renewals-workspace__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+}
+
+@media (max-width: 700px) {
+  .renewals-workspace__bulk {
+    margin-top: 0;
+    justify-content: flex-start;
+  }
+}

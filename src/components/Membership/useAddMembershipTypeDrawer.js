@@ -105,7 +105,11 @@ export function useAddMembershipTypeDrawer({
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const validationError = validateMembershipTypeForm(form, t)
+    const validationError = validateMembershipTypeForm(
+      form,
+      t,
+      federationOptions,
+    )
     if (validationError) {
       setErrorMessage(validationError)
       return

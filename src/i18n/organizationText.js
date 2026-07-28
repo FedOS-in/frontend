@@ -154,6 +154,13 @@ export const organizationText = {
       currencyType: "Currency type",
       joiningFee: "Joining Fee",
       renewalFee: "Renewal Fee",
+      splitJoiningAria: "Split joining fee",
+      splitRenewalAria: "Split renewal fee",
+      joiningSplitTitle: "Joining fee split",
+      renewalSplitTitle: "Renewal fee split",
+      splitNode: "Federation / Chapter",
+      splitAmount: "Amount",
+      splitPercentage: "Percentage",
       status: "Status",
       statusActive: "Active",
       statusInactive: "Inactive",
@@ -177,6 +184,26 @@ export const organizationText = {
         currencyRequired: "Currency type is required",
         joiningFeeRequired: "Joining fee is required",
         renewalFeeRequired: "Renewal fee is required",
+        joiningSplitNodeRequired: "Joining split federation is required",
+        joiningSplitNodeInvalid:
+          "Joining split must use the selected federation or a parent",
+        joiningSplitNodeUnique: "Joining split federations must be unique",
+        joiningSplitNumberRequired:
+          "Joining split amount and percentage must be numbers",
+        joiningSplitPercentTotal:
+          "Joining split percentages must total 100%",
+        joiningSplitAmountTotal:
+          "Joining split amounts must match the joining fee",
+        renewalSplitNodeRequired: "Renewal split federation is required",
+        renewalSplitNodeInvalid:
+          "Renewal split must use the selected federation or a parent",
+        renewalSplitNodeUnique: "Renewal split federations must be unique",
+        renewalSplitNumberRequired:
+          "Renewal split amount and percentage must be numbers",
+        renewalSplitPercentTotal:
+          "Renewal split percentages must total 100%",
+        renewalSplitAmountTotal:
+          "Renewal split amounts must match the renewal fee",
         createFailed: "Failed to create membership type",
         updateFailed: "Failed to update membership type",
         loadLookupsFailed: "Unable to load form options",
@@ -811,6 +838,13 @@ export const organizationText = {
       currencyType: "मुद्रा प्रकार",
       joiningFee: "जॉइनिंग शुल्क",
       renewalFee: "नवीनीकरण शुल्क",
+      splitJoiningAria: "Split joining fee",
+      splitRenewalAria: "Split renewal fee",
+      joiningSplitTitle: "Joining fee split",
+      renewalSplitTitle: "Renewal fee split",
+      splitNode: "Federation / Chapter",
+      splitAmount: "Amount",
+      splitPercentage: "Percentage",
       status: "स्थिति",
       statusActive: "सक्रिय",
       statusInactive: "निष्क्रिय",
@@ -832,6 +866,26 @@ export const organizationText = {
         currencyRequired: "मुद्रा प्रकार आवश्यक है",
         joiningFeeRequired: "जॉइनिंग शुल्क आवश्यक है",
         renewalFeeRequired: "नवीनीकरण शुल्क आवश्यक है",
+        joiningSplitNodeRequired: "Joining split federation is required",
+        joiningSplitNodeInvalid:
+          "Joining split must use the selected federation or a parent",
+        joiningSplitNodeUnique: "Joining split federations must be unique",
+        joiningSplitNumberRequired:
+          "Joining split amount and percentage must be numbers",
+        joiningSplitPercentTotal:
+          "Joining split percentages must total 100%",
+        joiningSplitAmountTotal:
+          "Joining split amounts must match the joining fee",
+        renewalSplitNodeRequired: "Renewal split federation is required",
+        renewalSplitNodeInvalid:
+          "Renewal split must use the selected federation or a parent",
+        renewalSplitNodeUnique: "Renewal split federations must be unique",
+        renewalSplitNumberRequired:
+          "Renewal split amount and percentage must be numbers",
+        renewalSplitPercentTotal:
+          "Renewal split percentages must total 100%",
+        renewalSplitAmountTotal:
+          "Renewal split amounts must match the renewal fee",
         createFailed: "सदस्यता प्रकार बनाया नहीं जा सका",
         loadLookupsFailed: "फॉर्म विकल्प लोड नहीं हो सके",
         codeExists: "इस फेडरेशन के लिए सदस्यता प्रकार कोड पहले से मौजूद है",
@@ -1275,6 +1329,13 @@ export const organizationText = {
       currencyType: "ಕರೆನ್ಸಿ ಪ್ರಕಾರ",
       joiningFee: "ಸೇರ್ಪಡೆ ಶುಲ್ಕ",
       renewalFee: "ನವೀಕರಣ ಶುಲ್ಕ",
+      splitJoiningAria: "Split joining fee",
+      splitRenewalAria: "Split renewal fee",
+      joiningSplitTitle: "Joining fee split",
+      renewalSplitTitle: "Renewal fee split",
+      splitNode: "Federation / Chapter",
+      splitAmount: "Amount",
+      splitPercentage: "Percentage",
       status: "ಸ್ಥಿತಿ",
       statusActive: "ಸಕ್ರಿಯ",
       statusInactive: "ನಿಷ್ಕ್ರಿಯ",
@@ -1296,6 +1357,26 @@ export const organizationText = {
         currencyRequired: "ಕರೆನ್ಸಿ ಪ್ರಕಾರ ಅಗತ್ಯವಿದೆ",
         joiningFeeRequired: "ಸೇರ್ಪಡೆ ಶುಲ್ಕ ಅಗತ್ಯವಿದೆ",
         renewalFeeRequired: "ನವೀಕರಣ ಶುಲ್ಕ ಅಗತ್ಯವಿದೆ",
+        joiningSplitNodeRequired: "Joining split federation is required",
+        joiningSplitNodeInvalid:
+          "Joining split must use the selected federation or a parent",
+        joiningSplitNodeUnique: "Joining split federations must be unique",
+        joiningSplitNumberRequired:
+          "Joining split amount and percentage must be numbers",
+        joiningSplitPercentTotal:
+          "Joining split percentages must total 100%",
+        joiningSplitAmountTotal:
+          "Joining split amounts must match the joining fee",
+        renewalSplitNodeRequired: "Renewal split federation is required",
+        renewalSplitNodeInvalid:
+          "Renewal split must use the selected federation or a parent",
+        renewalSplitNodeUnique: "Renewal split federations must be unique",
+        renewalSplitNumberRequired:
+          "Renewal split amount and percentage must be numbers",
+        renewalSplitPercentTotal:
+          "Renewal split percentages must total 100%",
+        renewalSplitAmountTotal:
+          "Renewal split amounts must match the renewal fee",
         createFailed: "ಸದಸ್ಯತ್ವ ಪ್ರಕಾರವನ್ನು ರಚಿಸಲಾಗಲಿಲ್ಲ",
         loadLookupsFailed: "ಫಾರ್ಮ್ ಆಯ್ಕೆಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ",
         codeExists: "ಈ ಫೆಡರೇಷನ್‌ಗೆ ಸದಸ್ಯತ್ವ ಪ್ರಕಾರದ ಕೋಡ್ ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ",
@@ -1754,6 +1835,13 @@ export const organizationText = {
       currencyType: "Currency type",
       joiningFee: "Joining Fee",
       renewalFee: "Renewal Fee",
+      splitJoiningAria: "Split joining fee",
+      splitRenewalAria: "Split renewal fee",
+      joiningSplitTitle: "Joining fee split",
+      renewalSplitTitle: "Renewal fee split",
+      splitNode: "Federation / Chapter",
+      splitAmount: "Amount",
+      splitPercentage: "Percentage",
       status: "Status",
       statusActive: "Active",
       statusInactive: "Inactive",
@@ -1775,6 +1863,26 @@ export const organizationText = {
         currencyRequired: "Currency type is required",
         joiningFeeRequired: "Joining fee is required",
         renewalFeeRequired: "Renewal fee is required",
+        joiningSplitNodeRequired: "Joining split federation is required",
+        joiningSplitNodeInvalid:
+          "Joining split must use the selected federation or a parent",
+        joiningSplitNodeUnique: "Joining split federations must be unique",
+        joiningSplitNumberRequired:
+          "Joining split amount and percentage must be numbers",
+        joiningSplitPercentTotal:
+          "Joining split percentages must total 100%",
+        joiningSplitAmountTotal:
+          "Joining split amounts must match the joining fee",
+        renewalSplitNodeRequired: "Renewal split federation is required",
+        renewalSplitNodeInvalid:
+          "Renewal split must use the selected federation or a parent",
+        renewalSplitNodeUnique: "Renewal split federations must be unique",
+        renewalSplitNumberRequired:
+          "Renewal split amount and percentage must be numbers",
+        renewalSplitPercentTotal:
+          "Renewal split percentages must total 100%",
+        renewalSplitAmountTotal:
+          "Renewal split amounts must match the renewal fee",
         createFailed: "Failed to create membership type",
         loadLookupsFailed: "Unable to load form options",
         codeExists:
@@ -2248,6 +2356,13 @@ export const organizationText = {
       currencyType: "நாணய வகை",
       joiningFee: "சேரும் கட்டணம்",
       renewalFee: "புதுப்பிப்பு கட்டணம்",
+      splitJoiningAria: "Split joining fee",
+      splitRenewalAria: "Split renewal fee",
+      joiningSplitTitle: "Joining fee split",
+      renewalSplitTitle: "Renewal fee split",
+      splitNode: "Federation / Chapter",
+      splitAmount: "Amount",
+      splitPercentage: "Percentage",
       status: "நிலை",
       statusActive: "செயலில்",
       statusInactive: "செயலற்றது",
@@ -2269,6 +2384,26 @@ export const organizationText = {
         currencyRequired: "நாணய வகை தேவை",
         joiningFeeRequired: "சேரும் கட்டணம் தேவை",
         renewalFeeRequired: "புதுப்பிப்பு கட்டணம் தேவை",
+        joiningSplitNodeRequired: "Joining split federation is required",
+        joiningSplitNodeInvalid:
+          "Joining split must use the selected federation or a parent",
+        joiningSplitNodeUnique: "Joining split federations must be unique",
+        joiningSplitNumberRequired:
+          "Joining split amount and percentage must be numbers",
+        joiningSplitPercentTotal:
+          "Joining split percentages must total 100%",
+        joiningSplitAmountTotal:
+          "Joining split amounts must match the joining fee",
+        renewalSplitNodeRequired: "Renewal split federation is required",
+        renewalSplitNodeInvalid:
+          "Renewal split must use the selected federation or a parent",
+        renewalSplitNodeUnique: "Renewal split federations must be unique",
+        renewalSplitNumberRequired:
+          "Renewal split amount and percentage must be numbers",
+        renewalSplitPercentTotal:
+          "Renewal split percentages must total 100%",
+        renewalSplitAmountTotal:
+          "Renewal split amounts must match the renewal fee",
         createFailed: "உறுப்பினர் வகையை உருவாக்க முடியவில்லை",
         loadLookupsFailed: "படிவ விருப்பங்களை ஏற்ற முடியவில்லை",
         codeExists: "இந்தக் கூட்டமைப்பிற்கு உறுப்பினர் வகை குறியீடு ஏற்கனவே உள்ளது",
@@ -2766,6 +2901,13 @@ export const organizationText = {
       currencyType: "కరెన్సీ రకం",
       joiningFee: "చేరిక రుసుము",
       renewalFee: "పునరుద్ధరణ రుసుము",
+      splitJoiningAria: "Split joining fee",
+      splitRenewalAria: "Split renewal fee",
+      joiningSplitTitle: "Joining fee split",
+      renewalSplitTitle: "Renewal fee split",
+      splitNode: "Federation / Chapter",
+      splitAmount: "Amount",
+      splitPercentage: "Percentage",
       status: "స్థితి",
       statusActive: "క్రియాశీలం",
       statusInactive: "నిష్క్రియం",
@@ -2787,6 +2929,26 @@ export const organizationText = {
         currencyRequired: "కరెన్సీ రకం అవసరం",
         joiningFeeRequired: "చేరిక రుసుము అవసరం",
         renewalFeeRequired: "పునరుద్ధరణ రుసుము అవసరం",
+        joiningSplitNodeRequired: "Joining split federation is required",
+        joiningSplitNodeInvalid:
+          "Joining split must use the selected federation or a parent",
+        joiningSplitNodeUnique: "Joining split federations must be unique",
+        joiningSplitNumberRequired:
+          "Joining split amount and percentage must be numbers",
+        joiningSplitPercentTotal:
+          "Joining split percentages must total 100%",
+        joiningSplitAmountTotal:
+          "Joining split amounts must match the joining fee",
+        renewalSplitNodeRequired: "Renewal split federation is required",
+        renewalSplitNodeInvalid:
+          "Renewal split must use the selected federation or a parent",
+        renewalSplitNodeUnique: "Renewal split federations must be unique",
+        renewalSplitNumberRequired:
+          "Renewal split amount and percentage must be numbers",
+        renewalSplitPercentTotal:
+          "Renewal split percentages must total 100%",
+        renewalSplitAmountTotal:
+          "Renewal split amounts must match the renewal fee",
         createFailed: "సభ్యత్వ రకాన్ని సృష్టించలేకపోయాం",
         loadLookupsFailed: "ఫారమ్ ఎంపికలను లోడ్ చేయలేకపోయాం",
         codeExists: "ఈ ఫెడరేషన్‌కు సభ్యత్వ రకం కోడ్ ఇప్పటికే ఉంది",

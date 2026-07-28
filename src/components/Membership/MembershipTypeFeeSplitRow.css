@@ -1,0 +1,25 @@
+.membership-type-fee-split-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.membership-type-fee-split-row__node {
+  flex: 1 1 140px;
+  min-width: 120px;
+}
+
+.membership-type-fee-split-row__amount,
+.membership-type-fee-split-row__percent {
+  flex: 0 1 96px;
+  min-width: 84px;
+}
+
+.membership-type-fee-split-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-top: 0.25rem;
+}

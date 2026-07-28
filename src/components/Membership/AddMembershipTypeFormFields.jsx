@@ -11,6 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material"
+import MembershipTypeFeeFields from "./MembershipTypeFeeFields"
 import "./AddMembershipTypeDrawer.css"
 
 export default function AddMembershipTypeFormFields({
@@ -28,12 +29,23 @@ export default function AddMembershipTypeFormFields({
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
+  const clearAllSplits = (nextFederationNode) => {
+    setForm((prev) => ({
+      ...prev,
+      federationNode: nextFederationNode,
+      joiningSplits: [],
+      renewalSplits: [],
+      showJoiningSplits: false,
+      showRenewalSplits: false,
+    }))
+  }
+
   return (
     <>
       <Autocomplete
         options={federationOptions}
         value={form.federationNode}
-        onChange={(_, value) => updateField("federationNode", value)}
+        onChange={(_, value) => clearAllSplits(value)}
         loading={loadingLookups}
         getOptionLabel={(option) => option?.name || ""}
         isOptionEqualToValue={(option, value) => option.id === value?.id}
@@ -134,37 +146,12 @@ export default function AddMembershipTypeFormFields({
         </Select>
       </FormControl>
 
-      <TextField
-        label={t.joiningFee}
-        type="number"
-        value={form.joiningFee}
-        onChange={(event) => updateField("joiningFee", event.target.value)}
-        fullWidth
-        required
-        slotProps={{ htmlInput: { min: 0, step: "0.01" } }}
+      <MembershipTypeFeeFields
+        t={t}
+        form={form}
+        setForm={setForm}
+        federationOptions={federationOptions}
       />
-
-      <TextField
-        label={t.renewalFee}
-        type="number"
-        value={form.renewalFee}
-        onChange={(event) => updateField("renewalFee", event.target.value)}
-        fullWidth
-        required
-        slotProps={{ htmlInput: { min: 0, step: "0.01" } }}
-      />
-
-      <FormControl fullWidth required>
-        <InputLabel id="membership-type-status-label">{t.status}</InputLabel>
-        <Select
-          labelId="membership-type-status-label"
-          label={t.status}
-          value={form.status}
-          onChange={(event) => updateField("status", event.target.value)}>
-          <MenuItem value="1">{t.statusActive}</MenuItem>
-          <MenuItem value="0">{t.statusInactive}</MenuItem>
-        </Select>
-      </FormControl>
     </>
   )
 }

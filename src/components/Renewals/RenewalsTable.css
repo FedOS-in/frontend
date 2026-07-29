@@ -56,18 +56,17 @@
   font-weight: 600;
 }
 
-.renewals-table__days--due_30,
-.renewals-table__days--due_15,
-.renewals-table__days--active {
+.MuiTypography-root.renewals-table__days--active {
   color: #006644;
 }
 
-.renewals-table__days--due_today {
-  color: #ff8b00;
+.MuiTypography-root.renewals-table__days--due_soon,
+.MuiTypography-root.renewals-table__days--due_today {
+  color: #0052cc;
 }
 
-.renewals-table__days--overdue,
-.renewals-table__days--expired {
+.MuiTypography-root.renewals-table__days--overdue,
+.MuiTypography-root.renewals-table__days--expired {
   color: #de350b;
 }
 
@@ -75,25 +74,25 @@
   font-weight: 600;
 }
 
-.renewals-table__chip--active,
-.renewals-table__chip--paid {
-  background: #e3fcef;
+.MuiChip-root.renewals-table__chip--active,
+.MuiChip-root.renewals-table__chip--paid {
+  background-color: #e3fcef;
   color: #006644;
 }
 
-.renewals-table__chip--due_soon,
-.renewals-table__chip--due_today {
-  background: #deebff;
+.MuiChip-root.renewals-table__chip--due_soon,
+.MuiChip-root.renewals-table__chip--due_today {
+  background-color: #deebff;
   color: #0052cc;
 }
 
-.renewals-table__chip--pending {
-  background: #fff0b3;
+.MuiChip-root.renewals-table__chip--pending {
+  background-color: #fff0b3;
   color: #ff8b00;
 }
 
-.renewals-table__chip--overdue,
-.renewals-table__chip--expired {
-  background: #ffebe6;
+.MuiChip-root.renewals-table__chip--overdue,
+.MuiChip-root.renewals-table__chip--expired {
+  background-color: #ffebe6;
   color: #de350b;
 }

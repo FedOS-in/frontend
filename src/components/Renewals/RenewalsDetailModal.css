@@ -48,26 +48,26 @@
   font-weight: 600;
 }
 
-.renewals-detail-modal__chip--active,
-.renewals-detail-modal__chip--paid {
-  background: #e3fcef;
+.MuiChip-root.renewals-detail-modal__chip--active,
+.MuiChip-root.renewals-detail-modal__chip--paid {
+  background-color: #e3fcef;
   color: #006644;
 }
 
-.renewals-detail-modal__chip--due_soon,
-.renewals-detail-modal__chip--due_today {
-  background: #deebff;
+.MuiChip-root.renewals-detail-modal__chip--due_soon,
+.MuiChip-root.renewals-detail-modal__chip--due_today {
+  background-color: #deebff;
   color: #0052cc;
 }
 
-.renewals-detail-modal__chip--pending {
-  background: #fff0b3;
+.MuiChip-root.renewals-detail-modal__chip--pending {
+  background-color: #fff0b3;
   color: #ff8b00;
 }
 
-.renewals-detail-modal__chip--overdue,
-.renewals-detail-modal__chip--expired {
-  background: #ffebe6;
+.MuiChip-root.renewals-detail-modal__chip--overdue,
+.MuiChip-root.renewals-detail-modal__chip--expired {
+  background-color: #ffebe6;
   color: #de350b;
 }
 

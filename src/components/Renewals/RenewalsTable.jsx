@@ -135,7 +135,7 @@ export default function RenewalsTable({
                   </TableCell>
                   <TableCell>
                     <Typography
-                      className={`renewals-table__days renewals-table__days--${row.bucket}`}>
+                      className={`renewals-table__days renewals-table__days--${row.renewalStatus || "active"}`}>
                       {daysLeftLabel(row, daysLeftLabels)}
                     </Typography>
                   </TableCell>
